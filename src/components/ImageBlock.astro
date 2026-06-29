@@ -1,0 +1,29 @@
+---
+import type { ProjectImage } from '../data/legalTechContent';
+
+interface Props {
+  image: ProjectImage;
+}
+
+const { image } = Astro.props;
+---
+
+<div class={`relative w-full rounded-lg overflow-hidden ${image.tall ? 'aspect-[771/1442]' : 'aspect-[770/430]'}`}>
+  <img src={image.src} alt="" class="absolute inset-0 w-full h-full object-cover" />
+  {image.overlay && (
+    <div aria-hidden="true" class="absolute inset-0">
+      <img src={image.overlay.src} alt="" class="w-full h-full object-cover" />
+      <div class="absolute inset-0" style={`background: rgba(0,0,0,${image.overlay.opacity || '0.33'})`}></div>
+    </div>
+  )}
+  {image.logo && (
+    <div class="absolute inset-0 flex items-center justify-center">
+      <img src={image.logo} alt="" class="h-[60px] w-auto max-w-[300px] object-contain" />
+    </div>
+  )}
+  {image.composites && image.composites.map((comp) => (
+    <div class="absolute" style={`width: ${comp.width}; top: ${comp.top}; left: ${comp.left};`}>
+      <img src={comp.src} alt="" class="w-full object-cover" />
+    </div>
+  ))}
+</div>

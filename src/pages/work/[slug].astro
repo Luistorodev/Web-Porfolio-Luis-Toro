@@ -2,7 +2,10 @@
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
+import ProjectContent from '../../components/ProjectContent.astro';
 import { allProjects, type Project } from '../../data/projects';
+import { legalTechContent } from '../../data/legalTechContent';
+import type { ProjectContent as ProjectContentType } from '../../data/legalTechContent';
 
 export function getStaticPaths() {
   return allProjects.map((project) => ({
@@ -12,19 +15,31 @@ export function getStaticPaths() {
 }
 
 const { project } = Astro.props as { project: Project };
+
+const contentMap: Record<string, ProjectContentType> = {
+  'legal-tech-ui': legalTechContent,
+};
+
+const content = contentMap[project.slug];
 ---
 
 <Layout>
-  <div class="bg-[#f9fafb] flex flex-col items-center overflow-clip min-h-screen w-full animate-[fadeIn_0.4s_ease-out]">
+  <div class="bg-[#f9fafb] flex flex-col gap-8 md:gap-12 items-center overflow-clip min-h-screen w-full animate-[fadeIn_0.4s_ease-out]">
     <Navbar currentPage="work" />
-    <div class="flex flex-1 flex-col gap-4 md:gap-6 items-center justify-center px-4 md:px-6 py-16 md:py-24 w-full max-w-[745px]">
-      <h1 class="font-bold text-[#1f2a37] text-[24px] md:text-[31px] leading-tight font-['Inter'] text-center">
-        {project.title}
-      </h1>
-      <p class="text-[#6b7280] text-[13px] leading-tight font-['Inter'] text-center max-w-[500px]">
-        {project.company} &middot; {project.year}
-      </p>
-    </div>
+
+    {content ? (
+      <ProjectContent content={content} />
+    ) : (
+      <div class="flex flex-1 flex-col gap-4 md:gap-6 items-center justify-center px-4 md:px-6 py-16 md:py-24 w-full max-w-[745px]">
+        <h1 class="font-bold text-[#1f2a37] text-[24px] md:text-[31px] leading-tight font-['Inter'] text-center">
+          {project.title}
+        </h1>
+        <p class="text-[#6b7280] text-[13px] leading-tight font-['Inter'] text-center max-w-[500px]">
+          {project.company} &middot; {project.year}
+        </p>
+      </div>
+    )}
+
     <Footer />
   </div>
 </Layout>
