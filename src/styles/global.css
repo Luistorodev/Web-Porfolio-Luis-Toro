@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+::selection {
+  background: #FF0054;
+  color: #ffffff;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

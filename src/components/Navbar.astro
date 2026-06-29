@@ -1,0 +1,110 @@
+---
+interface Props {
+  currentPage?: string;
+}
+
+const { currentPage = '' } = Astro.props;
+
+const navLinks = [
+  { href: '/', label: 'MY WORK', key: 'work' },
+  { href: '/side-projects', label: 'SIDE PROJECTS', key: 'side-projects' },
+  { href: '/about', label: 'ABOUT', key: 'about' },
+  { href: '/cv', label: 'CV', key: 'cv' },
+];
+---
+
+<div class="bg-white border-b border-[#e5e7eb] flex items-center h-auto md:h-[60px] px-4 md:px-6 py-3 md:py-2 w-full font-['Geist_Mono'] text-sm md:text-base relative z-50">
+  <div class="flex flex-1 items-center justify-between min-w-0">
+    <a href="/" class="flex items-center gap-2 md:gap-3 whitespace-nowrap no-underline">
+      <span class="text-[#374151]">LUIS TORO</span>
+      <span class="hidden md:inline text-[#9ca3af]">PRODUCT DESIGNER + AI BUILDER</span>
+    </a>
+
+    <!-- Desktop nav -->
+    <div class="hidden md:flex items-center gap-4 md:gap-8">
+      {navLinks.map((link) => (
+        <a href={link.href} class={`whitespace-nowrap no-underline transition-colors duration-200 ${currentPage === link.key ? 'text-[#ff0054]' : 'text-[#6b7280] hover:text-[#374151]'}`}>
+          {link.label}
+        </a>
+      ))}
+    </div>
+
+    <div class="hidden md:flex bg-[#f3f4f6] border border-[#e5e7eb] rounded-lg w-[44px] h-[44px] items-center justify-center shrink-0">
+      <span class="text-[#374151]">ES</span>
+    </div>
+
+    <!-- Burger button (mobile) -->
+    <button id="burger-btn" class="md:hidden flex flex-col gap-1 w-6 h-6 items-center justify-center bg-transparent border-none cursor-pointer p-0" aria-label="Menu">
+      <span class="block w-5 h-0.5 bg-[#374151] rounded transition-all duration-300 origin-center" id="burger-line-1"></span>
+      <span class="block w-5 h-0.5 bg-[#374151] rounded transition-all duration-300 origin-center" id="burger-line-2"></span>
+      <span class="block w-5 h-0.5 bg-[#374151] rounded transition-all duration-300 origin-center" id="burger-line-3"></span>
+    </button>
+  </div>
+</div>
+
+<!-- Overlay -->
+<div id="menu-overlay" class="fixed inset-0 bg-black/30 z-40 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+
+<!-- Slide-in panel -->
+<div id="mobile-panel" class="fixed top-0 right-0 h-full w-[280px] bg-white z-50 translate-x-full transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col shadow-lg">
+  <div class="flex justify-end px-4 py-3 border-b border-[#e5e7eb]">
+    <button id="close-panel-btn" class="bg-transparent border-none cursor-pointer text-[#374151] text-xl leading-none p-1" aria-label="Close menu">&times;</button>
+  </div>
+  <div class="flex flex-col gap-2 px-6 py-4 flex-1">
+    {navLinks.map((link) => (
+      <a href={link.href} class={`block py-2 no-underline transition-colors duration-200 font-['Geist_Mono'] text-sm ${currentPage === link.key ? 'text-[#ff0054]' : 'text-[#6b7280] hover:text-[#374151]'}`}>
+        {link.label}
+      </a>
+    ))}
+  </div>
+  <div class="px-6 py-4 border-t border-[#e5e7eb]">
+    <div class="flex bg-[#f3f4f6] border border-[#e5e7eb] rounded-lg w-[44px] h-[44px] items-center justify-center">
+      <span class="text-[#374151]">ES</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  const burgerBtn = document.getElementById('burger-btn');
+  const closeBtn = document.getElementById('close-panel-btn');
+  const panel = document.getElementById('mobile-panel');
+  const overlay = document.getElementById('menu-overlay');
+  const line1 = document.getElementById('burger-line-1');
+  const line2 = document.getElementById('burger-line-2');
+  const line3 = document.getElementById('burger-line-3');
+
+  let isOpen = false;
+
+  function openMenu() {
+    isOpen = true;
+    panel?.classList.remove('translate-x-full');
+    overlay?.classList.remove('opacity-0', 'pointer-events-none');
+    overlay?.classList.add('opacity-100');
+    line1?.classList.add('translate-y-[6px]', 'rotate-45');
+    line2?.classList.add('opacity-0');
+    line3?.classList.add('-translate-y-[6px]', '-rotate-45');
+  }
+
+  function closeMenu() {
+    isOpen = false;
+    panel?.classList.add('translate-x-full');
+    overlay?.classList.remove('opacity-100');
+    overlay?.classList.add('opacity-0', 'pointer-events-none');
+    line1?.classList.remove('translate-y-[6px]', 'rotate-45');
+    line2?.classList.remove('opacity-0');
+    line3?.classList.remove('-translate-y-[6px]', '-rotate-45');
+  }
+
+  burgerBtn?.addEventListener('click', () => {
+    if (isOpen) closeMenu();
+    else openMenu();
+  });
+
+  closeBtn?.addEventListener('click', closeMenu);
+  overlay?.addEventListener('click', closeMenu);
+
+  // Close on link click
+  panel?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+</script>

@@ -1,0 +1,93 @@
+<div id="custom-cursor" class="fixed top-0 left-0 w-3 h-3 rounded-full bg-[#FF0054] pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 transition-[opacity,background-color,width,height,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hidden md:flex items-center justify-center overflow-hidden opacity-0">
+  <span id="cursor-text" class="text-white text-[13px] font-['Geist_Mono'] uppercase whitespace-nowrap opacity-0 transition-opacity duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]">VIEW PROJECT</span>
+</div>
+
+<script>
+  const cursor = document.getElementById('custom-cursor');
+  const cursorText = document.getElementById('cursor-text');
+  if (cursor) {
+    let mouseX = 0;
+    let mouseY = 0;
+    let cursorX = 0;
+    let cursorY = 0;
+    let isProjectHover = false;
+
+    let hasMoved = false;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (!hasMoved) {
+        hasMoved = true;
+        cursorX = mouseX;
+        cursorY = mouseY;
+        cursor.style.left = `${cursorX}px`;
+        cursor.style.top = `${cursorY}px`;
+        cursor.classList.add('opacity-100');
+        cursor.classList.remove('opacity-0');
+      }
+    });
+
+    const interactive = 'a, button, input, textarea, select, [role="button"], .hover-target';
+    document.addEventListener('mouseover', (e) => {
+      const target = (e.target as Element).closest(interactive);
+      if (target) {
+        cursor.classList.add('w-8', 'h-8', 'bg-[#FF0054]/40');
+        cursor.classList.remove('w-3', 'h-3', 'bg-[#FF0054]');
+      }
+    });
+    document.addEventListener('mouseout', (e) => {
+      const target = (e.target as Element).closest(interactive);
+      if (target) {
+        cursor.classList.remove('w-8', 'h-8', 'bg-[#FF0054]/40');
+        cursor.classList.add('w-3', 'h-3', 'bg-[#FF0054]');
+      }
+    });
+
+    // Project card hover
+    document.addEventListener('mouseover', (e) => {
+      const target = (e.target as Element).closest('.project-card');
+      if (target && !isProjectHover) {
+        isProjectHover = true;
+        cursor.classList.add('w-fit', 'h-fit', 'bg-[#FF0054]', 'py-[6px]', 'px-[14px]');
+        cursor.classList.remove('w-3', 'h-3', 'w-8', 'h-8', 'bg-[#FF0054]/40');
+        if (cursorText) cursorText.classList.add('opacity-100');
+      }
+    });
+    document.addEventListener('mouseout', (e) => {
+      const target = (e.target as Element).closest('.project-card');
+      if (target && isProjectHover) {
+        isProjectHover = false;
+        if (cursorText) cursorText.classList.remove('opacity-100');
+        cursor.classList.remove('w-fit', 'h-fit', 'bg-[#FF0054]', 'py-[6px]', 'px-[14px]');
+        cursor.classList.add('w-3', 'h-3', 'bg-[#FF0054]');
+      }
+    });
+
+    function animate() {
+      cursorX += (mouseX - cursorX) * 0.35;
+      cursorY += (mouseY - cursorY) * 0.35;
+      cursor.style.left = `${cursorX}px`;
+      cursor.style.top = `${cursorY}px`;
+      requestAnimationFrame(animate);
+    }
+    animate();
+  }
+</script>
+
+<style is:global>
+  * {
+    cursor: none;
+  }
+  a, button, input, textarea, select, [role="button"], .hover-target {
+    cursor: none;
+  }
+  @media (max-width: 767px) {
+    * {
+      cursor: auto;
+    }
+    a, button, input, textarea, select, [role="button"], .hover-target {
+      cursor: pointer;
+    }
+  }
+</style>

@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import SideProjectsGrid from '../components/SideProjectsGrid.astro';
+---
+
+<Layout>
+  <div class="bg-[#f8f9fa] flex flex-col gap-8 md:gap-12 items-center overflow-clip min-h-screen w-full animate-[fadeIn_0.4s_ease-out]">
+    <Navbar currentPage="side-projects" />
+
+    <div class="flex flex-col gap-4 items-center justify-center px-4 md:px-6 py-8 md:py-8 w-full">
+      <div class="flex flex-col gap-4 max-w-[968px] w-full">
+        <h1 class="font-bold text-[#1f2a37] text-[24px] md:text-[31px] leading-tight font-['Inter']">
+          Building products, exploring code, empowering communities
+        </h1>
+        <p class="text-[#6b7280] text-[13px] leading-tight font-['Inter'] max-w-[968px]">
+          I enjoy building products for communities, exploring the limits of code, and experimenting with front-end development. Currently building a personal finance manager.
+        </p>
+      </div>
+    </div>
+
+    <SideProjectsGrid />
+
+    <Footer />
+  </div>
+</Layout>

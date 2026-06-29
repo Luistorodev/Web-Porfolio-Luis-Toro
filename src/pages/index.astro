@@ -1,0 +1,16 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import PortfolioGrid from '../components/PortfolioGrid.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout>
+  <div class="bg-[#f9fafb] flex flex-col gap-8 md:gap-12 items-center overflow-clip min-h-screen w-full animate-[fadeIn_0.4s_ease-out]">
+    <Navbar currentPage="work" />
+    <Hero />
+    <PortfolioGrid />
+    <Footer />
+  </div>
+</Layout>
