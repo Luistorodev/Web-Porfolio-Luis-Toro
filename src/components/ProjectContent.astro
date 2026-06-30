@@ -10,61 +10,63 @@ const { content } = Astro.props;
 const { cover, meta, sections } = content;
 ---
 
-<div class="border-b border-[#d1d5db] flex flex-col gap-4 items-center justify-center pb-8 w-full">
+<div class="border-b border-[#d1d5db] pb-8 w-full">
+  <div class="mx-auto max-w-[770px] px-4 md:px-0 flex flex-col gap-4">
 
-  <!-- Hero -->
-  <div class="flex flex-col gap-6 items-start max-w-[770px] w-full px-4 md:px-0">
-    <div class="flex flex-col gap-2">
-      <h1 class="font-bold text-[#1f2a37] text-[24px] md:text-[31px] leading-tight font-['Inter']">
-        {content.title}
-      </h1>
-      <p class="text-[#9ca3af] text-sm md:text-[14px] uppercase font-['Geist_Mono']">
-        {content.subtitle}
-      </p>
+    <!-- Hero -->
+    <div class="flex flex-col gap-6">
+      <div class="flex flex-col gap-2">
+        <h1 class="font-bold text-[#1f2a37] text-[24px] md:text-[31px] leading-tight font-['Inter']">
+          {content.title}
+        </h1>
+        <p class="text-[#9ca3af] text-sm md:text-[14px] uppercase font-['Geist_Mono']">
+          {content.subtitle}
+        </p>
+      </div>
+      <ImageBlock image={cover} />
     </div>
-    <ImageBlock image={cover} />
-  </div>
 
-  <!-- Meta bar -->
-  <div class="flex gap-4 text-sm md:text-[14px] max-w-[770px] w-full px-4 md:px-0">
-    <div class="flex flex-1 flex-col gap-1.5">
-      <span class="text-[#9ca3af] uppercase font-['Geist_Mono']">Role:</span>
-      <span class="text-[#374151] font-['Inter']">{meta.role}</span>
-    </div>
-    <div class="flex flex-1 flex-col gap-1.5">
-      <span class="text-[#9ca3af] uppercase font-['Geist_Mono']">Timeline</span>
-      <span class="text-[#374151] font-['Inter']">{meta.timeline}</span>
-    </div>
-    <div class="flex flex-1 flex-col gap-1.5">
-      <span class="text-[#9ca3af] uppercase font-['Geist_Mono']">Skills</span>
-      <div class="text-[#374151] font-['Inter'] leading-[1.2]">
-        {meta.skills.map((skill: string) => <p>{skill}</p>)}
+    <!-- Meta bar -->
+    <div class="flex gap-4 text-sm md:text-[14px]">
+      <div class="flex flex-1 flex-col gap-1.5">
+        <span class="text-[#9ca3af] uppercase font-['Geist_Mono']">Role:</span>
+        <span class="text-[#374151] font-['Inter']">{meta.role}</span>
+      </div>
+      <div class="flex flex-1 flex-col gap-1.5">
+        <span class="text-[#9ca3af] uppercase font-['Geist_Mono']">Timeline</span>
+        <span class="text-[#374151] font-['Inter']">{meta.timeline}</span>
+      </div>
+      <div class="flex flex-1 flex-col gap-1.5">
+        <span class="text-[#9ca3af] uppercase font-['Geist_Mono']">Skills</span>
+        <div class="text-[#374151] font-['Inter'] leading-[1.2]">
+          {meta.skills.map((skill: string) => <p>{skill}</p>)}
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Content sections -->
-  {sections.map((section: ProjectSection) => (
-    <div class="flex flex-col gap-4 max-w-[770px] w-full px-4 md:px-0">
-      {section.label && (
-        <p class="text-[#9ca3af] text-sm md:text-[14px] uppercase font-['Geist_Mono']">{section.label}</p>
-      )}
-      {section.heading && (
-        <h2 class="font-bold text-[#1f2a37] text-[24px] md:text-[31px] leading-tight font-['Inter']">{section.heading}</h2>
-      )}
-      {section.subheading && (
-        <h3 class="font-semibold text-[#374151] text-[18px] md:text-[20px] leading-tight font-['Inter']">{section.subheading}</h3>
-      )}
-      {section.body && (
-        <div class="flex flex-col gap-3">
-          {section.body.map((p: string) => (
-            <p class="text-[#6b7280] text-[13px] leading-relaxed font-['Inter']">{p}</p>
-          ))}
-        </div>
-      )}
-      {section.image && (
-        <ImageBlock image={section.image} />
-      )}
-    </div>
-  ))}
+    <!-- Content sections -->
+    {sections.map((section: ProjectSection) => (
+      <div class="flex flex-col gap-4">
+        {section.label && (
+          <p class="text-[#9ca3af] text-sm md:text-[14px] uppercase font-['Geist_Mono']">{section.label}</p>
+        )}
+        {section.heading && (
+          <h2 class="font-bold text-[#1f2a37] text-[24px] md:text-[31px] leading-tight font-['Inter']">{section.heading}</h2>
+        )}
+        {section.subheading && (
+          <h3 class="font-semibold text-[#374151] text-[18px] md:text-[20px] leading-tight font-['Inter']">{section.subheading}</h3>
+        )}
+        {section.body && (
+          <div class="flex flex-col gap-3">
+            {section.body.map((p: string) => (
+              <p class="text-[#6b7280] text-[13px] leading-relaxed font-['Inter']">{p}</p>
+            ))}
+          </div>
+        )}
+        {section.image && (
+          <ImageBlock image={section.image} />
+        )}
+      </div>
+    ))}
+  </div>
 </div>
