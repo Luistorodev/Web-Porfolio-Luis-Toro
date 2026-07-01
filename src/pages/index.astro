@@ -7,10 +7,12 @@ import Footer from '../components/Footer.astro';
 ---
 
 <Layout>
-  <div class="bg-[#f9fafb] flex flex-col gap-8 md:gap-12 items-center overflow-clip min-h-screen w-full animate-[fadeIn_0.4s_ease-out]">
+  <div class="bg-[#f9fafb] flex flex-col min-h-screen w-full">
     <Navbar currentPage="work" />
-    <Hero />
-    <PortfolioGrid />
+    <div class="flex flex-col gap-8 md:gap-12 items-center overflow-clip w-full max-w-[1440px] mx-auto py-8 md:py-12 animate-[fadeIn_0.4s_ease-out]">
+      <Hero />
+      <PortfolioGrid />
+    </div>
     <Footer />
   </div>
 </Layout>

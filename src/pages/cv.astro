@@ -5,45 +5,47 @@ import Footer from '../components/Footer.astro';
 ---
 
 <Layout>
-  <div class="bg-[#f9fafb] flex flex-col items-center overflow-clip min-h-screen w-full animate-[fadeIn_0.4s_ease-out]">
+  <div class="bg-[#f9fafb] flex flex-col min-h-screen w-full">
     <Navbar currentPage="cv" />
-    <div class="flex flex-1 flex-col gap-4 md:gap-6 items-center justify-center px-4 md:px-6 py-16 md:py-24 w-full max-w-[745px]">
-      <h1 class="font-bold text-[#1f2a37] text-[24px] md:text-[31px] leading-tight font-['Inter']">CV</h1>
+    <div class="flex flex-1 flex-col items-center overflow-clip w-full max-w-[1440px] mx-auto animate-[fadeIn_0.4s_ease-out]">
+      <div class="flex flex-1 flex-col gap-4 md:gap-6 items-center justify-center px-4 md:px-6 py-16 md:py-24 w-full max-w-[745px]">
+        <h1 class="font-bold text-[#1f2a37] text-[24px] md:text-[31px] leading-tight font-['Inter']">CV</h1>
 
-      <div class="flex flex-col gap-6 md:gap-8 mt-4 w-full max-w-[500px]">
-        <div>
-          <h2 class="text-[#9ca3af] text-[12px] md:text-[14px] uppercase font-['Geist_Mono'] mb-3">Experience</h2>
-          {[
-            { role: 'Senior Product Designer', company: 'ONTOP LLC', period: '2024 — Present' },
-            { role: 'Product Designer', company: 'Circulo de Credito', period: '2023 — 2024' },
-            { role: 'Product Designer', company: 'Scotiabank', period: '2020 — 2023' },
-            { role: 'UI/UX Designer', company: 'Budweiser', period: '2019 — 2020' },
-          ].map((exp) => (
+        <div class="flex flex-col gap-6 md:gap-8 mt-4 w-full max-w-[500px]">
+          <div>
+            <h2 class="text-[#9ca3af] text-[12px] md:text-[14px] uppercase font-['Geist_Mono'] mb-3">Experience</h2>
+            {[
+              { role: 'Senior Product Designer', company: 'ONTOP LLC', period: '2024 — Present' },
+              { role: 'Product Designer', company: 'Circulo de Credito', period: '2023 — 2024' },
+              { role: 'Product Designer', company: 'Scotiabank', period: '2020 — 2023' },
+              { role: 'UI/UX Designer', company: 'Budweiser', period: '2019 — 2020' },
+            ].map((exp) => (
+              <div class="flex flex-col md:flex-row md:justify-between py-3 border-b border-[#e5e7eb] gap-1 md:gap-0">
+                <div class="flex flex-col gap-0.5">
+                  <span class="text-[#374151] text-sm md:text-base font-['Inter'] font-medium">{exp.role}</span>
+                  <span class="text-[#6b7280] text-[13px] font-['Inter']">{exp.company}</span>
+                </div>
+                <span class="text-[#9ca3af] text-[11px] md:text-[13px] font-['Geist_Mono'] uppercase whitespace-nowrap">{exp.period}</span>
+              </div>
+            ))}
+          </div>
+
+          <div>
+            <h2 class="text-[#9ca3af] text-[12px] md:text-[14px] uppercase font-['Geist_Mono'] mb-3">Education</h2>
             <div class="flex flex-col md:flex-row md:justify-between py-3 border-b border-[#e5e7eb] gap-1 md:gap-0">
               <div class="flex flex-col gap-0.5">
-                <span class="text-[#374151] text-sm md:text-base font-['Inter'] font-medium">{exp.role}</span>
-                <span class="text-[#6b7280] text-[13px] font-['Inter']">{exp.company}</span>
+                <span class="text-[#374151] text-sm md:text-base font-['Inter'] font-medium">Graphic Design</span>
+                <span class="text-[#6b7280] text-[13px] font-['Inter']">Universidad del Norte</span>
               </div>
-              <span class="text-[#9ca3af] text-[11px] md:text-[13px] font-['Geist_Mono'] uppercase whitespace-nowrap">{exp.period}</span>
+              <span class="text-[#9ca3af] text-[11px] md:text-[13px] font-['Geist_Mono'] uppercase whitespace-nowrap">2015 — 2019</span>
             </div>
-          ))}
-        </div>
-
-        <div>
-          <h2 class="text-[#9ca3af] text-[12px] md:text-[14px] uppercase font-['Geist_Mono'] mb-3">Education</h2>
-          <div class="flex flex-col md:flex-row md:justify-between py-3 border-b border-[#e5e7eb] gap-1 md:gap-0">
-            <div class="flex flex-col gap-0.5">
-              <span class="text-[#374151] text-sm md:text-base font-['Inter'] font-medium">Graphic Design</span>
-              <span class="text-[#6b7280] text-[13px] font-['Inter']">Universidad del Norte</span>
-            </div>
-            <span class="text-[#9ca3af] text-[11px] md:text-[13px] font-['Geist_Mono'] uppercase whitespace-nowrap">2015 — 2019</span>
           </div>
-        </div>
 
-        <div class="flex justify-center mt-4">
-          <a href="/cv.pdf" class="bg-[#FF0054] text-white text-base font-['Geist_Mono'] uppercase px-6 py-3 rounded-lg no-underline hover:opacity-90 transition-opacity duration-200">
-            Download CV
-          </a>
+          <div class="flex justify-center mt-4">
+            <a href="/cv.pdf" class="bg-[#FF0054] text-white text-base font-['Geist_Mono'] uppercase px-6 py-3 rounded-lg no-underline hover:opacity-90 transition-opacity duration-200">
+              Download CV
+            </a>
+          </div>
         </div>
       </div>
     </div>

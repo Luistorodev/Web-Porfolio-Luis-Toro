@@ -5,12 +5,10 @@ import Footer from '../components/Footer.astro';
 ---
 
 <Layout>
-  <div class="bg-[#f8f9fa] flex flex-col gap-8 md:gap-12 items-center overflow-clip min-h-screen w-full animate-[fadeIn_0.4s_ease-out]">
+  <div class="bg-[#f8f9fa] flex flex-col min-h-screen w-full">
     <Navbar currentPage="about" />
-
-    <!-- Header -->
-    <div class="flex flex-col gap-4 items-center justify-center px-4 md:px-6 py-8 w-full">
-      <div class="flex flex-col gap-4 max-w-[968px] w-full">
+    <div class="flex flex-col gap-8 md:gap-12 items-center overflow-clip w-full max-w-[1440px] mx-auto py-8 md:py-12 animate-[fadeIn_0.4s_ease-out]">
+      <div class="flex flex-col gap-4 px-4 md:px-6 w-full max-w-[968px]">
         <h1 class="font-bold text-[#1f2a37] text-[24px] md:text-[31px] leading-tight font-['Inter']">
           Designing products. Exploring the world. Building new things.
         </h1>
@@ -18,63 +16,54 @@ import Footer from '../components/Footer.astro';
           A curious creator driven by technology, finance, gaming, travel, and entrepreneurship. Currently exploring how digital and physical products come together through 3D printing and maker culture.
         </p>
       </div>
-    </div>
 
-    <!-- Image grid: 4-column masonry (Figma exact) -->
-    <div class="flex flex-col items-start w-full">
-      <!-- Desktop: 4 columns -->
-      <div class="hidden lg:flex gap-8 justify-center px-6 w-full items-start">
-        <!-- Column 1: 2 cards, both 353px -->
-        <div class="flex flex-1 flex-col gap-8 min-w-0">
-          <div class="h-[353px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
-          <div class="h-[353px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
+      <div class="flex flex-col items-start w-full">
+        <div class="hidden lg:flex gap-8 justify-center px-6 w-full items-start">
+          <div class="flex flex-1 flex-col gap-8 min-w-0">
+            <div class="h-[353px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
+            <div class="h-[353px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
+          </div>
+          <div class="flex flex-1 flex-col gap-8 min-w-0 h-[842px]">
+            <div class="h-[332px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
+            <div class="flex-1 min-h-0 w-full rounded-lg bg-[#9ca3af]"></div>
+          </div>
+          <div class="flex flex-1 flex-col gap-8 min-w-0">
+            <div class="h-[353px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
+            <div class="h-[332px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
+          </div>
+          <div class="flex flex-1 flex-col gap-8 min-w-0 h-[842px]">
+            <div class="flex-1 min-h-0 w-full rounded-lg bg-[#9ca3af]"></div>
+            <div class="flex-1 min-h-0 w-full rounded-lg bg-[#9ca3af]"></div>
+          </div>
         </div>
-        <!-- Column 2: taller column (842px), card 1 = 332px, card 2 = flex-1 -->
-        <div class="flex flex-1 flex-col gap-8 min-w-0 h-[842px]">
-          <div class="h-[332px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
-          <div class="flex-1 min-h-0 w-full rounded-lg bg-[#9ca3af]"></div>
-        </div>
-        <!-- Column 3: 2 cards, 353px + 332px -->
-        <div class="flex flex-1 flex-col gap-8 min-w-0">
-          <div class="h-[353px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
-          <div class="h-[332px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
-        </div>
-        <!-- Column 4: taller column (842px), both cards flex-1 -->
-        <div class="flex flex-1 flex-col gap-8 min-w-0 h-[842px]">
-          <div class="flex-1 min-h-0 w-full rounded-lg bg-[#9ca3af]"></div>
-          <div class="flex-1 min-h-0 w-full rounded-lg bg-[#9ca3af]"></div>
-        </div>
-      </div>
 
-      <!-- Tablet: 2 columns -->
-      <div class="hidden md:flex lg:hidden gap-8 justify-center px-6 w-full items-start">
-        <div class="flex flex-1 flex-col gap-8 min-w-0">
-          <div class="h-[353px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
-          <div class="h-[332px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
-          <div class="h-[353px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
-          <div class="h-[332px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
+        <div class="hidden md:flex lg:hidden gap-8 justify-center px-6 w-full items-start">
+          <div class="flex flex-1 flex-col gap-8 min-w-0">
+            <div class="h-[353px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
+            <div class="h-[332px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
+            <div class="h-[353px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
+            <div class="h-[332px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
+          </div>
+          <div class="flex flex-1 flex-col gap-8 min-w-0">
+            <div class="h-[332px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
+            <div class="h-[353px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
+            <div class="h-[353px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
+            <div class="h-[332px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
+          </div>
         </div>
-        <div class="flex flex-1 flex-col gap-8 min-w-0">
-          <div class="h-[332px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
-          <div class="h-[353px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
-          <div class="h-[353px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
-          <div class="h-[332px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
-        </div>
-      </div>
 
-      <!-- Mobile: 1 column -->
-      <div class="flex md:hidden flex-col gap-8 px-4 w-full">
-        <div class="h-[250px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
-        <div class="h-[300px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
-        <div class="h-[220px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
-        <div class="h-[280px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
-        <div class="h-[320px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
-        <div class="h-[240px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
-        <div class="h-[260px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
-        <div class="h-[290px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
+        <div class="flex md:hidden flex-col gap-8 px-4 w-full">
+          <div class="h-[250px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
+          <div class="h-[300px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
+          <div class="h-[220px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
+          <div class="h-[280px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
+          <div class="h-[320px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
+          <div class="h-[240px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
+          <div class="h-[260px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
+          <div class="h-[290px] w-full rounded-lg bg-[#9ca3af] shrink-0"></div>
+        </div>
       </div>
     </div>
-
     <Footer />
   </div>
 </Layout>
