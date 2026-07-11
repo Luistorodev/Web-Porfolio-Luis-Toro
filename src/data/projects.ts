@@ -16,7 +16,7 @@ function slugify(title: string): string {
 export const leftColumn: Project[] = [
   { title: "Ontop App Dark mode adaptations", company: "ONTOP LLC", year: "2026", slug: slugify("Ontop App Dark mode adaptations") },
   { title: "Ontop Design System", company: "ONTOP LLC", year: "2024", slug: slugify("Ontop Design System"), image: "/assets/work/ontop-design-system/Cover.png" },
-  { title: "Platzi Calendar", company: "Platzi", year: "2022", slug: slugify("Platzi Calendar"), image: "/assets/Platzi-calendar-Cover.png" },
+  { title: "Platzi Calendar", company: "Platzi", year: "2022", slug: slugify("Platzi Calendar"), image: "/assets/work/platzi-calendar/cover.png" },
   { title: "Canva Design System", company: "SCOTIABANK", year: "2022", slug: slugify("Canva Design System"), image: "/assets/Scotiabank-Cover.png" },
   { title: "Fanbase App", company: "Budweiser", year: "2021", slug: slugify("Fanbase App"), image: "/assets/Fanbase-cover.png" },
   { title: "Legal Tech UI", company: "Phylo Legal Tech", year: "2020", slug: slugify("Legal Tech UI"), image: "/assets/phylo-legal-cover.png" },

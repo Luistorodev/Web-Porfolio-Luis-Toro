@@ -67,15 +67,9 @@ export const ontopRedesignContent: ProjectContent = {
       ],
     },
     {
-      columns: [
-        {
-          heading: "Hallazgos clave",
-          body: [
-            "El home era \"un menú grande\" más que un punto de inicio: muchas funciones, poca guía.",
-            "Formularios pedían más de lo necesario y mezclaban información operativa con decisiones del usuario.",
-            "Faltaban señales de progreso y confirmación, aumentando la ansiedad (\"¿sí se envió?\" / \"¿en qué estado está?\").",
-          ],
-        },
+      body: [
+        "'''Hallazgos clave'''",
+        "El home era \"un menú grande\" más que un punto de inicio: muchas funciones, poca guía. Formularios pedían más de lo necesario y mezclaban información operativa con decisiones del usuario. Faltaban señales de progreso y confirmación, aumentando la ansiedad (\"¿sí se envió?\" / \"¿en qué estado está?\").",
       ],
     },
     {
