@@ -3,12 +3,17 @@ export interface ProjectSection {
   heading?: string;
   subheading?: string;
   body?: string[];
+  columns?: { heading: string; body: string[] }[];
   image?: ProjectImage;
+  layout?: 'side-text-right' | 'side-text-left';
 }
 
 export interface ProjectImage {
   src: string;
   tall?: boolean;
+  height?: string;
+  contain?: boolean;
+  caption?: string;
   overlay?: {
     src: string;
     opacity?: string;

@@ -8,6 +8,34 @@ interface Props {
 
 const { content } = Astro.props;
 const { cover, meta, sections } = content;
+
+function renderBody(body: string[]) {
+  const items: { type: 'p' | 'ul' | 'quote'; content: string[] }[] = [];
+  let bulletGroup: string[] = [];
+
+  for (const p of body) {
+    if (p.startsWith('•')) {
+      bulletGroup.push(p.replace(/^•\s*/, ''));
+    } else {
+      if (bulletGroup.length > 0) {
+        items.push({ type: 'ul', content: bulletGroup });
+        bulletGroup = [];
+      }
+      if (p.startsWith("'''") || p.startsWith('"""')) {
+        items.push({ type: 'heading-serif', content: [p.replace(/^['''"""]+/, '').replace(/['''"""]+$/, '')] });
+      } else if (p.startsWith("''") || p.startsWith('"')) {
+        items.push({ type: 'quote', content: [p.replace(/^[''""]+/, '').replace(/[''""]+$/, '')] });
+      } else {
+        items.push({ type: 'p', content: [p] });
+      }
+    }
+  }
+  if (bulletGroup.length > 0) {
+    items.push({ type: 'ul', content: bulletGroup });
+  }
+
+  return items;
+}
 ---
 
 <div class="border-b border-[#d1d5db] pb-8 w-full">
@@ -46,6 +74,73 @@ const { cover, meta, sections } = content;
 
     <!-- Content sections -->
     {sections.map((section: ProjectSection) => (
+      section.layout ? (
+        <div class={`flex flex-col md:flex-row gap-4 ${section.layout === 'side-text-left' ? 'md:flex-row' : ''} ${section.layout === 'side-text-right' ? 'md:flex-row' : ''}`}>
+          {section.layout === 'side-text-right' ? (
+            <>
+              <div class="flex-1">
+                {section.image && (
+                  <>
+                    <ImageBlock image={section.image} />
+                    {section.image.caption && (
+                      <p class="text-[#6b7280] text-[13px] font-['Geist_Mono'] leading-[1.2] uppercase text-right">{section.image.caption}</p>
+                    )}
+                  </>
+                )}
+              </div>
+              <div class="flex-1 flex flex-col justify-end gap-3">
+                {section.body && (
+                  <div class="flex flex-col gap-3">
+                    {renderBody(section.body).map((item) => (
+                      item.type === 'heading-serif' ? (
+                        item.content.map((h: string) => (
+                          <p class="text-[#1f2a37] text-[20px] md:text-[24px] leading-[1.2] font-['Instrument_Serif',serif]">{h}</p>
+                        ))
+                      ) : (
+                        item.content.map((p: string) => {
+                          const html = p.replace(/~~(.+?)~~/g, '<span class="text-[#c8102e]">$1</span>').replace(/\*\*(.+?)\*\*/g, '<span class="font-bold text-[#1f2a37]">$1</span>');
+                          return <p class="text-[#6b7280] text-[13px] leading-relaxed font-['Inter']" set:html={html} />;
+                        })
+                      )
+                    ))}
+                  </div>
+                )}
+              </div>
+            </>
+          ) : (
+            <>
+              <div class="flex-1 flex flex-col justify-end gap-3">
+                {section.body && (
+                  <div class="flex flex-col gap-3">
+                    {renderBody(section.body).map((item) => (
+                      item.type === 'heading-serif' ? (
+                        item.content.map((h: string) => (
+                          <p class="text-[#1f2a37] text-[20px] md:text-[24px] leading-[1.2] font-['Instrument_Serif',serif]">{h}</p>
+                        ))
+                      ) : (
+                        item.content.map((p: string) => {
+                          const html = p.replace(/~~(.+?)~~/g, '<span class="text-[#c8102e]">$1</span>').replace(/\*\*(.+?)\*\*/g, '<span class="font-bold text-[#1f2a37]">$1</span>');
+                          return <p class="text-[#6b7280] text-[13px] leading-relaxed font-['Inter']" set:html={html} />;
+                        })
+                      )
+                    ))}
+                  </div>
+                )}
+              </div>
+              <div class="flex-1">
+                {section.image && (
+                  <>
+                    <ImageBlock image={section.image} />
+                    {section.image.caption && (
+                      <p class="text-[#6b7280] text-[13px] font-['Geist_Mono'] leading-[1.2] uppercase text-right">{section.image.caption}</p>
+                    )}
+                  </>
+                )}
+              </div>
+            </>
+          )}
+        </div>
+      ) : (
       <div class="flex flex-col gap-4">
         {section.label && (
           <p class="text-[#9ca3af] text-sm md:text-[14px] uppercase font-['Geist_Mono']">{section.label}</p>
@@ -58,15 +153,65 @@ const { cover, meta, sections } = content;
         )}
         {section.body && (
           <div class="flex flex-col gap-3">
-            {section.body.map((p: string) => (
-              <p class="text-[#6b7280] text-[13px] leading-relaxed font-['Inter']">{p}</p>
+            {renderBody(section.body).map((item) => (
+              item.type === 'ul' ? (
+                <ul class="list-disc pl-5 space-y-1.5 text-[#6b7280] text-[13px] leading-relaxed font-['Inter']">
+                  {item.content.map((li: string) => {
+                    const html = li
+                      .replace(/~~(.+?)~~/g, '<span class="text-[#c8102e]">$1</span>')
+                      .replace(/\*\*(.+?)\*\*/g, '<span class="font-bold text-[#1f2a37]">$1</span>');
+                    return <li set:html={html} />;
+                  })}
+                </ul>
+              ) : item.type === 'heading-serif' ? (
+                item.content.map((h: string) => (
+                  <p class="text-[#1f2a37] text-[20px] md:text-[24px] leading-[1.2] font-['Instrument_Serif',serif]">{h}</p>
+                ))
+              ) : item.type === 'quote' ? (
+                item.content.map((q: string) => {
+                  const html = q
+                    .replace(/~~(.+?)~~/g, '<span class="text-[#c8102e]">$1</span>')
+                    .replace(/\*\*(.+?)\*\*/g, '<span class="font-bold text-[#1f2a37]">$1</span>');
+                  return <p class={`text-[#1f2a37] leading-[1.2] text-center font-['Instrument_Serif',serif] py-4 ${html.length > 60 ? 'text-[18px] md:text-[20px]' : 'text-[20px] md:text-[24px]'}`} set:html={html} />;
+                })
+              ) : (
+                item.content.map((p: string) => {
+                  const html = p
+                    .replace(/~~(.+?)~~/g, '<span class="text-[#c8102e]">$1</span>')
+                    .replace(/\*\*(.+?)\*\*/g, '<span class="font-bold text-[#1f2a37]">$1</span>');
+                  return <p class="text-[#6b7280] text-[13px] leading-relaxed font-['Inter']" set:html={html} />;
+                })
+              )
+            ))}
+          </div>
+        )}
+        {section.columns && (
+          <div class={`grid grid-cols-1 gap-6 ${section.columns.length === 4 ? 'md:grid-cols-4' : section.columns.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'}`}>
+            {section.columns.map((col) => (
+              <div class="flex flex-col gap-3">
+                <p class="text-[#1f2a37] text-[20px] md:text-[24px] leading-[1.2] font-['Instrument_Serif',serif]">{col.heading}</p>
+                <div class="flex flex-col gap-2 text-[#6b7280] text-[13px] leading-relaxed font-['Inter']">
+                  {col.body.map((p: string) => {
+                    const html = p
+                      .replace(/~~(.+?)~~/g, '<span class="text-[#c8102e]">$1</span>')
+                      .replace(/\*\*(.+?)\*\*/g, '<span class="font-bold text-[#1f2a37]">$1</span>');
+                    return <p set:html={html} />;
+                  })}
+                </div>
+              </div>
             ))}
           </div>
         )}
         {section.image && (
-          <ImageBlock image={section.image} />
+          <>
+            <ImageBlock image={section.image} />
+            {section.image.caption && (
+              <p class="text-[#6b7280] text-[13px] font-['Geist_Mono'] leading-[1.2] uppercase text-right">{section.image.caption}</p>
+            )}
+          </>
         )}
       </div>
+      )
     ))}
   </div>
 </div>
