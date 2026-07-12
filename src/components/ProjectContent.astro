@@ -1,6 +1,7 @@
 ---
 import type { ProjectContent, ProjectSection } from '../data/legalTechContent';
 import ImageBlock from './ImageBlock.astro';
+import Lightbox from './Lightbox.astro';
 
 interface Props {
   content: ProjectContent;
@@ -215,3 +216,5 @@ function renderBody(body: string[]) {
     ))}
   </div>
 </div>
+
+<Lightbox />

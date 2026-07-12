@@ -4,6 +4,7 @@ export interface Project {
   year: string;
   slug: string;
   image?: string;
+  disabled?: boolean;
 }
 
 function slugify(title: string): string {
@@ -14,7 +15,7 @@ function slugify(title: string): string {
 }
 
 export const leftColumn: Project[] = [
-  { title: "Ontop App Dark mode adaptations", company: "ONTOP LLC", year: "2026", slug: slugify("Ontop App Dark mode adaptations") },
+  { title: "Ontop App Dark mode adaptations", company: "ONTOP LLC", year: "2026", slug: slugify("Ontop App Dark mode adaptations"), image: "/assets/Ontop-dark-mode-cover.png", disabled: true },
   { title: "Ontop Design System", company: "ONTOP LLC", year: "2024", slug: slugify("Ontop Design System"), image: "/assets/work/ontop-design-system/Cover.png" },
   { title: "Platzi Calendar", company: "Platzi", year: "2022", slug: slugify("Platzi Calendar"), image: "/assets/work/platzi-calendar/cover.png" },
   { title: "Canva Design System", company: "SCOTIABANK", year: "2022", slug: slugify("Canva Design System"), image: "/assets/Scotiabank-Cover.png" },
@@ -25,7 +26,7 @@ export const leftColumn: Project[] = [
 export const rightColumn: Project[] = [
   { title: "Ontop App Redesign", company: "ONTOP LLC", year: "2026", slug: slugify("Ontop App Redesign"), image: "/assets/work/ontop-app-revamp/Cover.png" },
   { title: "Application redesign", company: "Circulo de Credito", year: "2024", slug: slugify("Application redesign"), image: "/assets/work/application-redesign/cover.png" },
-  { title: "Product request revamp", company: "SCOTIABANK", year: "2022", slug: slugify("Product request revamp"), image: "/assets/Scotiabank2-cover.png" },
+  { title: "Product request revamp", company: "SCOTIABANK", year: "2022", slug: slugify("Product request revamp"), image: "/assets/work/product-request-revamp/cover.png" },
   { title: "Bud66 Studio", company: "Budweiser", year: "2020", slug: slugify("Bud66 Studio"), image: "/assets/Bud66-Cover.png" },
   { title: "100+ Accelerator", company: "ABInbev", year: "2020", slug: slugify("100+ Accelerator"), image: "/assets/100-Accelerator-cover.png" },
 ];

@@ -1,0 +1,121 @@
+<!--
+  Lightbox.astro
+  Renders a PhotoSwipe v5 lightbox that auto-discovers images marked with
+  [data-pswp-src] on the current page. One instance per project page.
+-->
+
+<script>
+  import PhotoSwipeLightbox from 'photoswipe/lightbox';
+  import 'photoswipe/style.css';
+
+  function initLightbox() {
+    const images = document.querySelectorAll<HTMLElement>('[data-pswp-src]');
+    if (images.length === 0) return;
+
+    // ── Build data source from discovered images ────────────────────
+    const dataSource = Array.from(images).map((el) => {
+      const img = el as HTMLImageElement;
+      return {
+        src: el.dataset.pswpSrc!,
+        // Use natural dimensions if already loaded, otherwise defaults
+        width: img.naturalWidth || 1920,
+        height: img.naturalHeight || 1080,
+        alt: img.alt || '',
+        element: el,
+      };
+    });
+
+    // Pre-load to get accurate dimensions for images not yet fully loaded
+    dataSource.forEach((item, i) => {
+      const img = item.element as HTMLImageElement;
+      if (img.naturalWidth && img.naturalHeight) {
+        item.width = img.naturalWidth;
+        item.height = img.naturalHeight;
+      } else {
+        // Load the full image to get dimensions
+        const tempImg = new Image();
+        tempImg.onload = () => {
+          item.width = tempImg.naturalWidth;
+          item.height = tempImg.naturalHeight;
+        };
+        tempImg.src = item.src;
+      }
+    });
+
+    const lightbox = new PhotoSwipeLightbox({
+      dataSource,
+      pswpModule: () => import('photoswipe'),
+
+      // Zoom levels
+      initialZoomLevel: 'fit',
+      secondaryZoomLevel: 2,
+      maxZoomLevel: 4,
+
+      // UX options
+      closeOnVerticalDrag: true,
+      pinchToClose: true,
+      escKey: true,
+      arrowKeys: true,
+      tapAction: 'zoom',
+      doubleTapAction: 'zoom',
+
+      // Animation durations (ms)
+      showAnimationDuration: 300,
+      hideAnimationDuration: 300,
+      zoomAnimationDuration: 300,
+
+      // Padding around slides
+      padding: { top: 40, bottom: 40, left: 20, right: 20 },
+
+      // Background opacity
+      bgOpacity: 0.92,
+    });
+
+    // ── Cursor integration ──────────────────────────────────────────
+    const customCursor = document.getElementById('custom-cursor');
+
+    lightbox.on('openingAnimationStart', () => {
+      if (customCursor) {
+        customCursor.style.display = 'none';
+      }
+      document.documentElement.classList.add('pswp-open');
+    });
+
+    lightbox.on('closingAnimationEnd', () => {
+      if (customCursor) {
+        customCursor.style.display = '';
+      }
+      document.documentElement.classList.remove('pswp-open');
+    });
+
+    // ── Thumb bounds for open/close animation ───────────────────────
+    lightbox.addFilter('thumbEl', (_thumbEl, data, _index) => {
+      const el = data.element as HTMLElement | undefined;
+      if (el) {
+        const img = el.tagName === 'IMG' ? el : el.querySelector('img');
+        return (img as HTMLElement) || el;
+      }
+      return _thumbEl;
+    });
+
+    lightbox.init();
+
+    // ── Click handlers on trigger wrappers ───────────────────────────
+    images.forEach((el, index) => {
+      const trigger = el.closest('.lightbox-trigger') || el;
+
+      trigger.addEventListener('click', (e: Event) => {
+        e.preventDefault();
+        e.stopPropagation();
+        lightbox.loadAndOpen(index);
+      });
+    });
+  }
+
+  // Initialize on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLightbox);
+  } else {
+    initLightbox();
+  }
+</script>

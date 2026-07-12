@@ -13,3 +13,47 @@ html {
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
+/* ── Lightbox trigger cursor ─────────────────────────────── */
+.lightbox-trigger {
+  cursor: zoom-in;
+}
+
+/* ── Restore native cursor when PhotoSwipe is open ───────── */
+html.pswp-open,
+html.pswp-open *,
+html.pswp-open a,
+html.pswp-open button,
+html.pswp-open [role="button"] {
+  cursor: auto !important;
+}
+
+html.pswp-open .pswp__button {
+  cursor: pointer !important;
+}
+
+html.pswp-open .pswp__img--placeholder {
+  cursor: grab !important;
+}
+
+html.pswp-open .pswp__zoom-wrap {
+  cursor: grab !important;
+}
+
+/* ── PhotoSwipe theming ──────────────────────────────────── */
+.pswp {
+  --pswp-bg: rgba(0, 0, 0, 0.92);
+  --pswp-icon-color: #ffffff;
+  --pswp-icon-color-secondary: rgba(255, 255, 255, 0.6);
+}
+
+.pswp__button:hover {
+  color: #FF0054;
+}
+
+.pswp__counter {
+  font-family: 'Geist Mono', monospace;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}

@@ -95,31 +95,8 @@ export const legalTechContent: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/297ca85a5424ddb65dc723c250a3f2e5261ef7db.png`,
-        overlay: {
-          src: `${workAssets}/34c14e47d0b5a9944fe966972e3f7f3cf47b0220.png`,
-          opacity: "0.33",
-        },
-        composites: [
-          {
-            src: `${workAssets}/c63991145e736f8a7a5636d43dcda29abd592675.png`,
-            width: "208px",
-            top: "36px",
-            left: "25px",
-          },
-          {
-            src: `${workAssets}/c63991145e736f8a7a5636d43dcda29abd592675.png`,
-            width: "208px",
-            top: "-295px",
-            left: "281px",
-          },
-          {
-            src: `${workAssets}/b724dc87e4b925d5d3e72279cef1606158c92351.png`,
-            width: "208px",
-            top: "-362px",
-            left: "537px",
-          },
-        ],
+        src: `${workAssets}/Project-app.png`,
+        contain: true,
       },
     },
   ],
