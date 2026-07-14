@@ -17,7 +17,7 @@ const { image } = Astro.props;
       data-pswp-src={image.src}
     />
     {image.caption && (
-      <p class="text-[#6b7280] text-[13px] font-['Geist_Mono'] leading-[1.2] mt-2 uppercase text-right">{image.caption}</p>
+      <p class="text-[var(--color-text-secondary)] text-[13px] font-['Geist_Mono'] leading-[1.2] mt-2 uppercase text-right">{image.caption}</p>
     )}
   </div>
 ) : (
@@ -50,7 +50,7 @@ const { image } = Astro.props;
           ))}
         </div>
         {image.caption && (
-          <p class="text-[#6b7280] text-[13px] font-['Geist_Mono'] leading-[1.2] mt-2 uppercase text-right">{image.caption}</p>
+          <p class="text-[var(--color-text-secondary)] text-[13px] font-['Geist_Mono'] leading-[1.2] mt-2 uppercase text-right">{image.caption}</p>
         )}
       </>
     ) : (
@@ -80,7 +80,7 @@ const { image } = Astro.props;
           ))}
         </div>
         {image.caption && (
-          <p class="text-[#6b7280] text-[13px] font-['Geist_Mono'] leading-[1.2] mt-2 uppercase text-right">{image.caption}</p>
+          <p class="text-[var(--color-text-secondary)] text-[13px] font-['Geist_Mono'] leading-[1.2] mt-2 uppercase text-right">{image.caption}</p>
         )}
       </>
     )}

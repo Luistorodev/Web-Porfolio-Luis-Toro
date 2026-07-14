@@ -9,57 +9,69 @@ const navLinks = [
   { href: '/', label: 'MY WORK', key: 'work' },
   { href: '/side-projects', label: 'SIDE PROJECTS', key: 'side-projects' },
   { href: '/about', label: 'ABOUT', key: 'about' },
-  { href: '/cv', label: 'CV', key: 'cv' },
+  { href: '/assets/Luis%20Toro%20Cordero%20-%20Product%20Designer%20CV%20-%202025%20%5BEN%5D.pdf', label: 'CV', key: 'cv', target: '_blank' },
 ];
 ---
 
-<div class="bg-white border-b border-[#e5e7eb] flex items-center h-auto md:h-[60px] px-4 md:px-6 py-3 md:py-2 w-full font-['Geist_Mono'] text-sm md:text-base relative z-50">
+<div class="bg-[var(--color-surface)] border-b border-[var(--color-border)] flex items-center h-auto md:h-[60px] px-4 md:px-6 py-3 md:py-2 w-full font-['Geist_Mono'] text-sm md:text-base relative z-50 transition-colors duration-200">
   <div class="flex flex-1 items-center justify-between min-w-0">
     <a href="/" class="flex items-center gap-2 md:gap-3 whitespace-nowrap no-underline">
-      <span class="text-[#374151]">LUIS TORO</span>
-      <span class="hidden md:inline text-[#9ca3af]">PRODUCT DESIGNER + AI BUILDER</span>
+      <span class="text-[var(--color-text-strong)]">LUIS TORO</span>
+      <span class="hidden md:inline text-[var(--color-text-muted)]">PRODUCT DESIGNER + AI BUILDER</span>
     </a>
 
     <!-- Desktop nav -->
     <div class="hidden md:flex items-center gap-4 md:gap-8">
       {navLinks.map((link) => (
-        <a href={link.href} class={`whitespace-nowrap no-underline transition-colors duration-200 ${currentPage === link.key ? 'text-[#ff0054]' : 'text-[#6b7280] hover:text-[#374151]'}`}>
+        <a href={link.href} target={link.target} rel={link.target ? 'noopener noreferrer' : undefined} class={`whitespace-nowrap no-underline transition-colors duration-200 ${currentPage === link.key ? 'text-[var(--color-accent)]' : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-strong)]'}`}>
           {link.label}
         </a>
       ))}
     </div>
 
-    <div class="hidden md:flex bg-[#f3f4f6] border border-[#e5e7eb] rounded-lg w-[44px] h-[44px] items-center justify-center shrink-0">
-      <span class="text-[#374151]">ES</span>
+    <div class="hidden md:flex items-center gap-2 shrink-0">
+      <button data-theme-toggle type="button" class="theme-toggle bg-[var(--color-surface-muted)] border border-[var(--color-border)] rounded-lg w-[44px] h-[44px] flex items-center justify-center text-[var(--color-text-strong)] cursor-pointer transition-colors duration-200 hover:text-[var(--color-accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]" aria-label="Activate dark mode" aria-pressed="false" title="Activate dark mode">
+        <svg class="theme-icon--moon w-5 h-5" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z" /></svg>
+        <svg class="theme-icon--sun w-5 h-5" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.5" /><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" /></svg>
+      </button>
+      <div class="bg-[var(--color-surface-muted)] border border-[var(--color-border)] rounded-lg w-[44px] h-[44px] flex items-center justify-center">
+        <span class="text-[var(--color-text-strong)]">ES</span>
+      </div>
     </div>
 
     <!-- Burger button (mobile) -->
     <button id="burger-btn" class="md:hidden flex flex-col gap-1 w-6 h-6 items-center justify-center bg-transparent border-none cursor-pointer p-0" aria-label="Menu">
-      <span class="block w-5 h-0.5 bg-[#374151] rounded transition-all duration-300 origin-center" id="burger-line-1"></span>
-      <span class="block w-5 h-0.5 bg-[#374151] rounded transition-all duration-300 origin-center" id="burger-line-2"></span>
-      <span class="block w-5 h-0.5 bg-[#374151] rounded transition-all duration-300 origin-center" id="burger-line-3"></span>
+      <span class="block w-5 h-0.5 bg-[var(--color-text-strong)] rounded transition-all duration-300 origin-center" id="burger-line-1"></span>
+      <span class="block w-5 h-0.5 bg-[var(--color-text-strong)] rounded transition-all duration-300 origin-center" id="burger-line-2"></span>
+      <span class="block w-5 h-0.5 bg-[var(--color-text-strong)] rounded transition-all duration-300 origin-center" id="burger-line-3"></span>
     </button>
   </div>
 </div>
 
 <!-- Overlay -->
-<div id="menu-overlay" class="fixed inset-0 bg-black/30 z-40 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+<div id="menu-overlay" class="fixed inset-0 bg-black/40 z-40 opacity-0 pointer-events-none transition-opacity duration-300"></div>
 
 <!-- Slide-in panel -->
-<div id="mobile-panel" class="fixed top-0 right-0 h-full w-[280px] bg-white z-50 translate-x-full transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col shadow-lg">
-  <div class="flex justify-end px-4 py-3 border-b border-[#e5e7eb]">
-    <button id="close-panel-btn" class="bg-transparent border-none cursor-pointer text-[#374151] text-xl leading-none p-1" aria-label="Close menu">&times;</button>
+<div id="mobile-panel" class="fixed top-0 right-0 h-full w-[280px] bg-[var(--color-surface)] z-50 translate-x-full transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col shadow-lg">
+  <div class="flex justify-end px-4 py-3 border-b border-[var(--color-border)]">
+    <button id="close-panel-btn" class="bg-transparent border-none cursor-pointer text-[var(--color-text-strong)] text-xl leading-none p-1" aria-label="Close menu">&times;</button>
   </div>
   <div class="flex flex-col gap-2 px-6 py-4 flex-1">
     {navLinks.map((link) => (
-      <a href={link.href} class={`block py-2 no-underline transition-colors duration-200 font-['Geist_Mono'] text-sm ${currentPage === link.key ? 'text-[#ff0054]' : 'text-[#6b7280] hover:text-[#374151]'}`}>
+      <a href={link.href} target={link.target} rel={link.target ? 'noopener noreferrer' : undefined} class={`block py-2 no-underline transition-colors duration-200 font-['Geist_Mono'] text-sm ${currentPage === link.key ? 'text-[var(--color-accent)]' : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-strong)]'}`}>
         {link.label}
       </a>
     ))}
   </div>
-  <div class="px-6 py-4 border-t border-[#e5e7eb]">
-    <div class="flex bg-[#f3f4f6] border border-[#e5e7eb] rounded-lg w-[44px] h-[44px] items-center justify-center">
-      <span class="text-[#374151]">ES</span>
+  <div class="px-6 py-4 border-t border-[var(--color-border)]">
+    <div class="flex items-center gap-2">
+      <button data-theme-toggle type="button" class="theme-toggle bg-[var(--color-surface-muted)] border border-[var(--color-border)] rounded-lg w-[44px] h-[44px] flex items-center justify-center text-[var(--color-text-strong)] cursor-pointer transition-colors duration-200 hover:text-[var(--color-accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]" aria-label="Activate dark mode" aria-pressed="false" title="Activate dark mode">
+        <svg class="theme-icon--moon w-5 h-5" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z" /></svg>
+        <svg class="theme-icon--sun w-5 h-5" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.5" /><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" /></svg>
+      </button>
+      <div class="flex bg-[var(--color-surface-muted)] border border-[var(--color-border)] rounded-lg w-[44px] h-[44px] items-center justify-center">
+        <span class="text-[var(--color-text-strong)]">ES</span>
+      </div>
     </div>
   </div>
 </div>
@@ -72,6 +84,7 @@ const navLinks = [
   const line1 = document.getElementById('burger-line-1');
   const line2 = document.getElementById('burger-line-2');
   const line3 = document.getElementById('burger-line-3');
+  const themeButtons = document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]');
 
   let isOpen = false;
 
@@ -107,4 +120,37 @@ const navLinks = [
   panel?.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', closeMenu);
   });
+
+  function updateThemeControls(theme: 'light' | 'dark') {
+    const isDark = theme === 'dark';
+    const label = isDark ? 'Activate light mode' : 'Activate dark mode';
+
+    themeButtons.forEach((button) => {
+      button.setAttribute('aria-pressed', String(isDark));
+      button.setAttribute('aria-label', label);
+      button.title = label;
+    });
+  }
+
+  function toggleTheme() {
+    const root = document.documentElement;
+    const theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+
+    root.classList.add('theme-transition');
+    // Force the transition styles to apply before changing the theme tokens.
+    void root.offsetWidth;
+    root.dataset.theme = theme;
+
+    try {
+      localStorage.setItem('theme', theme);
+    } catch {
+      // The visual preference still works when storage is unavailable.
+    }
+
+    updateThemeControls(theme);
+    window.setTimeout(() => root.classList.remove('theme-transition'), 220);
+  }
+
+  updateThemeControls(document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light');
+  themeButtons.forEach((button) => button.addEventListener('click', toggleTheme));
 </script>

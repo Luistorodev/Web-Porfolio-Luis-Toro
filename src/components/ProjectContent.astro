@@ -11,7 +11,7 @@ const { content } = Astro.props;
 const { cover, meta, sections } = content;
 
 function renderBody(body: string[]) {
-  const items: { type: 'p' | 'ul' | 'quote'; content: string[] }[] = [];
+  const items: { type: 'p' | 'ul' | 'quote' | 'heading-serif'; content: string[] }[] = [];
   let bulletGroup: string[] = [];
 
   for (const p of body) {
@@ -39,16 +39,16 @@ function renderBody(body: string[]) {
 }
 ---
 
-<div class="border-b border-[#d1d5db] pb-8 w-full">
+<div class="border-b border-[var(--color-border-strong)] pb-8 w-full">
   <div class="mx-auto max-w-[770px] px-4 md:px-0 flex flex-col gap-4">
 
     <!-- Hero -->
     <div class="flex flex-col gap-6">
       <div class="flex flex-col gap-2">
-        <h1 class="font-bold text-[#1f2a37] text-[24px] md:text-[31px] leading-tight font-['Inter']">
+        <h1 class="font-bold text-[var(--color-text-primary)] text-[24px] md:text-[31px] leading-tight font-['Inter']">
           {content.title}
         </h1>
-        <p class="text-[#9ca3af] text-sm md:text-[14px] uppercase font-['Geist_Mono']">
+        <p class="text-[var(--color-text-muted)] text-sm md:text-[14px] uppercase font-['Geist_Mono']">
           {content.subtitle}
         </p>
       </div>
@@ -58,16 +58,16 @@ function renderBody(body: string[]) {
     <!-- Meta bar -->
     <div class="flex gap-4 text-sm md:text-[14px]">
       <div class="flex flex-1 flex-col gap-1.5">
-        <span class="text-[#9ca3af] uppercase font-['Geist_Mono']">Role:</span>
-        <span class="text-[#374151] font-['Inter']">{meta.role}</span>
+        <span class="text-[var(--color-text-muted)] uppercase font-['Geist_Mono']">Role:</span>
+        <span class="text-[var(--color-text-strong)] font-['Inter']">{meta.role}</span>
       </div>
       <div class="flex flex-1 flex-col gap-1.5">
-        <span class="text-[#9ca3af] uppercase font-['Geist_Mono']">Timeline</span>
-        <span class="text-[#374151] font-['Inter']">{meta.timeline}</span>
+        <span class="text-[var(--color-text-muted)] uppercase font-['Geist_Mono']">Timeline</span>
+        <span class="text-[var(--color-text-strong)] font-['Inter']">{meta.timeline}</span>
       </div>
       <div class="flex flex-1 flex-col gap-1.5">
-        <span class="text-[#9ca3af] uppercase font-['Geist_Mono']">Skills</span>
-        <div class="text-[#374151] font-['Inter'] leading-[1.2]">
+        <span class="text-[var(--color-text-muted)] uppercase font-['Geist_Mono']">Skills</span>
+        <div class="text-[var(--color-text-strong)] font-['Inter'] leading-[1.2]">
           {meta.skills.map((skill: string) => <p>{skill}</p>)}
         </div>
       </div>
@@ -84,7 +84,7 @@ function renderBody(body: string[]) {
                   <>
                     <ImageBlock image={section.image} />
                     {section.image.caption && (
-                      <p class="text-[#6b7280] text-[13px] font-['Geist_Mono'] leading-[1.2] uppercase text-right">{section.image.caption}</p>
+                      <p class="text-[var(--color-text-secondary)] text-[13px] font-['Geist_Mono'] leading-[1.2] uppercase text-right">{section.image.caption}</p>
                     )}
                   </>
                 )}
@@ -95,12 +95,12 @@ function renderBody(body: string[]) {
                     {renderBody(section.body).map((item) => (
                       item.type === 'heading-serif' ? (
                         item.content.map((h: string) => (
-                          <p class="text-[#1f2a37] text-[20px] md:text-[24px] leading-[1.2] font-['Instrument_Serif',serif]">{h}</p>
+                          <p class="text-[var(--color-text-primary)] text-[20px] md:text-[24px] leading-[1.2] font-['Instrument_Serif',serif]">{h}</p>
                         ))
                       ) : (
                         item.content.map((p: string) => {
-                          const html = p.replace(/~~(.+?)~~/g, '<span class="text-[#c8102e]">$1</span>').replace(/\*\*(.+?)\*\*/g, '<span class="font-bold text-[#1f2a37]">$1</span>');
-                          return <p class="text-[#6b7280] text-[13px] leading-relaxed font-['Inter']" set:html={html} />;
+                          const html = p.replace(/~~(.+?)~~/g, '<span class="text-[var(--color-accent)]">$1</span>').replace(/\*\*(.+?)\*\*/g, '<span class="font-bold text-[var(--color-text-primary)]">$1</span>');
+                          return <p class="text-[var(--color-text-secondary)] text-[13px] leading-relaxed font-['Inter']" set:html={html} />;
                         })
                       )
                     ))}
@@ -116,12 +116,12 @@ function renderBody(body: string[]) {
                     {renderBody(section.body).map((item) => (
                       item.type === 'heading-serif' ? (
                         item.content.map((h: string) => (
-                          <p class="text-[#1f2a37] text-[20px] md:text-[24px] leading-[1.2] font-['Instrument_Serif',serif]">{h}</p>
+                          <p class="text-[var(--color-text-primary)] text-[20px] md:text-[24px] leading-[1.2] font-['Instrument_Serif',serif]">{h}</p>
                         ))
                       ) : (
                         item.content.map((p: string) => {
-                          const html = p.replace(/~~(.+?)~~/g, '<span class="text-[#c8102e]">$1</span>').replace(/\*\*(.+?)\*\*/g, '<span class="font-bold text-[#1f2a37]">$1</span>');
-                          return <p class="text-[#6b7280] text-[13px] leading-relaxed font-['Inter']" set:html={html} />;
+                          const html = p.replace(/~~(.+?)~~/g, '<span class="text-[var(--color-accent)]">$1</span>').replace(/\*\*(.+?)\*\*/g, '<span class="font-bold text-[var(--color-text-primary)]">$1</span>');
+                          return <p class="text-[var(--color-text-secondary)] text-[13px] leading-relaxed font-['Inter']" set:html={html} />;
                         })
                       )
                     ))}
@@ -133,7 +133,7 @@ function renderBody(body: string[]) {
                   <>
                     <ImageBlock image={section.image} />
                     {section.image.caption && (
-                      <p class="text-[#6b7280] text-[13px] font-['Geist_Mono'] leading-[1.2] uppercase text-right">{section.image.caption}</p>
+                      <p class="text-[var(--color-text-secondary)] text-[13px] font-['Geist_Mono'] leading-[1.2] uppercase text-right">{section.image.caption}</p>
                     )}
                   </>
                 )}
@@ -144,43 +144,43 @@ function renderBody(body: string[]) {
       ) : (
       <div class="flex flex-col gap-4">
         {section.label && (
-          <p class="text-[#9ca3af] text-sm md:text-[14px] uppercase font-['Geist_Mono']">{section.label}</p>
+          <p class="text-[var(--color-text-muted)] text-sm md:text-[14px] uppercase font-['Geist_Mono']">{section.label}</p>
         )}
         {section.heading && (
-          <h2 class="font-bold text-[#1f2a37] text-[24px] md:text-[31px] leading-tight font-['Inter']">{section.heading}</h2>
+          <h2 class="font-bold text-[var(--color-text-primary)] text-[24px] md:text-[31px] leading-tight font-['Inter']">{section.heading}</h2>
         )}
         {section.subheading && (
-          <h3 class="font-semibold text-[#374151] text-[18px] md:text-[20px] leading-tight font-['Inter']">{section.subheading}</h3>
+          <h3 class="font-semibold text-[var(--color-text-strong)] text-[18px] md:text-[20px] leading-tight font-['Inter']">{section.subheading}</h3>
         )}
         {section.body && (
           <div class="flex flex-col gap-3">
             {renderBody(section.body).map((item) => (
               item.type === 'ul' ? (
-                <ul class="list-disc pl-5 space-y-1.5 text-[#6b7280] text-[13px] leading-relaxed font-['Inter']">
+                <ul class="list-disc pl-5 space-y-1.5 text-[var(--color-text-secondary)] text-[13px] leading-relaxed font-['Inter']">
                   {item.content.map((li: string) => {
                     const html = li
-                      .replace(/~~(.+?)~~/g, '<span class="text-[#c8102e]">$1</span>')
-                      .replace(/\*\*(.+?)\*\*/g, '<span class="font-bold text-[#1f2a37]">$1</span>');
+                      .replace(/~~(.+?)~~/g, '<span class="text-[var(--color-accent)]">$1</span>')
+                      .replace(/\*\*(.+?)\*\*/g, '<span class="font-bold text-[var(--color-text-primary)]">$1</span>');
                     return <li set:html={html} />;
                   })}
                 </ul>
               ) : item.type === 'heading-serif' ? (
                 item.content.map((h: string) => (
-                  <p class="text-[#1f2a37] text-[20px] md:text-[24px] leading-[1.2] font-['Instrument_Serif',serif]">{h}</p>
+                  <p class="text-[var(--color-text-primary)] text-[20px] md:text-[24px] leading-[1.2] font-['Instrument_Serif',serif]">{h}</p>
                 ))
               ) : item.type === 'quote' ? (
                 item.content.map((q: string) => {
                   const html = q
-                    .replace(/~~(.+?)~~/g, '<span class="text-[#c8102e]">$1</span>')
-                    .replace(/\*\*(.+?)\*\*/g, '<span class="font-bold text-[#1f2a37]">$1</span>');
-                  return <p class={`text-[#1f2a37] leading-[1.2] text-center font-['Instrument_Serif',serif] py-4 ${html.length > 60 ? 'text-[18px] md:text-[20px]' : 'text-[20px] md:text-[24px]'}`} set:html={html} />;
+                    .replace(/~~(.+?)~~/g, '<span class="text-[var(--color-accent)]">$1</span>')
+                    .replace(/\*\*(.+?)\*\*/g, '<span class="font-bold text-[var(--color-text-primary)]">$1</span>');
+                  return <p class={`text-[var(--color-text-primary)] leading-[1.2] text-center font-['Instrument_Serif',serif] py-4 ${html.length > 60 ? 'text-[18px] md:text-[20px]' : 'text-[20px] md:text-[24px]'}`} set:html={html} />;
                 })
               ) : (
                 item.content.map((p: string) => {
                   const html = p
-                    .replace(/~~(.+?)~~/g, '<span class="text-[#c8102e]">$1</span>')
-                    .replace(/\*\*(.+?)\*\*/g, '<span class="font-bold text-[#1f2a37]">$1</span>');
-                  return <p class="text-[#6b7280] text-[13px] leading-relaxed font-['Inter']" set:html={html} />;
+                    .replace(/~~(.+?)~~/g, '<span class="text-[var(--color-accent)]">$1</span>')
+                    .replace(/\*\*(.+?)\*\*/g, '<span class="font-bold text-[var(--color-text-primary)]">$1</span>');
+                  return <p class="text-[var(--color-text-secondary)] text-[13px] leading-relaxed font-['Inter']" set:html={html} />;
                 })
               )
             ))}
@@ -190,12 +190,12 @@ function renderBody(body: string[]) {
           <div class={`grid grid-cols-1 gap-6 ${section.columns.length === 4 ? 'md:grid-cols-4' : section.columns.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'}`}>
             {section.columns.map((col) => (
               <div class="flex flex-col gap-3">
-                <p class="text-[#1f2a37] text-[20px] md:text-[24px] leading-[1.2] font-['Instrument_Serif',serif]">{col.heading}</p>
-                <div class="flex flex-col gap-2 text-[#6b7280] text-[13px] leading-relaxed font-['Inter']">
+                <p class="text-[var(--color-text-primary)] text-[20px] md:text-[24px] leading-[1.2] font-['Instrument_Serif',serif]">{col.heading}</p>
+                <div class="flex flex-col gap-2 text-[var(--color-text-secondary)] text-[13px] leading-relaxed font-['Inter']">
                   {col.body.map((p: string) => {
                     const html = p
-                      .replace(/~~(.+?)~~/g, '<span class="text-[#c8102e]">$1</span>')
-                      .replace(/\*\*(.+?)\*\*/g, '<span class="font-bold text-[#1f2a37]">$1</span>');
+                      .replace(/~~(.+?)~~/g, '<span class="text-[var(--color-accent)]">$1</span>')
+                      .replace(/\*\*(.+?)\*\*/g, '<span class="font-bold text-[var(--color-text-primary)]">$1</span>');
                     return <p set:html={html} />;
                   })}
                 </div>
@@ -207,7 +207,7 @@ function renderBody(body: string[]) {
           <>
             <ImageBlock image={section.image} />
             {section.image.caption && (
-              <p class="text-[#6b7280] text-[13px] font-['Geist_Mono'] leading-[1.2] uppercase text-right">{section.image.caption}</p>
+              <p class="text-[var(--color-text-secondary)] text-[13px] font-['Geist_Mono'] leading-[1.2] uppercase text-right">{section.image.caption}</p>
             )}
           </>
         )}

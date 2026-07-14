@@ -16,15 +16,15 @@ function getPlaceholderText(title: string) {
             {item.image ? (
               <img src={item.image} alt={item.title} class="w-full h-full object-cover" />
             ) : (
-              <div class="bg-[#9ca3af] w-full h-full flex items-center justify-center">
-                <span class="text-white text-sm font-['Geist_Mono'] uppercase">{getPlaceholderText(item.title)}</span>
+              <div class="bg-[var(--color-placeholder)] w-full h-full flex items-center justify-center">
+                <span class="text-[var(--color-text-primary)] text-sm font-['Geist_Mono'] uppercase">{getPlaceholderText(item.title)}</span>
               </div>
             )}
           </div>
           <div class="flex items-start justify-between h-[19px] text-sm md:text-base whitespace-nowrap w-full">
-            <p class="font-medium text-[#374151] font-['Inter']">{item.title}</p>
+            <p class="font-medium text-[var(--color-text-strong)] font-['Inter']">{item.title}</p>
             {item.year && (
-              <p class="text-[#6b7280] uppercase font-['Geist_Mono']">{item.year}</p>
+              <p class="text-[var(--color-text-secondary)] uppercase font-['Geist_Mono']">{item.year}</p>
             )}
           </div>
         </a>
@@ -39,15 +39,15 @@ function getPlaceholderText(title: string) {
             {item.image ? (
               <img src={item.image} alt={item.title} class="w-full h-full object-cover" />
             ) : (
-              <div class="bg-[#9ca3af] w-full h-full flex items-center justify-center">
-                <span class="text-white text-sm font-['Geist_Mono'] uppercase">{getPlaceholderText(item.title)}</span>
+              <div class="bg-[var(--color-placeholder)] w-full h-full flex items-center justify-center">
+                <span class="text-[var(--color-text-primary)] text-sm font-['Geist_Mono'] uppercase">{getPlaceholderText(item.title)}</span>
               </div>
             )}
           </div>
           <div class="flex items-start justify-between h-[19px] text-sm md:text-base whitespace-nowrap w-full">
-            <p class="font-medium text-[#374151] font-['Inter']">{item.title}</p>
+            <p class="font-medium text-[var(--color-text-strong)] font-['Inter']">{item.title}</p>
             {item.year && (
-              <p class="text-[#6b7280] uppercase font-['Geist_Mono']">{item.year}</p>
+              <p class="text-[var(--color-text-secondary)] uppercase font-['Geist_Mono']">{item.year}</p>
             )}
           </div>
         </a>
@@ -63,15 +63,15 @@ function getPlaceholderText(title: string) {
               {item.image ? (
                 <img src={item.image} alt={item.title} class="w-full h-full object-cover" />
               ) : (
-                <div class="bg-[#9ca3af] w-full h-full flex items-center justify-center">
-                  <span class="text-white text-sm font-['Geist_Mono'] uppercase">{getPlaceholderText(item.title)}</span>
+                <div class="bg-[var(--color-placeholder)] w-full h-full flex items-center justify-center">
+                  <span class="text-[var(--color-text-primary)] text-sm font-['Geist_Mono'] uppercase">{getPlaceholderText(item.title)}</span>
                 </div>
               )}
             </div>
             <div class="flex flex-col gap-0.5 text-sm w-full">
-              <p class="font-medium text-[#374151] font-['Inter']">{item.title}</p>
+              <p class="font-medium text-[var(--color-text-strong)] font-['Inter']">{item.title}</p>
               {item.year && (
-                <p class="text-[#6b7280] uppercase font-['Geist_Mono']">{item.year}</p>
+                <p class="text-[var(--color-text-secondary)] uppercase font-['Geist_Mono']">{item.year}</p>
               )}
             </div>
           </a>
@@ -81,15 +81,15 @@ function getPlaceholderText(title: string) {
                 {rightColumn[i].image ? (
                   <img src={rightColumn[i].image} alt={rightColumn[i].title} class="w-full h-full object-cover" />
                 ) : (
-                  <div class="bg-[#9ca3af] w-full h-full flex items-center justify-center">
-                    <span class="text-white text-sm font-['Geist_Mono'] uppercase">{getPlaceholderText(rightColumn[i].title)}</span>
+                  <div class="bg-[var(--color-placeholder)] w-full h-full flex items-center justify-center">
+                    <span class="text-[var(--color-text-primary)] text-sm font-['Geist_Mono'] uppercase">{getPlaceholderText(rightColumn[i].title)}</span>
                   </div>
                 )}
               </div>
               <div class="flex flex-col gap-0.5 text-sm w-full">
-                <p class="font-medium text-[#374151] font-['Inter']">{rightColumn[i].title}</p>
+                <p class="font-medium text-[var(--color-text-strong)] font-['Inter']">{rightColumn[i].title}</p>
                 {rightColumn[i].year && (
-                  <p class="text-[#6b7280] uppercase font-['Geist_Mono']">{rightColumn[i].year}</p>
+                  <p class="text-[var(--color-text-secondary)] uppercase font-['Geist_Mono']">{rightColumn[i].year}</p>
                 )}
               </div>
             </a>

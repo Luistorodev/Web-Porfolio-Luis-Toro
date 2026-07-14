@@ -26,7 +26,7 @@
     });
 
     // Pre-load to get accurate dimensions for images not yet fully loaded
-    dataSource.forEach((item, i) => {
+    dataSource.forEach((item) => {
       const img = item.element as HTMLImageElement;
       if (img.naturalWidth && img.naturalHeight) {
         item.width = img.naturalWidth;
@@ -95,7 +95,7 @@
         const img = el.tagName === 'IMG' ? el : el.querySelector('img');
         return (img as HTMLElement) || el;
       }
-      return _thumbEl;
+      return _thumbEl || document.body;
     });
 
     lightbox.init();
