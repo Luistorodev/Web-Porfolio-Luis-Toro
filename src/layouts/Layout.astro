@@ -19,13 +19,9 @@ import Cursor from '../components/Cursor.astro';
 
         try {
           const savedTheme = localStorage.getItem(storageKey);
-          theme = savedTheme === 'light' || savedTheme === 'dark'
-            ? savedTheme
-            : window.matchMedia('(prefers-color-scheme: dark)').matches
-              ? 'dark'
-              : 'light';
+          theme = savedTheme === 'light' || savedTheme === 'dark' ? savedTheme : 'light';
         } catch {
-          theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          theme = 'light';
         }
 
         document.documentElement.dataset.theme = theme;
