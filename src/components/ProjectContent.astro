@@ -1,13 +1,15 @@
 ---
 import type { ProjectContent, ProjectSection } from '../data/legalTechContent';
+import { ui, type Language } from '../data/i18n';
 import ImageBlock from './ImageBlock.astro';
 import Lightbox from './Lightbox.astro';
 
 interface Props {
   content: ProjectContent;
+  lang?: Language;
 }
 
-const { content } = Astro.props;
+const { content, lang = 'en' } = Astro.props;
 const { cover, meta, sections } = content;
 
 function renderBody(body: string[]) {
@@ -58,15 +60,15 @@ function renderBody(body: string[]) {
     <!-- Meta bar -->
     <div class="flex gap-4 text-sm md:text-[14px]">
       <div class="flex flex-1 flex-col gap-1.5">
-        <span class="text-[var(--color-text-muted)] uppercase font-['Geist_Mono']">Role:</span>
+        <span class="text-[var(--color-text-muted)] uppercase font-['Geist_Mono']">{ui[lang].projectMeta.role}:</span>
         <span class="text-[var(--color-text-strong)] font-['Inter']">{meta.role}</span>
       </div>
       <div class="flex flex-1 flex-col gap-1.5">
-        <span class="text-[var(--color-text-muted)] uppercase font-['Geist_Mono']">Timeline</span>
+        <span class="text-[var(--color-text-muted)] uppercase font-['Geist_Mono']">{ui[lang].projectMeta.timeline}</span>
         <span class="text-[var(--color-text-strong)] font-['Inter']">{meta.timeline}</span>
       </div>
       <div class="flex flex-1 flex-col gap-1.5">
-        <span class="text-[var(--color-text-muted)] uppercase font-['Geist_Mono']">Skills</span>
+        <span class="text-[var(--color-text-muted)] uppercase font-['Geist_Mono']">{ui[lang].projectMeta.skills}</span>
         <div class="text-[var(--color-text-strong)] font-['Inter'] leading-[1.2]">
           {meta.skills.map((skill: string) => <p>{skill}</p>)}
         </div>

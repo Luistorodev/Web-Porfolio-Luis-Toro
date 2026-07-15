@@ -1,3 +1,14 @@
+---
+import { ui, type Language } from '../data/i18n';
+
+interface Props {
+  lang?: Language;
+}
+
+const { lang = 'en' } = Astro.props;
+const copy = ui[lang].hero;
+---
+
 <div class="flex flex-col md:flex-row gap-4 md:gap-4 items-center justify-center w-full px-4 md:px-0">
   <!-- Profile photo -->
   <img
@@ -12,24 +23,24 @@
         <div class="flex flex-col gap-2">
           <div class="flex flex-col gap-2 text-center md:text-left">
             <h1 class="font-bold text-[var(--color-text-primary)] text-[24px] md:text-[31px] leading-tight font-['Inter']">
-              Hey! I'm Luis Toro 👋
+              {copy.title}
             </h1>
             <p class="text-[var(--color-text-secondary)] text-[13px] leading-tight max-w-[500px] font-['Inter']">
-              Product Designer with 6+ years of experience and a background in FinTech, Healthcare, EdTech, and E-commerce, creating meaningful experiences with the highest standards of design craft.
+              {copy.description}
             </p>
           </div>
 
           <!-- Location -->
           <div class="flex gap-1 items-center justify-center md:justify-start font-['Inter']">
-            <img src="/assets/map-pin-icon.svg" alt="Location" class="w-[17px] h-[17px]" />
-            <p class="text-[var(--color-text-strong)] text-[13px] leading-tight whitespace-nowrap">Barranquilla, COL</p>
+            <img src="/assets/map-pin-icon.svg" alt={copy.locationAlt} class="w-[17px] h-[17px]" />
+            <p class="text-[var(--color-text-strong)] text-[13px] leading-tight whitespace-nowrap">{copy.location}</p>
           </div>
         </div>
 
         <!-- Companies -->
         <div class="flex flex-col gap-0.5 items-center md:items-start">
           <p class="text-[var(--color-text-muted)] text-[12px] md:text-[14px] uppercase whitespace-nowrap font-['Geist_Mono']">
-            Companies that trust my work
+            {copy.trustedBy}
           </p>
           <div class="flex flex-wrap justify-center md:justify-start gap-4 md:gap-[32px] items-start">
             <!-- Finsocial -->

@@ -4,7 +4,7 @@ const workAssets = '/assets/work/product-request-revamp';
 
 export const productRequestContent: ProjectContent = {
   slug: "product-request-revamp",
-  title: "Rediseño de la solicitud de Libre Inversión y Rotativo",
+  title: "Redesigning personal and revolving credit applications",
   subtitle: "Scotiabank Colpatria",
   cover: {
     src: `${workAssets}/cover.png`,
@@ -17,34 +17,34 @@ export const productRequestContent: ProjectContent = {
   sections: [
     {
       label: "Overview",
-      heading: "Crédito sin incertidumbre",
+      heading: "Credit without uncertainty",
       body: [
-        "Scotiabank Colpatria venía impulsando la solicitud de productos por su canal Oneclick (web + app vía WebView). El reto era escalar esa experiencia para créditos de libre inversión y créditos rotativos, manteniendo consistencia con otros productos (cuentas/tarjetas) y reduciendo fricción. Mi rol fue Product Designer, liderando el rediseño end-to-end de la experiencia: diagnóstico, investigación, definición, diseño de interacción y UI, validación con usuarios y entrega para desarrollo.",
+        "Scotiabank Colpatria was expanding product applications through its Oneclick channel (web + app via WebView). The challenge was to scale the experience to personal and revolving credit while maintaining consistency with other products (accounts/cards) and reducing friction. As Product Designer, I led the end-to-end redesign: diagnosis, research, definition, interaction and UI design, user validation, and developer handoff.",
       ],
     },
     {
       subheading: "Problem",
       body: [
-        "La experiencia de solicitud estaba afectada por dos factores críticos:",
+        "The application experience was shaped by two critical issues:",
       ],
       columns: [
         {
-          heading: "Desconfianza y desconocimiento",
+          heading: "Distrust and uncertainty",
           body: [
-            "Las personas no tenían claridad sobre qué necesitaban, qué les ofrecía el banco y por qué se pedía cierta información. La comunicación de tasas/condiciones se percibía incompleta o \"poco transparente\", elevando la ansiedad y el abandono.",
+            "People did not know what they needed, what the bank was offering, or why certain information was required. Rate and terms communication felt incomplete or \"not transparent enough,\" increasing anxiety and abandonment.",
           ],
         },
         {
-          heading: "No existía simulación",
+          heading: "No simulation tool",
           body: [
-            "Sin una simulación de cuotas/escenarios, la gente no podía \"probar\" si el crédito encajaba con su presupuesto. Esto aumentaba la sensación de riesgo (\"voy a avanzar y luego me van a mostrar algo peor\") y debilitaba la intención de completar.",
+            "Without a payment and scenario simulation, people could not test whether the loan fit their budget. This heightened the perceived risk (\"I'll move forward, then they'll show me something worse\") and weakened completion intent.",
           ],
         },
       ],
     },
     {
       body: [
-        "Resultado: alto abandono, baja conversión y experiencia inconsistente entre productos.",
+        "Result: high abandonment, low conversion, and an inconsistent product experience.",
       ],
     },
     {
@@ -55,19 +55,19 @@ export const productRequestContent: ProjectContent = {
     {
       subheading: "Research",
       body: [
-        "Para entender el \"por qué\" detrás del abandono y qué debía cambiar, trabajé con un enfoque mixto:",
+        "To understand why people abandoned the flow and what needed to change, I used a mixed-method approach:",
       ],
       columns: [
         {
-          heading: "Análisis de funnel y métricas del canal Oneclick",
+          heading: "Oneclick funnel and channel metrics analysis",
           body: [
-            "Identificación de pantallas con mayor drop-off (especialmente donde aparecen datos financieros/legales y donde se solicita información percibida como \"excesiva\").",
+            "I identified the screens with the highest drop-off, especially where financial or legal information appeared and where people were asked for information they perceived as \"excessive.\"",
           ],
         },
         {
-          heading: "Entrevistas + pruebas moderadas (usuarios bancarizados que buscaban un crédito)",
+          heading: "Interviews + moderated testing (banked users seeking credit)",
           body: [
-            "Detectamos patrones claros: \"No entiendo si califico\" / \"no sé cuánto voy a pagar\" / \"No me dicen tasas claras\" (miedo a una tasa sorpresa) / \"Demasiados campos para algo que debería ser rápido\".",
+            "We found clear patterns: \"I don't understand whether I qualify\" / \"I don't know how much I'll pay\" / \"They don't show clear rates\" (fear of a surprise rate) / \"Too many fields for something that should be quick.\"",
           ],
         },
       ],
@@ -77,13 +77,13 @@ export const productRequestContent: ProjectContent = {
         {
           heading: "Heuristic review",
           body: [
-            "Se documentaron problemas de consistencia, microcopy ambiguos, falta de jerarquía visual, y componentes desalineados con el sistema de diseño.",
+            "We documented inconsistent patterns, ambiguous microcopy, weak visual hierarchy, and components misaligned with the design system.",
           ],
         },
         {
-          heading: "Benchmark competitivo",
+          heading: "Competitive benchmark",
           body: [
-            "Revisión de patrones de confianza: simuladores, breakdown de cuota, rangos de tasa, comparativas de escenarios, progresos claros y mensajes de seguridad/privacidad.",
+            "We reviewed trust-building patterns: simulators, payment breakdowns, rate ranges, scenario comparisons, clear progress indicators, and security and privacy messaging.",
           ],
         },
       ],
@@ -101,18 +101,235 @@ export const productRequestContent: ProjectContent = {
     {
       subheading: "Design Decisions (what I did differently)",
       body: [
-        "A partir de los hallazgos, tomé decisiones de diseño enfocadas en transparencia + control + reducción de carga cognitiva:",
-        "• **Simulador temprano:** mostrar cuotas y escenarios desde el inicio para generar confianza.",
-        "• **Simplificar campos:** reducir y explicar inputs con microcopy claro.",
-        "• **Estandarizar UX:** componentes y reglas consistentes entre productos.",
-        "• **Storytelling legal:** legal claro, breve y en lenguaje humano.",
-        "• **Claridad de proceso:** explicar elegibilidad, tiempos y siguientes pasos.",
+        "Based on the findings, I made design decisions focused on transparency, control, and lower cognitive load:",
+        "• **Early simulation:** show payments and scenarios upfront to build confidence.",
+        "• **Simplified fields:** reduce and explain inputs with clear microcopy.",
+        "• **Standardized UX:** consistent components and rules across products.",
+        "• **Legal storytelling:** concise, clear legal copy in human language.",
+        "• **Process clarity:** explain eligibility, timelines, and next steps.",
       ],
     },
     {
       subheading: "Solution",
       body: [
-        "El rediseño final entregó una experiencia de solicitud más confiable, coherente y orientada a decisión:",
+        "The final redesign delivered a more trustworthy, consistent, decision-oriented application experience:",
+      ],
+    },
+    {
+      body: [
+        "'''Integrated simulator (Personal / Revolving credit)'''",
+      ],
+    },
+    {
+      image: {
+        src: `${workAssets}/image04.png`,
+      },
+    },
+    {
+      body: [
+        "'''Optimized form'''",
+      ],
+    },
+    {
+      image: {
+        src: `${workAssets}/image05.png`,
+      },
+    },
+    {
+      body: [
+        "'''Transparency'''",
+      ],
+    },
+    {
+      image: {
+        src: `${workAssets}/image06.png`,
+      },
+    },
+    {
+      body: [
+        "'''Consistent UI/UX'''",
+      ],
+    },
+    {
+      image: {
+        src: `${workAssets}/image07.png`,
+      },
+    },
+    {
+      image: {
+        src: `${workAssets}/image08.png`,
+      },
+    },
+    {
+      image: {
+        src: `${workAssets}/image09.png`,
+      },
+    },
+    {
+      image: {
+        src: `${workAssets}/image10.png`,
+      },
+    },
+    {
+      subheading: "Impact",
+      columns: [
+        {
+          heading: "Less abandonment at the critical step",
+          body: [
+            "Early simulation and greater transparency reduced drop-off around rates and terms by 18% to 25%.",
+          ],
+        },
+        {
+          heading: "Higher conversion",
+          body: [
+            "Lower friction and greater perceived control drove a 10% to 18% increase in total flow conversion.",
+          ],
+        },
+        {
+          heading: "Greater perceived trust",
+          body: [
+            "Clearer offers improved trust metrics by +20 to +30 points in clarity scores or up to +1.2 on perception scales.",
+          ],
+        },
+        {
+          heading: "Simulator use drives intent",
+          body: [
+            "Between 60% and 75% of users interacted with the simulator, and those who used it were up to 1.6x more likely to complete.",
+          ],
+        },
+        {
+          heading: "Faster completion",
+          body: [
+            "Simplifying the flow reduced total completion time by 12% to 20%.",
+          ],
+        },
+        {
+          heading: "Fewer errors and retries",
+          body: [
+            "Clear validation and contextual help reduced field-level errors by 15% to 30%.",
+          ],
+        },
+      ],
+    },
+    {
+      body: [
+        "''This project strengthened Scotiabank Colpatria's service ecosystem by standardizing the Oneclick experience and improving user confidence and self-sufficiency through simulation and clear communication. It created a reusable foundation for scaling product applications with higher conversion and less friction.''",
+      ],
+    },
+  ],
+};
+
+export const productRequestContentEs: ProjectContent = {
+  slug: "product-request-revamp",
+  title: "Rediseño de la solicitud de crédito de libre inversión y rotativo",
+  subtitle: "Scotiabank Colpatria",
+  cover: {
+    src: `${workAssets}/cover.png`,
+  },
+  meta: {
+    role: "Diseñador de Producto",
+    timeline: "2022",
+    skills: ["Diseño de Producto", "Diseño UX", "Prototipado"],
+  },
+  sections: [
+    {
+      label: "Resumen",
+      heading: "Crédito sin incertidumbre",
+      body: [
+        "Scotiabank Colpatria estaba impulsando la solicitud de productos a través de su canal Oneclick (web + app mediante WebView). El reto era escalar la experiencia a créditos de libre inversión y rotativos, manteniendo consistencia con otros productos (cuentas/tarjetas) y reduciendo fricción. Como Diseñador de Producto, lideré el rediseño end-to-end: diagnóstico, investigación, definición, diseño de interacción y UI, validación con usuarios y entrega a desarrollo.",
+      ],
+    },
+    {
+      subheading: "Problema",
+      body: [
+        "La experiencia de solicitud estaba marcada por dos problemas críticos:",
+      ],
+      columns: [
+        {
+          heading: "Desconfianza e incertidumbre",
+          body: [
+            "Las personas no sabían qué necesitaban, qué les ofrecía el banco ni por qué se solicitaba cierta información. La comunicación de tasas y condiciones se percibía incompleta o \"poco transparente\", lo que aumentaba la ansiedad y el abandono.",
+          ],
+        },
+        {
+          heading: "No había simulador",
+          body: [
+            "Sin una simulación de cuotas y escenarios, las personas no podían evaluar si el crédito se ajustaba a su presupuesto. Esto elevaba la sensación de riesgo (\"voy a avanzar y luego me van a mostrar algo peor\") y debilitaba la intención de completar el flujo.",
+          ],
+        },
+      ],
+    },
+    {
+      body: [
+        "Resultado: alto abandono, baja conversión y una experiencia inconsistente entre productos.",
+      ],
+    },
+    {
+      image: {
+        src: `${workAssets}/image01.png`,
+      },
+    },
+    {
+      subheading: "Investigación",
+      body: [
+        "Para entender por qué las personas abandonaban el flujo y qué debía cambiar, trabajé con un enfoque mixto:",
+      ],
+      columns: [
+        {
+          heading: "Análisis del funnel y las métricas del canal Oneclick",
+          body: [
+            "Identifiqué las pantallas con mayor drop-off, especialmente donde aparecían datos financieros o legales y donde se pedía información percibida como \"excesiva\".",
+          ],
+        },
+        {
+          heading: "Entrevistas + pruebas moderadas (usuarios bancarizados en busca de crédito)",
+          body: [
+            "Encontramos patrones claros: \"No entiendo si califico\" / \"no sé cuánto voy a pagar\" / \"No me muestran tasas claras\" (miedo a una tasa sorpresa) / \"Demasiados campos para algo que debería ser rápido\".",
+          ],
+        },
+      ],
+    },
+    {
+      columns: [
+        {
+          heading: "Evaluación heurística",
+          body: [
+            "Documentamos patrones inconsistentes, microcopy ambiguo, jerarquía visual débil y componentes desalineados con el sistema de diseño.",
+          ],
+        },
+        {
+          heading: "Benchmark competitivo",
+          body: [
+            "Revisamos patrones que generan confianza: simuladores, desglose de cuotas, rangos de tasa, comparativas de escenarios, indicadores de progreso claros y mensajes de seguridad y privacidad.",
+          ],
+        },
+      ],
+    },
+    {
+      image: {
+        src: `${workAssets}/image02.png`,
+      },
+    },
+    {
+      image: {
+        src: `${workAssets}/image03.png`,
+      },
+    },
+    {
+      subheading: "Decisiones de diseño (qué hice diferente)",
+      body: [
+        "A partir de los hallazgos, tomé decisiones enfocadas en transparencia, control y menor carga cognitiva:",
+        "• **Simulador temprano:** mostrar cuotas y escenarios desde el inicio para generar confianza.",
+        "• **Campos simplificados:** reducir y explicar los inputs con microcopy claro.",
+        "• **UX estandarizada:** componentes y reglas consistentes entre productos.",
+        "• **Storytelling legal:** textos legales claros, breves y en lenguaje humano.",
+        "• **Claridad del proceso:** explicar elegibilidad, tiempos y próximos pasos.",
+      ],
+    },
+    {
+      subheading: "Solución",
+      body: [
+        "El rediseño final entregó una experiencia de solicitud más confiable, coherente y orientada a la decisión:",
       ],
     },
     {
@@ -147,7 +364,7 @@ export const productRequestContent: ProjectContent = {
     },
     {
       body: [
-        "'''Consistencia UI/UX'''",
+        "'''UI/UX consistente'''",
       ],
     },
     {
@@ -171,49 +388,49 @@ export const productRequestContent: ProjectContent = {
       },
     },
     {
-      subheading: "Impact",
+      subheading: "Impacto",
       columns: [
         {
-          heading: "Reducción de abandono en el paso crítico",
+          heading: "Menor abandono en el paso crítico",
           body: [
-            "Al introducir simulación temprana y mayor transparencia, el drop-off en tasas/condiciones se reduce entre 18% y 25%.",
+            "La simulación temprana y una mayor transparencia redujeron entre 18% y 25% el drop-off en tasas y condiciones.",
           ],
         },
         {
-          heading: "Aumento de conversión",
+          heading: "Mayor conversión",
           body: [
-            "La combinación de menor fricción y mayor percepción de control impulsa un incremento del 10% al 18% en la conversión total del flujo.",
+            "La combinación de menos fricción y mayor percepción de control impulsó un incremento de entre 10% y 18% en la conversión total del flujo.",
           ],
         },
         {
-          heading: "Mejora en confianza percibida",
+          heading: "Mayor confianza percibida",
           body: [
-            "La claridad en la oferta eleva métricas de confianza con +20 a +30 puntos en scores de claridad o hasta +1.2 en escalas de percepción.",
+            "Una oferta más clara mejoró las métricas de confianza entre +20 y +30 puntos en scores de claridad o hasta +1.2 en escalas de percepción.",
           ],
         },
         {
-          heading: "Uso del simulador como driver de intención",
+          heading: "El simulador impulsa la intención",
           body: [
-            "Entre el 60% y 75% de usuarios interactúan con el simulador, y quienes lo usan tienen hasta 1.6x más probabilidad de completar.",
+            "Entre el 60% y 75% de los usuarios interactuaron con el simulador, y quienes lo usaron tuvieron hasta 1.6x más probabilidad de completar.",
           ],
         },
         {
-          heading: "Reducción de tiempo de completación",
+          heading: "Completación más rápida",
           body: [
-            "La simplificación del flujo disminuye el tiempo total entre un 12% y 20%.",
+            "La simplificación del flujo redujo el tiempo total de completación entre 12% y 20%.",
           ],
         },
         {
           heading: "Menos errores y reintentos",
           body: [
-            "Validaciones claras y ayudas contextuales reducen errores por campo entre un 15% y 30%.",
+            "Las validaciones claras y la ayuda contextual redujeron los errores por campo entre 15% y 30%.",
           ],
         },
       ],
     },
     {
       body: [
-        "''Este proyecto fortaleció el ecosistema de servicios de Scotiabank Colpatria al estandarizar la experiencia Oneclick y elevar la confianza y autosuficiencia del usuario mediante simulación y comunicación clara, creando una base reusable para escalar solicitudes de productos con más conversión y menos fricción.''",
+        "''Este proyecto fortaleció el ecosistema de servicios de Scotiabank Colpatria al estandarizar la experiencia Oneclick y elevar la confianza y autonomía de los usuarios mediante simulación y comunicación clara. Creó una base reusable para escalar solicitudes de productos con mayor conversión y menos fricción.''",
       ],
     },
   ],

@@ -1,8 +1,19 @@
 ---
 import { leftColumn, rightColumn, type Project } from '../data/projects';
+import { getLocalizedPath, type Language } from '../data/i18n';
+
+interface Props {
+  lang?: Language;
+}
+
+const { lang = 'en' } = Astro.props;
 
 function getPlaceholderText(title: string) {
   return title.split(" ").map(w => w[0]).join("").slice(0, 3);
+}
+
+function getTitle(project: Project) {
+  return project.title[lang];
 }
 ---
 
@@ -15,31 +26,31 @@ function getPlaceholderText(title: string) {
           <div class="project-card-disabled flex flex-col gap-0.5 h-[353px] w-full">
             <div class="flex-1 min-h-0 w-full rounded-lg overflow-hidden relative">
               {item.image ? (
-                <img src={item.image} alt={item.title} class="absolute inset-0 w-full h-full object-cover" />
+                <img src={item.image} alt={getTitle(item)} class="absolute inset-0 w-full h-full object-cover" />
               ) : (
                 <div class="bg-[var(--color-placeholder)] absolute inset-0 flex items-center justify-center">
-                  <span class="text-[var(--color-text-muted)] text-sm">{getPlaceholderText(item.title)}</span>
+                  <span class="text-[var(--color-text-muted)] text-sm">{getPlaceholderText(getTitle(item))}</span>
                 </div>
               )}
             </div>
             <div class="flex items-start justify-between h-[19px] text-sm md:text-base whitespace-nowrap w-full">
-              <p class="font-medium text-[var(--color-text-strong)] font-['Inter']">{item.title}</p>
+              <p class="font-medium text-[var(--color-text-strong)] font-['Inter']">{getTitle(item)}</p>
               <p class="text-[var(--color-text-secondary)] uppercase font-['Geist_Mono']">{`${item.company} • ${item.year}`}</p>
             </div>
           </div>
         ) : (
-          <a href={`/work/${item.slug}`} class="project-card group flex flex-col gap-0.5 h-[353px] w-full cursor-none no-underline">
+          <a href={getLocalizedPath(`/work/${item.slug}`, lang)} class="project-card group flex flex-col gap-0.5 h-[353px] w-full cursor-none no-underline">
             <div class="flex-1 min-h-0 w-full rounded-lg overflow-hidden relative transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]">
               {item.image ? (
-                <img src={item.image} alt={item.title} class="absolute inset-0 w-full h-full object-cover" />
+                <img src={item.image} alt={getTitle(item)} class="absolute inset-0 w-full h-full object-cover" />
               ) : (
                 <div class="bg-[var(--color-placeholder)] absolute inset-0 flex items-center justify-center">
-                  <span class="text-[var(--color-text-muted)] text-sm">{getPlaceholderText(item.title)}</span>
+                  <span class="text-[var(--color-text-muted)] text-sm">{getPlaceholderText(getTitle(item))}</span>
                 </div>
               )}
             </div>
             <div class="flex items-start justify-between h-[19px] text-sm md:text-base whitespace-nowrap w-full">
-              <p class="font-medium text-[var(--color-text-strong)] font-['Inter']">{item.title}</p>
+              <p class="font-medium text-[var(--color-text-strong)] font-['Inter']">{getTitle(item)}</p>
               <p class="text-[var(--color-text-secondary)] uppercase font-['Geist_Mono']">{`${item.company} • ${item.year}`}</p>
             </div>
           </a>
@@ -54,31 +65,31 @@ function getPlaceholderText(title: string) {
           <div class="project-card-disabled flex flex-col gap-0.5 flex-1 w-full">
             <div class="flex-1 min-h-0 w-full rounded-lg overflow-hidden relative">
               {item.image ? (
-                <img src={item.image} alt={item.title} class="absolute inset-0 w-full h-full object-cover" />
+                <img src={item.image} alt={getTitle(item)} class="absolute inset-0 w-full h-full object-cover" />
               ) : (
                 <div class="bg-[var(--color-placeholder)] absolute inset-0 flex items-center justify-center">
-                  <span class="text-[var(--color-text-muted)] text-sm">{getPlaceholderText(item.title)}</span>
+                  <span class="text-[var(--color-text-muted)] text-sm">{getPlaceholderText(getTitle(item))}</span>
                 </div>
               )}
             </div>
             <div class="flex items-start justify-between h-[19px] text-sm md:text-base whitespace-nowrap w-full">
-              <p class="font-medium text-[var(--color-text-strong)] font-['Inter']">{item.title}</p>
+              <p class="font-medium text-[var(--color-text-strong)] font-['Inter']">{getTitle(item)}</p>
               <p class="text-[var(--color-text-secondary)] uppercase font-['Geist_Mono']">{`${item.company} • ${item.year}`}</p>
             </div>
           </div>
         ) : (
-          <a href={`/work/${item.slug}`} class="project-card group flex flex-col gap-0.5 flex-1 w-full cursor-none no-underline">
+          <a href={getLocalizedPath(`/work/${item.slug}`, lang)} class="project-card group flex flex-col gap-0.5 flex-1 w-full cursor-none no-underline">
             <div class="flex-1 min-h-0 w-full rounded-lg overflow-hidden relative transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]">
               {item.image ? (
-                <img src={item.image} alt={item.title} class="absolute inset-0 w-full h-full object-cover" />
+                <img src={item.image} alt={getTitle(item)} class="absolute inset-0 w-full h-full object-cover" />
               ) : (
                 <div class="bg-[var(--color-placeholder)] absolute inset-0 flex items-center justify-center">
-                  <span class="text-[var(--color-text-muted)] text-sm">{getPlaceholderText(item.title)}</span>
+                  <span class="text-[var(--color-text-muted)] text-sm">{getPlaceholderText(getTitle(item))}</span>
                 </div>
               )}
             </div>
             <div class="flex items-start justify-between h-[19px] text-sm md:text-base whitespace-nowrap w-full">
-              <p class="font-medium text-[var(--color-text-strong)] font-['Inter']">{item.title}</p>
+              <p class="font-medium text-[var(--color-text-strong)] font-['Inter']">{getTitle(item)}</p>
               <p class="text-[var(--color-text-secondary)] uppercase font-['Geist_Mono']">{`${item.company} • ${item.year}`}</p>
             </div>
           </a>
@@ -94,31 +105,31 @@ function getPlaceholderText(title: string) {
             <div class="project-card-disabled flex flex-col gap-0.5 w-full">
               <div class="h-[250px] w-full rounded-lg overflow-hidden relative">
                 {item.image ? (
-                  <img src={item.image} alt={item.title} class="absolute inset-0 w-full h-full object-cover" />
+                    <img src={item.image} alt={getTitle(item)} class="absolute inset-0 w-full h-full object-cover" />
                 ) : (
                   <div class="bg-[var(--color-placeholder)] absolute inset-0 flex items-center justify-center">
-                    <span class="text-[var(--color-text-muted)] text-sm">{getPlaceholderText(item.title)}</span>
+                    <span class="text-[var(--color-text-muted)] text-sm">{getPlaceholderText(getTitle(item))}</span>
                   </div>
                 )}
               </div>
               <div class="flex flex-col gap-0.5 text-sm w-full">
-                <p class="font-medium text-[var(--color-text-strong)] font-['Inter']">{item.title}</p>
+                <p class="font-medium text-[var(--color-text-strong)] font-['Inter']">{getTitle(item)}</p>
                 <p class="text-[var(--color-text-secondary)] uppercase font-['Geist_Mono']">{`${item.company} • ${item.year}`}</p>
               </div>
             </div>
           ) : (
-            <a href={`/work/${item.slug}`} class="project-card group flex flex-col gap-0.5 w-full cursor-none no-underline">
+            <a href={getLocalizedPath(`/work/${item.slug}`, lang)} class="project-card group flex flex-col gap-0.5 w-full cursor-none no-underline">
               <div class="h-[250px] w-full rounded-lg overflow-hidden relative transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]">
                 {item.image ? (
-                  <img src={item.image} alt={item.title} class="absolute inset-0 w-full h-full object-cover" />
+                  <img src={item.image} alt={getTitle(item)} class="absolute inset-0 w-full h-full object-cover" />
                 ) : (
                   <div class="bg-[var(--color-placeholder)] absolute inset-0 flex items-center justify-center">
-                    <span class="text-[var(--color-text-muted)] text-sm">{getPlaceholderText(item.title)}</span>
+                    <span class="text-[var(--color-text-muted)] text-sm">{getPlaceholderText(getTitle(item))}</span>
                   </div>
                 )}
               </div>
               <div class="flex flex-col gap-0.5 text-sm w-full">
-                <p class="font-medium text-[var(--color-text-strong)] font-['Inter']">{item.title}</p>
+                <p class="font-medium text-[var(--color-text-strong)] font-['Inter']">{getTitle(item)}</p>
                 <p class="text-[var(--color-text-secondary)] uppercase font-['Geist_Mono']">{`${item.company} • ${item.year}`}</p>
               </div>
             </a>
@@ -128,31 +139,31 @@ function getPlaceholderText(title: string) {
               <div class="project-card-disabled flex flex-col gap-0.5 w-full">
                 <div class="h-[250px] w-full rounded-lg overflow-hidden relative">
                   {rightColumn[i].image ? (
-                    <img src={rightColumn[i].image} alt={rightColumn[i].title} class="absolute inset-0 w-full h-full object-cover" />
+                    <img src={rightColumn[i].image} alt={getTitle(rightColumn[i])} class="absolute inset-0 w-full h-full object-cover" />
                   ) : (
                     <div class="bg-[var(--color-placeholder)] absolute inset-0 flex items-center justify-center">
-                      <span class="text-[var(--color-text-muted)] text-sm">{getPlaceholderText(rightColumn[i].title)}</span>
+                      <span class="text-[var(--color-text-muted)] text-sm">{getPlaceholderText(getTitle(rightColumn[i]))}</span>
                     </div>
                   )}
                 </div>
                 <div class="flex flex-col gap-0.5 text-sm w-full">
-                  <p class="font-medium text-[var(--color-text-strong)] font-['Inter']">{rightColumn[i].title}</p>
+                  <p class="font-medium text-[var(--color-text-strong)] font-['Inter']">{getTitle(rightColumn[i])}</p>
                   <p class="text-[var(--color-text-secondary)] uppercase font-['Geist_Mono']">{`${rightColumn[i].company} • ${rightColumn[i].year}`}</p>
                 </div>
               </div>
             ) : (
-              <a href={`/work/${rightColumn[i].slug}`} class="project-card group flex flex-col gap-0.5 w-full cursor-none no-underline">
+              <a href={getLocalizedPath(`/work/${rightColumn[i].slug}`, lang)} class="project-card group flex flex-col gap-0.5 w-full cursor-none no-underline">
                 <div class="h-[250px] w-full rounded-lg overflow-hidden relative transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]">
                   {rightColumn[i].image ? (
-                    <img src={rightColumn[i].image} alt={rightColumn[i].title} class="absolute inset-0 w-full h-full object-cover" />
+                    <img src={rightColumn[i].image} alt={getTitle(rightColumn[i])} class="absolute inset-0 w-full h-full object-cover" />
                   ) : (
                     <div class="bg-[var(--color-placeholder)] absolute inset-0 flex items-center justify-center">
-                      <span class="text-[var(--color-text-muted)] text-sm">{getPlaceholderText(rightColumn[i].title)}</span>
+                      <span class="text-[var(--color-text-muted)] text-sm">{getPlaceholderText(getTitle(rightColumn[i]))}</span>
                     </div>
                   )}
                 </div>
                 <div class="flex flex-col gap-0.5 text-sm w-full">
-                  <p class="font-medium text-[var(--color-text-strong)] font-['Inter']">{rightColumn[i].title}</p>
+                  <p class="font-medium text-[var(--color-text-strong)] font-['Inter']">{getTitle(rightColumn[i])}</p>
                   <p class="text-[var(--color-text-secondary)] uppercase font-['Geist_Mono']">{`${rightColumn[i].company} • ${rightColumn[i].year}`}</p>
                 </div>
               </a>

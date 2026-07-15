@@ -1,8 +1,19 @@
 ---
 import { leftColumn, rightColumn, type SideProject } from '../data/sideProjects';
+import type { Language } from '../data/i18n';
+
+interface Props {
+  lang?: Language;
+}
+
+const { lang = 'en' } = Astro.props;
 
 function getPlaceholderText(title: string) {
   return title.split(" ").map(w => w[0]).join("").slice(0, 3);
+}
+
+function getTitle(project: SideProject) {
+  return project.title[lang];
 }
 ---
 
@@ -14,15 +25,15 @@ function getPlaceholderText(title: string) {
         <a href={`/side-projects/${item.slug}`} class="project-card group flex flex-col gap-0.5 h-[353px] w-full cursor-none no-underline">
           <div class="flex-1 min-h-0 w-full rounded-lg overflow-hidden transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]">
             {item.image ? (
-              <img src={item.image} alt={item.title} class="w-full h-full object-cover" />
+            <img src={item.image} alt={getTitle(item)} class="w-full h-full object-cover" />
             ) : (
               <div class="bg-[var(--color-placeholder)] w-full h-full flex items-center justify-center">
-                <span class="text-[var(--color-text-primary)] text-sm font-['Geist_Mono'] uppercase">{getPlaceholderText(item.title)}</span>
+                <span class="text-[var(--color-text-primary)] text-sm font-['Geist_Mono'] uppercase">{getPlaceholderText(getTitle(item))}</span>
               </div>
             )}
           </div>
           <div class="flex items-start justify-between h-[19px] text-sm md:text-base whitespace-nowrap w-full">
-            <p class="font-medium text-[var(--color-text-strong)] font-['Inter']">{item.title}</p>
+            <p class="font-medium text-[var(--color-text-strong)] font-['Inter']">{getTitle(item)}</p>
             {item.year && (
               <p class="text-[var(--color-text-secondary)] uppercase font-['Geist_Mono']">{item.year}</p>
             )}
@@ -37,15 +48,15 @@ function getPlaceholderText(title: string) {
         <a href={`/side-projects/${item.slug}`} class="project-card group flex flex-col gap-0.5 flex-1 w-full cursor-none no-underline">
           <div class="flex-1 min-h-0 w-full rounded-lg overflow-hidden transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]">
             {item.image ? (
-              <img src={item.image} alt={item.title} class="w-full h-full object-cover" />
+            <img src={item.image} alt={getTitle(item)} class="w-full h-full object-cover" />
             ) : (
               <div class="bg-[var(--color-placeholder)] w-full h-full flex items-center justify-center">
-                <span class="text-[var(--color-text-primary)] text-sm font-['Geist_Mono'] uppercase">{getPlaceholderText(item.title)}</span>
+                <span class="text-[var(--color-text-primary)] text-sm font-['Geist_Mono'] uppercase">{getPlaceholderText(getTitle(item))}</span>
               </div>
             )}
           </div>
           <div class="flex items-start justify-between h-[19px] text-sm md:text-base whitespace-nowrap w-full">
-            <p class="font-medium text-[var(--color-text-strong)] font-['Inter']">{item.title}</p>
+            <p class="font-medium text-[var(--color-text-strong)] font-['Inter']">{getTitle(item)}</p>
             {item.year && (
               <p class="text-[var(--color-text-secondary)] uppercase font-['Geist_Mono']">{item.year}</p>
             )}
@@ -61,15 +72,15 @@ function getPlaceholderText(title: string) {
           <a href={`/side-projects/${item.slug}`} class="project-card group flex flex-col gap-0.5 w-full cursor-none no-underline">
             <div class="h-[250px] w-full rounded-lg overflow-hidden transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]">
               {item.image ? (
-                <img src={item.image} alt={item.title} class="w-full h-full object-cover" />
+                <img src={item.image} alt={getTitle(item)} class="w-full h-full object-cover" />
               ) : (
                 <div class="bg-[var(--color-placeholder)] w-full h-full flex items-center justify-center">
-                  <span class="text-[var(--color-text-primary)] text-sm font-['Geist_Mono'] uppercase">{getPlaceholderText(item.title)}</span>
+                  <span class="text-[var(--color-text-primary)] text-sm font-['Geist_Mono'] uppercase">{getPlaceholderText(getTitle(item))}</span>
                 </div>
               )}
             </div>
             <div class="flex flex-col gap-0.5 text-sm w-full">
-              <p class="font-medium text-[var(--color-text-strong)] font-['Inter']">{item.title}</p>
+              <p class="font-medium text-[var(--color-text-strong)] font-['Inter']">{getTitle(item)}</p>
               {item.year && (
                 <p class="text-[var(--color-text-secondary)] uppercase font-['Geist_Mono']">{item.year}</p>
               )}
@@ -79,15 +90,15 @@ function getPlaceholderText(title: string) {
             <a href={`/side-projects/${rightColumn[i].slug}`} class="project-card group flex flex-col gap-0.5 w-full cursor-none no-underline">
               <div class="h-[250px] w-full rounded-lg overflow-hidden transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]">
                 {rightColumn[i].image ? (
-                  <img src={rightColumn[i].image} alt={rightColumn[i].title} class="w-full h-full object-cover" />
+                  <img src={rightColumn[i].image} alt={getTitle(rightColumn[i])} class="w-full h-full object-cover" />
                 ) : (
                   <div class="bg-[var(--color-placeholder)] w-full h-full flex items-center justify-center">
-                    <span class="text-[var(--color-text-primary)] text-sm font-['Geist_Mono'] uppercase">{getPlaceholderText(rightColumn[i].title)}</span>
+                    <span class="text-[var(--color-text-primary)] text-sm font-['Geist_Mono'] uppercase">{getPlaceholderText(getTitle(rightColumn[i]))}</span>
                   </div>
                 )}
               </div>
               <div class="flex flex-col gap-0.5 text-sm w-full">
-                <p class="font-medium text-[var(--color-text-strong)] font-['Inter']">{rightColumn[i].title}</p>
+                <p class="font-medium text-[var(--color-text-strong)] font-['Inter']">{getTitle(rightColumn[i])}</p>
                 {rightColumn[i].year && (
                   <p class="text-[var(--color-text-secondary)] uppercase font-['Geist_Mono']">{rightColumn[i].year}</p>
                 )}

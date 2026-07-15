@@ -1,0 +1,19 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Hero from '../../components/Hero.astro';
+import PortfolioGrid from '../../components/PortfolioGrid.astro';
+import Footer from '../../components/Footer.astro';
+import { ui } from '../../data/i18n';
+---
+
+<Layout lang="es" title={ui.es.seo.home.title} description={ui.es.seo.home.description}>
+  <div class="bg-[var(--color-page)] flex flex-col min-h-screen w-full transition-colors duration-200">
+    <Navbar currentPage="work" currentPath="/es" lang="es" />
+    <div class="flex flex-col gap-8 md:gap-12 items-center overflow-clip w-full max-w-[1440px] mx-auto py-8 md:py-12 animate-[fadeIn_0.4s_ease-out]">
+      <Hero lang="es" />
+      <PortfolioGrid lang="es" />
+    </div>
+    <Footer lang="es" />
+  </div>
+</Layout>

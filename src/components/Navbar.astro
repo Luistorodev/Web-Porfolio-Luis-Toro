@@ -1,23 +1,30 @@
 ---
+import { getLocalizedPath, ui, type Language } from '../data/i18n';
+
 interface Props {
   currentPage?: string;
+  currentPath?: string;
+  lang?: Language;
 }
 
-const { currentPage = '' } = Astro.props;
+const { currentPage = '', currentPath = '/', lang = 'en' } = Astro.props;
+const copy = ui[lang];
+const alternateLanguage: Language = lang === 'en' ? 'es' : 'en';
+const alternatePath = getLocalizedPath(currentPath, alternateLanguage);
 
 const navLinks = [
-  { href: '/', label: 'MY WORK', key: 'work' },
-  { href: '/side-projects', label: 'SIDE PROJECTS', key: 'side-projects' },
-  { href: '/about', label: 'ABOUT', key: 'about' },
-  { href: '/assets/Luis%20Toro%20Cordero%20-%20Product%20Designer%20CV%20-%202025%20%5BEN%5D.pdf', label: 'CV', key: 'cv', target: '_blank' },
+  { href: getLocalizedPath('/', lang), label: copy.nav.work, key: 'work' },
+  { href: getLocalizedPath('/side-projects', lang), label: copy.nav.sideProjects, key: 'side-projects' },
+  { href: getLocalizedPath('/about', lang), label: copy.nav.about, key: 'about' },
+  { href: '/assets/Luis%20Toro%20Cordero%20-%20Product%20Designer%20CV%20-%202025%20%5BEN%5D.pdf', label: copy.nav.cv, key: 'cv', target: '_blank' },
 ];
 ---
 
 <div class="bg-[var(--color-surface)] border-b border-[var(--color-border)] flex items-center h-auto md:h-[60px] px-4 md:px-6 py-3 md:py-2 w-full font-['Geist_Mono'] text-sm md:text-base relative z-50 transition-colors duration-200">
   <div class="flex flex-1 items-center justify-between min-w-0">
-    <a href="/" class="flex items-center gap-2 md:gap-3 whitespace-nowrap no-underline">
+    <a href={getLocalizedPath('/', lang)} class="flex items-center gap-2 md:gap-3 whitespace-nowrap no-underline">
       <span class="text-[var(--color-text-strong)]">LUIS TORO</span>
-      <span class="hidden md:inline text-[var(--color-text-muted)]">PRODUCT DESIGNER + AI BUILDER</span>
+      <span class="hidden md:inline text-[var(--color-text-muted)]">{copy.brandDescriptor}</span>
     </a>
 
     <!-- Desktop nav -->
@@ -30,17 +37,17 @@ const navLinks = [
     </div>
 
     <div class="hidden md:flex items-center gap-2 shrink-0">
-      <button data-theme-toggle type="button" class="theme-toggle bg-[var(--color-surface-muted)] border border-[var(--color-border)] rounded-lg w-[44px] h-[44px] flex items-center justify-center text-[var(--color-text-strong)] cursor-pointer transition-colors duration-200 hover:text-[var(--color-accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]" aria-label="Activate dark mode" aria-pressed="false" title="Activate dark mode">
+      <button data-theme-toggle data-dark-label={copy.themeDark} data-light-label={copy.themeLight} type="button" class="theme-toggle bg-[var(--color-surface-muted)] border border-[var(--color-border)] rounded-lg w-[44px] h-[44px] flex items-center justify-center text-[var(--color-text-strong)] cursor-pointer transition-colors duration-200 hover:text-[var(--color-accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]" aria-label={copy.themeDark} aria-pressed="false" title={copy.themeDark}>
         <svg class="theme-icon--moon w-5 h-5" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z" /></svg>
         <svg class="theme-icon--sun w-5 h-5" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.5" /><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" /></svg>
       </button>
-      <div class="bg-[var(--color-surface-muted)] border border-[var(--color-border)] rounded-lg w-[44px] h-[44px] flex items-center justify-center">
-        <span class="text-[var(--color-text-strong)]">ES</span>
-      </div>
+      <a href={alternatePath} aria-label={copy.languageSwitchLabel} class="bg-[var(--color-surface-muted)] border border-[var(--color-border)] rounded-lg w-[44px] h-[44px] flex items-center justify-center no-underline text-[var(--color-text-strong)] hover:text-[var(--color-accent)] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]">
+        {copy.languageSwitch}
+      </a>
     </div>
 
     <!-- Burger button (mobile) -->
-    <button id="burger-btn" class="md:hidden flex flex-col gap-1 w-6 h-6 items-center justify-center bg-transparent border-none cursor-pointer p-0" aria-label="Menu">
+    <button id="burger-btn" class="md:hidden flex flex-col gap-1 w-6 h-6 items-center justify-center bg-transparent border-none cursor-pointer p-0" aria-label={copy.menu}>
       <span class="block w-5 h-0.5 bg-[var(--color-text-strong)] rounded transition-all duration-300 origin-center" id="burger-line-1"></span>
       <span class="block w-5 h-0.5 bg-[var(--color-text-strong)] rounded transition-all duration-300 origin-center" id="burger-line-2"></span>
       <span class="block w-5 h-0.5 bg-[var(--color-text-strong)] rounded transition-all duration-300 origin-center" id="burger-line-3"></span>
@@ -54,7 +61,7 @@ const navLinks = [
 <!-- Slide-in panel -->
 <div id="mobile-panel" class="fixed top-0 right-0 h-full w-[280px] bg-[var(--color-surface)] z-50 translate-x-full transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col shadow-lg">
   <div class="flex justify-end px-4 py-3 border-b border-[var(--color-border)]">
-    <button id="close-panel-btn" class="bg-transparent border-none cursor-pointer text-[var(--color-text-strong)] text-xl leading-none p-1" aria-label="Close menu">&times;</button>
+    <button id="close-panel-btn" class="bg-transparent border-none cursor-pointer text-[var(--color-text-strong)] text-xl leading-none p-1" aria-label={copy.closeMenu}>&times;</button>
   </div>
   <div class="flex flex-col gap-2 px-6 py-4 flex-1">
     {navLinks.map((link) => (
@@ -65,13 +72,13 @@ const navLinks = [
   </div>
   <div class="px-6 py-4 border-t border-[var(--color-border)]">
     <div class="flex items-center gap-2">
-      <button data-theme-toggle type="button" class="theme-toggle bg-[var(--color-surface-muted)] border border-[var(--color-border)] rounded-lg w-[44px] h-[44px] flex items-center justify-center text-[var(--color-text-strong)] cursor-pointer transition-colors duration-200 hover:text-[var(--color-accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]" aria-label="Activate dark mode" aria-pressed="false" title="Activate dark mode">
+      <button data-theme-toggle data-dark-label={copy.themeDark} data-light-label={copy.themeLight} type="button" class="theme-toggle bg-[var(--color-surface-muted)] border border-[var(--color-border)] rounded-lg w-[44px] h-[44px] flex items-center justify-center text-[var(--color-text-strong)] cursor-pointer transition-colors duration-200 hover:text-[var(--color-accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]" aria-label={copy.themeDark} aria-pressed="false" title={copy.themeDark}>
         <svg class="theme-icon--moon w-5 h-5" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z" /></svg>
         <svg class="theme-icon--sun w-5 h-5" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.5" /><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" /></svg>
       </button>
-      <div class="flex bg-[var(--color-surface-muted)] border border-[var(--color-border)] rounded-lg w-[44px] h-[44px] items-center justify-center">
-        <span class="text-[var(--color-text-strong)]">ES</span>
-      </div>
+      <a href={alternatePath} aria-label={copy.languageSwitchLabel} class="flex bg-[var(--color-surface-muted)] border border-[var(--color-border)] rounded-lg w-[44px] h-[44px] items-center justify-center no-underline text-[var(--color-text-strong)] hover:text-[var(--color-accent)] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]">
+        {copy.languageSwitch}
+      </a>
     </div>
   </div>
 </div>
@@ -123,7 +130,9 @@ const navLinks = [
 
   function updateThemeControls(theme: 'light' | 'dark') {
     const isDark = theme === 'dark';
-    const label = isDark ? 'Activate light mode' : 'Activate dark mode';
+    const label = isDark
+      ? themeButtons[0]?.dataset.lightLabel ?? 'Activate light mode'
+      : themeButtons[0]?.dataset.darkLabel ?? 'Activate dark mode';
 
     themeButtons.forEach((button) => {
       button.setAttribute('aria-pressed', String(isDark));

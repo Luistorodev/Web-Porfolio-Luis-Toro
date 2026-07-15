@@ -4,17 +4,8 @@ import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
 import ProjectContent from '../../components/ProjectContent.astro';
 import { allProjects, type Project } from '../../data/projects';
-import { legalTechContent } from '../../data/legalTechContent';
-import { acceleratorContent } from '../../data/acceleratorContent';
-import { fanbaseContent } from '../../data/fanbaseContent';
-import { bud66Content } from '../../data/bud66Content';
-import { canvaContent } from '../../data/canvaContent';
-import { productRequestContent } from '../../data/productRequestContent';
-import { platziContent } from '../../data/platziContent';
-import { circuloContent } from '../../data/circuloContent';
-import { ontopRedesignContent } from '../../data/ontopRedesignContent';
-import { ontopDSContent } from '../../data/ontopDSContent';
-import type { ProjectContent as ProjectContentType } from '../../data/legalTechContent';
+import { getCaseStudy } from '../../data/caseStudies';
+import { projectCopy, ui } from '../../data/i18n';
 
 export function getStaticPaths() {
   return allProjects.map((project) => ({
@@ -25,41 +16,33 @@ export function getStaticPaths() {
 
 const { project } = Astro.props as { project: Project };
 
-const contentMap: Record<string, ProjectContentType> = {
-  'legal-tech-ui': legalTechContent,
-  '100-accelerator': acceleratorContent,
-  'fanbase-app': fanbaseContent,
-  'bud66-studio': bud66Content,
-  'canva-design-system': canvaContent,
-  'product-request-revamp': productRequestContent,
-  'platzi-calendar': platziContent,
-  'application-redesign': circuloContent,
-  'ontop-app-redesign': ontopRedesignContent,
-  'ontop-design-system': ontopDSContent,
-};
-
-const content = contentMap[project.slug];
+const content = getCaseStudy(project.slug, 'en');
+const projectText = projectCopy[project.slug as keyof typeof projectCopy];
+const localizedContent = content && projectText ? { ...content, ...projectText.en } : content;
+const seo = projectText
+  ? { title: `${projectText.en.title} | Luis Toro`, description: projectText.en.subtitle }
+  : ui.en.seo.home;
 ---
 
-<Layout>
+<Layout lang="en" title={seo.title} description={seo.description}>
   <div class="bg-[var(--color-page)] flex flex-col min-h-screen w-full transition-colors duration-200">
-    <Navbar currentPage="work" />
+    <Navbar currentPage="work" currentPath={`/work/${project.slug}`} lang="en" />
 
     <div class="flex flex-col items-center overflow-clip w-full max-w-[1440px] mx-auto pt-8 md:pt-12 animate-[fadeIn_0.4s_ease-out]">
-      {content ? (
-        <ProjectContent content={content} />
+      {localizedContent ? (
+        <ProjectContent content={localizedContent} lang="en" />
       ) : (
         <div class="flex flex-1 flex-col gap-4 md:gap-6 items-center justify-center px-4 md:px-6 py-16 md:py-24 w-full max-w-[745px]">
           <h1 class="font-bold text-[var(--color-text-primary)] text-[24px] md:text-[31px] leading-tight font-['Inter'] text-center">
-            {project.title}
+            {project.title.en}
           </h1>
           <p class="text-[var(--color-text-secondary)] text-[13px] leading-tight font-['Inter'] text-center max-w-[500px]">
-            {project.company} &middot; {project.year}
+            {ui.en.emptyProject} {project.company} &middot; {project.year}
           </p>
         </div>
       )}
     </div>
 
-    <Footer />
+    <Footer lang="en" />
   </div>
 </Layout>

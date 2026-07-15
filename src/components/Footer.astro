@@ -1,8 +1,18 @@
+---
+import { ui, type Language } from '../data/i18n';
+
+interface Props {
+  lang?: Language;
+}
+
+const { lang = 'en' } = Astro.props;
+---
+
 <div class="bg-[var(--color-surface)] border-t border-[var(--color-border)] flex items-center h-auto md:h-[60px] px-4 md:px-6 py-3 md:py-2 w-full font-['Geist_Mono'] text-xs md:text-base transition-colors duration-200">
   <div class="flex flex-1 flex-col md:flex-row items-center justify-between min-w-0 gap-2 md:gap-0">
     <div class="flex items-center gap-2 md:gap-3 shrink-0">
       <p class="text-[var(--color-text-muted)] uppercase whitespace-nowrap">
-        Designed and coded with love by luis toro
+        {ui[lang].footer}
       </p>
       <img src="/assets/Heart Angle.svg" alt="" class="w-4 h-4 md:w-6 md:h-6 shrink-0" />
     </div>

@@ -1,17 +1,31 @@
 ---
 import '../styles/global.css';
 import Cursor from '../components/Cursor.astro';
+import type { Language } from '../data/i18n';
+
+interface Props {
+  lang?: Language;
+  title?: string;
+  description?: string;
+}
+
+const {
+  lang = 'en',
+  title = 'Luis Toro | Product Designer',
+  description = 'Portfolio of Luis Toro, Product Designer.',
+} = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>Luis Toro — Product Designer</title>
+    <title>{title}</title>
+    <meta name="description" content={description} />
     <script is:inline>
       (() => {
         const storageKey = 'theme';

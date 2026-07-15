@@ -3,22 +3,25 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import SideProjectsGrid from '../components/SideProjectsGrid.astro';
+import { ui } from '../data/i18n';
+
+const copy = ui.en;
 ---
 
-<Layout>
+<Layout lang="en" title={copy.seo.sideProjects.title} description={copy.seo.sideProjects.description}>
   <div class="bg-[var(--color-page-alt)] flex flex-col min-h-screen w-full transition-colors duration-200">
-    <Navbar currentPage="side-projects" />
+    <Navbar currentPage="side-projects" currentPath="/side-projects" lang="en" />
     <div class="flex flex-col gap-8 md:gap-12 items-center overflow-clip w-full max-w-[1440px] mx-auto py-8 md:py-12 animate-[fadeIn_0.4s_ease-out]">
       <div class="flex flex-col gap-4 px-4 md:px-6 w-full max-w-[968px]">
         <h1 class="font-bold text-[var(--color-text-primary)] text-[24px] md:text-[31px] leading-tight font-['Inter']">
-          Building products, exploring code, empowering communities
+          {copy.sideProjects.title}
         </h1>
         <p class="text-[var(--color-text-secondary)] text-[13px] leading-tight font-['Inter']">
-          I enjoy building products for communities, exploring the limits of code, and experimenting with front-end development. Currently building a personal finance manager.
+          {copy.sideProjects.description}
         </p>
       </div>
-      <SideProjectsGrid />
+      <SideProjectsGrid lang="en" />
     </div>
-    <Footer />
+    <Footer lang="en" />
   </div>
 </Layout>
