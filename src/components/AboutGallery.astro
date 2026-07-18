@@ -1,0 +1,36 @@
+---
+import type { Language } from '../data/i18n';
+
+interface Props {
+  lang?: Language;
+}
+
+const { lang = 'en' } = Astro.props;
+
+const images = {
+  en: [
+    { src: '/assets/about/first-pc-build-v0-ldhy9mzukgdh1.webp', alt: 'First PC build' },
+    { src: '/assets/about/HNhZ2jma0AAQmRj.jpg', alt: 'Personal photo 2' },
+    { src: '/assets/about/IMG_0185.jpg', alt: 'Personal photo 3' },
+    { src: '/assets/about/IMG_0552.jpg', alt: 'Personal photo 4' },
+    { src: '/assets/about/IMG_0574.jpg', alt: 'Personal photo 5' },
+    { src: '/assets/about/IMG_0800.jpg', alt: 'Personal photo 6' },
+  ],
+  es: [
+    { src: '/assets/about/first-pc-build-v0-ldhy9mzukgdh1.webp', alt: 'Primer PC ensamblado' },
+    { src: '/assets/about/HNhZ2jma0AAQmRj.jpg', alt: 'Foto personal 2' },
+    { src: '/assets/about/IMG_0185.jpg', alt: 'Foto personal 3' },
+    { src: '/assets/about/IMG_0552.jpg', alt: 'Foto personal 4' },
+    { src: '/assets/about/IMG_0574.jpg', alt: 'Foto personal 5' },
+    { src: '/assets/about/IMG_0800.jpg', alt: 'Foto personal 6' },
+  ],
+};
+---
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 md:px-6 w-full">
+  {images[lang].map((image) => (
+    <div class="aspect-[1.15] lg:aspect-[1.27] w-full rounded-lg overflow-hidden">
+      <img src={image.src} alt={image.alt} class="w-full h-full object-cover" />
+    </div>
+  ))}
+</div>

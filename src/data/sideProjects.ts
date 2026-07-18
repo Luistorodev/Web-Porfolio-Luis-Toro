@@ -6,6 +6,8 @@ export interface SideProject {
   year?: string;
   slug: string;
   image?: string;
+  externalUrl?: string;
+  disabled?: boolean;
 }
 
 function slugify(title: string): string {
@@ -16,7 +18,7 @@ function slugify(title: string): string {
 }
 
 export const leftColumn: SideProject[] = [
-  { title: { en: "Personal Finance Manager", es: "Gestor de finanzas personales" }, description: { en: "A budgeting and expense-tracking tool", es: "Una herramienta para presupuestos y seguimiento de gastos" }, year: "2026", slug: slugify("Personal Finance Manager") },
+  { title: { en: "DeepDen", es: "DeepDen" }, year: "2026", slug: slugify("DeepDen"), image: "/assets/Deepden-Screen.png", externalUrl: "https://deepden.app/" },
   { title: { en: "Community Resource Hub", es: "Hub de recursos comunitarios" }, description: { en: "A directory of free resources for underserved communities", es: "Un directorio de recursos gratuitos para comunidades con acceso limitado" }, year: "2025", slug: slugify("Community Resource Hub") },
   { title: { en: "Open Source Component Library", es: "Librería de componentes open source" }, description: { en: "Reusable React components with accessibility built in", es: "Componentes reutilizables de React con accesibilidad integrada" }, year: "2025", slug: slugify("Open Source Component Library") },
   { title: { en: "Design Token Generator", es: "Generador de design tokens" }, description: { en: "A CLI for syncing design tokens across platforms", es: "Una CLI para sincronizar design tokens entre plataformas" }, year: "2024", slug: slugify("Design Token Generator") },
@@ -25,6 +27,7 @@ export const leftColumn: SideProject[] = [
 ];
 
 export const rightColumn: SideProject[] = [
+  { title: { en: "Personal Finance Manager", es: "Personal Finance Manager" }, description: { en: "A budgeting and expense-tracking tool", es: "Una herramienta para presupuestos y seguimiento de gastos" }, year: "2026", slug: slugify("Personal Finance Manager"), disabled: true },
   { title: { en: "Code Snippet Manager", es: "Gestor de fragmentos de código" }, description: { en: "Save and organize reusable code snippets", es: "Guarda y organiza fragmentos de código reutilizables" }, year: "2026", slug: slugify("Code Snippet Manager") },
   { title: { en: "Design Critique Platform", es: "Plataforma de crítica de diseño" }, description: { en: "A peer-review space for UI and UX designers", es: "Un espacio de revisión entre pares para diseñadores de UI y UX" }, year: "2025", slug: slugify("Design Critique Platform") },
   { title: { en: "Color Palette Explorer", es: "Explorador de paletas de color" }, description: { en: "Generate and test accessible color combinations", es: "Genera y prueba combinaciones de color accesibles" }, year: "2024", slug: slugify("Color Palette Explorer") },

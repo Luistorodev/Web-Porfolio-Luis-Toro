@@ -20,7 +20,7 @@ const navLinks = [
 ];
 ---
 
-<div class="bg-[var(--color-surface)] border-b border-[var(--color-border)] flex items-center h-auto md:h-[60px] px-4 md:px-6 py-3 md:py-2 w-full font-['Geist_Mono'] text-sm md:text-base relative z-50 transition-colors duration-200">
+<div class="bg-[var(--color-surface)] border-b border-[var(--color-border)] flex items-center h-auto md:h-[60px] px-4 md:px-6 py-3 md:py-2 w-full font-['Geist_Mono'] text-sm md:text-base fixed top-0 left-0 z-50 transition-colors duration-200">
   <div class="flex flex-1 items-center justify-between min-w-0">
     <a href={getLocalizedPath('/', lang)} class="flex items-center gap-2 md:gap-3 whitespace-nowrap no-underline">
       <span class="text-[var(--color-text-strong)]">LUIS TORO</span>
@@ -54,6 +54,9 @@ const navLinks = [
     </button>
   </div>
 </div>
+
+<!-- Preserves the document flow behind the fixed navigation. -->
+<div aria-hidden="true" class="h-[48px] md:h-[60px]"></div>
 
 <!-- Overlay -->
 <div id="menu-overlay" class="fixed inset-0 bg-black/40 z-40 opacity-0 pointer-events-none transition-opacity duration-300"></div>
