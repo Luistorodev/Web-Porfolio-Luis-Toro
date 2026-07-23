@@ -1,13 +1,17 @@
 import type { ProjectContent } from './legalTechContent';
 
-const workAssets = '/assets/work/100-accelerator';
+import { workImage } from './workImages';
+
+const w = (p: string) => workImage(`100-accelerator/${p}`);
+
+// TODO(luis): confirmar los alts propuestos en este archivo (generados por contexto de sección; validar contra las imágenes reales) y añadir captions opcionales donde aporten.
 
 export const acceleratorContent: ProjectContent = {
   slug: "100-accelerator",
   title: "UX/UI for startup web and app experiences (2021)",
   subtitle: "100+ Accelerator",
   cover: {
-    src: `${workAssets}/Cover.png`,
+    src: w('Cover.png'), alt: 'Cover of the 100+ Accelerator startup program case study',
   },
   meta: {
     role: "Product Designer",
@@ -24,7 +28,7 @@ export const acceleratorContent: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/Project-image1.png`,
+        src: w('Project-image1.png'), alt: 'Overview of the 100+ Accelerator program website',
       },
     },
     {
@@ -48,12 +52,12 @@ export const acceleratorContent: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/Project-image-2.png`,
+        src: w('Project-image-2.png'), alt: 'Design goal exploration for the accelerator experience',
       },
     },
     {
       image: {
-        src: `${workAssets}/project-image3.png`,
+        src: w('project-image3.png'), alt: 'Program discovery and application flow screens',
       },
     },
     {
@@ -67,12 +71,12 @@ export const acceleratorContent: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/Project-image4.png`,
+        src: w('Project-image4.png'), alt: 'Key design decisions applied to the accelerator UI',
       },
     },
     {
       image: {
-        src: `${workAssets}/Project-image5.png`,
+        src: w('Project-image5.png'), alt: 'Final accelerator experience screens',
       },
     },
   ],
@@ -83,7 +87,7 @@ export const acceleratorContentEs: ProjectContent = {
   title: "UX/UI para experiencias web y app de startups (2021)",
   subtitle: "100+ Accelerator",
   cover: {
-    src: `${workAssets}/Cover.png`,
+    src: w('Cover.png'), alt: 'Portada del caso de estudio del programa de aceleración 100+',
   },
   meta: {
     role: "Diseño de producto",
@@ -100,7 +104,7 @@ export const acceleratorContentEs: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/Project-image1.png`,
+        src: w('Project-image1.png'), alt: 'Vista general del sitio web del programa 100+ Accelerator',
       },
     },
     {
@@ -124,12 +128,12 @@ export const acceleratorContentEs: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/Project-image-2.png`,
+        src: w('Project-image-2.png'), alt: 'Exploración del objetivo de diseño para la experiencia de la aceleradora',
       },
     },
     {
       image: {
-        src: `${workAssets}/project-image3.png`,
+        src: w('project-image3.png'), alt: 'Pantallas de descubrimiento y aplicación al programa',
       },
     },
     {
@@ -143,12 +147,12 @@ export const acceleratorContentEs: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/Project-image4.png`,
+        src: w('Project-image4.png'), alt: 'Decisiones de diseño clave aplicadas a la UI de la aceleradora',
       },
     },
     {
       image: {
-        src: `${workAssets}/Project-image5.png`,
+        src: w('Project-image5.png'), alt: 'Pantallas finales de la experiencia de la aceleradora',
       },
     },
   ],

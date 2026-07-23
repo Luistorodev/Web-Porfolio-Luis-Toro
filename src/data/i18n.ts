@@ -11,6 +11,15 @@ export const ui = {
     themeLight: 'Activate light mode',
     menu: 'Menu',
     closeMenu: 'Close menu',
+    skipToContent: 'Skip to content',
+    navPrimary: 'Primary navigation',
+    projectsSection: 'Projects',
+    caseStudyNav: {
+      label: 'Case study navigation',
+      previous: 'Previous project',
+      next: 'Next project',
+      back: 'Back to work',
+    },
     hero: {
       title: "Hi, I'm Luis Toro.",
       description: 'Product Designer with 6+ years of experience and a background in FinTech, Healthcare, EdTech, and E-commerce, creating meaningful experiences with the highest standards of design craft.',
@@ -54,6 +63,15 @@ export const ui = {
     themeLight: 'Activar modo claro',
     menu: 'Menú',
     closeMenu: 'Cerrar menú',
+    skipToContent: 'Saltar al contenido',
+    navPrimary: 'Navegación principal',
+    projectsSection: 'Proyectos',
+    caseStudyNav: {
+      label: 'Navegación entre casos de estudio',
+      previous: 'Proyecto anterior',
+      next: 'Proyecto siguiente',
+      back: 'Volver a proyectos',
+    },
     hero: {
       title: 'Hola, soy Luis Toro.',
       description: 'Product Designer con más de 6 años creando experiencias claras y de alta calidad en FinTech, salud, EdTech y comercio electrónico.',
@@ -102,7 +120,7 @@ export const projectCopy = {
     en: { title: 'Redesigning Ontop Wallet', subtitle: 'A clearer wallet experience that gives workers confidence in every financial decision.' },
     es: { title: 'Rediseñando Ontop Wallet', subtitle: 'Una experiencia de billetera más clara para tomar decisiones financieras con confianza.' },
   },
-  'canva-design-system': {
+  'scotiabank-design-system': {
     en: { title: "Scaling Scotiabank's design system", subtitle: 'A local design system that brought consistency to complex financial journeys.' },
     es: { title: 'Escalando el Design System de Scotiabank', subtitle: 'Un sistema local que llevó consistencia a recorridos financieros complejos.' },
   },

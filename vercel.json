@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/work/canva-design-system",
+      "destination": "/work/scotiabank-design-system",
+      "permanent": true
+    },
+    {
+      "source": "/es/work/canva-design-system",
+      "destination": "/es/work/scotiabank-design-system",
+      "permanent": true
+    }
+  ]
+}

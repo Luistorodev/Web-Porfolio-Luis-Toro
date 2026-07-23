@@ -39,6 +39,26 @@ html[data-theme='dark'] {
   color: #ffffff;
 }
 
+/* Skip link: visually hidden until focused (keyboard navigation). */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100%;
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background: var(--color-accent);
+  color: #ffffff;
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: top 150ms ease;
+}
+
+.skip-link:focus-visible {
+  top: 0.5rem;
+}
+
 html {
   scroll-behavior: smooth;
   background: var(--color-page);

@@ -1,121 +1,65 @@
 ---
-import { leftColumn, rightColumn, type SideProject } from '../data/sideProjects';
-
-const visibleLeft = leftColumn.slice(0, 1);
-const visibleRight = rightColumn.slice(0, 1);
-import type { Language } from '../data/i18n';
+import { Image } from 'astro:assets';
+import { allSideProjects, type SideProject } from '../data/sideProjects';
+import { ui, type Language } from '../data/i18n';
 
 interface Props {
   lang?: Language;
 }
 
 const { lang = 'en' } = Astro.props;
+const projects = allSideProjects.filter((project) => project.featured);
+const widths = [400, 680, 1360];
+const sizes = '(min-width: 768px) 680px, calc(100vw - 2rem)';
 
-function getPlaceholderText(title: string) {
-  return title.split(" ").map(w => w[0]).join("").slice(0, 3);
-}
-
-function getTitle(project: SideProject) {
+function title(project: SideProject) {
   return project.title[lang];
 }
 
-function getHref(project: SideProject) {
-  if (project.disabled) return undefined;
-  return project.externalUrl ?? `/side-projects/${project.slug}`;
+function placeholder(project: SideProject) {
+  return title(project).split(' ').map((word) => word[0]).join('').slice(0, 3);
 }
 ---
 
-<div class="flex flex-col items-start w-full">
-  <div class="flex flex-col md:flex-row gap-8 justify-center px-4 md:px-6 w-full">
-    <!-- Left Column (hidden on mobile) -->
-    <div class="hidden md:flex flex-1 flex-col gap-8 min-w-0">
-      {visibleLeft.map((item: SideProject) => (
-        <a href={getHref(item)} target={item.externalUrl ? '_blank' : undefined} rel={item.externalUrl ? 'noopener noreferrer' : undefined} aria-disabled={item.disabled ? 'true' : undefined} class={`${item.disabled ? 'project-card-disabled' : 'project-card'} group flex flex-col gap-0.5 h-[353px] w-full cursor-none no-underline`}>
-          <div class="flex-1 min-h-0 w-full rounded-lg overflow-hidden transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]">
-            {item.image ? (
-            <img src={item.image} alt={getTitle(item)} class="w-full h-full object-cover" />
-            ) : (
-              <div class="bg-[var(--color-placeholder)] w-full h-full flex items-center justify-center">
-                <span class="text-[var(--color-text-primary)] text-sm font-['Geist_Mono'] uppercase">{getPlaceholderText(getTitle(item))}</span>
-              </div>
-            )}
-          </div>
-          <div class="flex items-start justify-between h-[19px] text-sm md:text-base whitespace-nowrap w-full">
-            <p class="font-medium text-[var(--color-text-strong)] font-['Inter']">{getTitle(item)}</p>
-            {item.year && (
-              <p class="text-[var(--color-text-secondary)] uppercase font-['Geist_Mono']">{item.year}</p>
-            )}
-          </div>
-        </a>
-      ))}
-    </div>
-
-    <!-- Right Column (hidden on mobile) -->
-    <div class="hidden md:flex flex-1 flex-col gap-8 min-w-0 self-stretch">
-      {visibleRight.map((item: SideProject) => (
-        <a href={getHref(item)} target={item.externalUrl ? '_blank' : undefined} rel={item.externalUrl ? 'noopener noreferrer' : undefined} aria-disabled={item.disabled ? 'true' : undefined} class={`${item.disabled ? 'project-card-disabled' : 'project-card'} group flex flex-col gap-0.5 flex-1 w-full cursor-none no-underline`}>
-          <div class="flex-1 min-h-0 w-full rounded-lg overflow-hidden transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]">
-            {item.image ? (
-            <img src={item.image} alt={getTitle(item)} class="w-full h-full object-cover" />
-            ) : (
-              <div class="bg-[var(--color-placeholder)] w-full h-full flex items-center justify-center">
-                <span class="text-[var(--color-text-primary)] text-sm font-['Geist_Mono'] uppercase">{getPlaceholderText(getTitle(item))}</span>
-              </div>
-            )}
-          </div>
-          <div class="flex items-start justify-between h-[19px] text-sm md:text-base whitespace-nowrap w-full">
-            <p class="font-medium text-[var(--color-text-strong)] font-['Inter']">{getTitle(item)}</p>
-            {item.year && (
-              <p class="text-[var(--color-text-secondary)] uppercase font-['Geist_Mono']">{item.year}</p>
-            )}
-          </div>
-        </a>
-      ))}
-    </div>
-
-    <!-- Mobile: Single column, interleaved -->
-    <div class="flex md:hidden flex-col gap-8 w-full">
-      {leftColumn.map((item: SideProject, i: number) => (
-        <>
-          <a href={getHref(item)} target={item.externalUrl ? '_blank' : undefined} rel={item.externalUrl ? 'noopener noreferrer' : undefined} aria-disabled={item.disabled ? 'true' : undefined} class={`${item.disabled ? 'project-card-disabled' : 'project-card'} group flex flex-col gap-0.5 w-full cursor-none no-underline`}>
-            <div class="h-[250px] w-full rounded-lg overflow-hidden transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]">
-              {item.image ? (
-                <img src={item.image} alt={getTitle(item)} class="w-full h-full object-cover" />
+<section aria-labelledby="side-projects-heading" class="w-full px-4 md:px-6">
+  <h2 id="side-projects-heading" class="sr-only">{ui[lang].projectsSection}</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+    {projects.map((project) => (
+      <article class={`${project.disabled ? 'project-card-disabled' : 'project-card group'} flex flex-col gap-0.5 w-full md:h-[353px]`}>
+        {project.externalUrl && !project.disabled ? (
+          <a href={project.externalUrl} target="_blank" rel="noopener noreferrer" class="flex flex-col gap-0.5 h-full w-full no-underline cursor-none">
+            <div class="h-[250px] md:flex-1 md:min-h-0 w-full rounded-lg overflow-hidden transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]">
+              {project.image ? (
+                <Image src={project.image} alt={title(project)} widths={widths} sizes={sizes} format="webp" loading="lazy" decoding="async" class="block w-full h-full object-cover" />
               ) : (
                 <div class="bg-[var(--color-placeholder)] w-full h-full flex items-center justify-center">
-                  <span class="text-[var(--color-text-primary)] text-sm font-['Geist_Mono'] uppercase">{getPlaceholderText(getTitle(item))}</span>
+                  <span class="text-[var(--color-text-primary)] text-sm font-['Geist_Mono'] uppercase">{placeholder(project)}</span>
                 </div>
               )}
             </div>
-            <div class="flex flex-col gap-0.5 text-sm w-full">
-              <p class="font-medium text-[var(--color-text-strong)] font-['Inter']">{getTitle(item)}</p>
-              {item.year && (
-                <p class="text-[var(--color-text-secondary)] uppercase font-['Geist_Mono']">{item.year}</p>
-              )}
+            <div class="flex flex-col gap-0.5 text-sm w-full md:flex-row md:items-start md:justify-between md:h-[19px] md:text-base md:whitespace-nowrap">
+              <h3 class="font-medium text-[var(--color-text-strong)] font-['Inter']">{title(project)}</h3>
+              {project.year && <p class="text-[var(--color-text-secondary)] uppercase font-['Geist_Mono']">{project.year}</p>}
             </div>
           </a>
-          {visibleRight[i] && (
-            <a href={getHref(visibleRight[i])} target={visibleRight[i].externalUrl ? '_blank' : undefined} rel={visibleRight[i].externalUrl ? 'noopener noreferrer' : undefined} aria-disabled={visibleRight[i].disabled ? 'true' : undefined} class={`${visibleRight[i].disabled ? 'project-card-disabled' : 'project-card'} group flex flex-col gap-0.5 w-full cursor-none no-underline`}>
-              <div class="h-[250px] w-full rounded-lg overflow-hidden transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]">
-                {visibleRight[i].image ? (
-                  <img src={visibleRight[i].image} alt={getTitle(visibleRight[i])} class="w-full h-full object-cover" />
-                ) : (
-                  <div class="bg-[var(--color-placeholder)] w-full h-full flex items-center justify-center">
-                    <span class="text-[var(--color-text-primary)] text-sm font-['Geist_Mono'] uppercase">{getPlaceholderText(getTitle(visibleRight[i]))}</span>
-                  </div>
-                )}
-              </div>
-              <div class="flex flex-col gap-0.5 text-sm w-full">
-                <p class="font-medium text-[var(--color-text-strong)] font-['Inter']">{getTitle(visibleRight[i])}</p>
-                {visibleRight[i].year && (
-                  <p class="text-[var(--color-text-secondary)] uppercase font-['Geist_Mono']">{visibleRight[i].year}</p>
-                )}
-              </div>
-            </a>
-          )}
-        </>
-      ))}
-    </div>
+        ) : (
+          <div class="flex flex-col gap-0.5 h-full w-full" aria-disabled={project.disabled ? 'true' : undefined}>
+            <div class="h-[250px] md:flex-1 md:min-h-0 w-full rounded-lg overflow-hidden relative">
+              {project.image ? (
+                <Image src={project.image} alt={title(project)} widths={widths} sizes={sizes} format="webp" loading="lazy" decoding="async" class="block w-full h-full object-cover" />
+              ) : (
+                <div class="bg-[var(--color-placeholder)] absolute inset-0 flex items-center justify-center">
+                  <span class="text-[var(--color-text-primary)] text-sm font-['Geist_Mono'] uppercase">{placeholder(project)}</span>
+                </div>
+              )}
+            </div>
+            <div class="flex flex-col gap-0.5 text-sm w-full md:flex-row md:items-start md:justify-between md:h-[19px] md:text-base md:whitespace-nowrap">
+              <h3 class="font-medium text-[var(--color-text-strong)] font-['Inter']">{title(project)}</h3>
+              {project.year && <p class="text-[var(--color-text-secondary)] uppercase font-['Geist_Mono']">{project.year}</p>}
+            </div>
+          </div>
+        )}
+      </article>
+    ))}
   </div>
-</div>
-
+</section>

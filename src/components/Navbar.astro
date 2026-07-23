@@ -20,7 +20,7 @@ const navLinks = [
 ];
 ---
 
-<div class="bg-[var(--color-surface)] border-b border-[var(--color-border)] flex items-center h-auto md:h-[60px] px-4 md:px-6 py-3 md:py-2 w-full font-['Geist_Mono'] text-sm md:text-base fixed top-0 left-0 z-50 transition-colors duration-200">
+<header class="bg-[var(--color-surface)] border-b border-[var(--color-border)] flex items-center h-auto md:h-[60px] px-4 md:px-6 py-3 md:py-2 w-full font-['Geist_Mono'] text-sm md:text-base fixed top-0 left-0 z-50 transition-colors duration-200">
   <div class="flex flex-1 items-center justify-between min-w-0">
     <a href={getLocalizedPath('/', lang)} class="flex items-center gap-2 md:gap-3 whitespace-nowrap no-underline">
       <span class="text-[var(--color-text-strong)]">LUIS TORO</span>
@@ -28,13 +28,15 @@ const navLinks = [
     </a>
 
     <!-- Desktop nav -->
-    <div class="hidden md:flex items-center gap-4 md:gap-8">
+    <nav aria-label={copy.navPrimary} class="hidden md:flex items-center gap-4 md:gap-8">
       {navLinks.map((link) => (
-        <a href={link.href} target={link.target} rel={link.target ? 'noopener noreferrer' : undefined} class={`whitespace-nowrap no-underline transition-colors duration-200 ${currentPage === link.key ? 'text-[var(--color-accent)]' : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-strong)]'}`}>
+        <a href={link.href} target={link.target} rel={link.target ? 'noopener noreferrer' : undefined} class={link.key === 'cv'
+          ? 'bg-[var(--color-accent)] text-white rounded-lg px-3 py-2 no-underline hover:opacity-90 transition-opacity duration-200'
+          : `whitespace-nowrap no-underline transition-colors duration-200 ${currentPage === link.key ? 'text-[var(--color-accent)]' : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-strong)]'}`}>
           {link.label}
         </a>
       ))}
-    </div>
+    </nav>
 
     <div class="hidden md:flex items-center gap-2 shrink-0">
       <button data-theme-toggle data-dark-label={copy.themeDark} data-light-label={copy.themeLight} type="button" class="theme-toggle bg-[var(--color-surface-muted)] border border-[var(--color-border)] rounded-lg w-[44px] h-[44px] flex items-center justify-center text-[var(--color-text-strong)] cursor-pointer transition-colors duration-200 hover:text-[var(--color-accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]" aria-label={copy.themeDark} aria-pressed="false" title={copy.themeDark}>
@@ -46,14 +48,14 @@ const navLinks = [
       </a>
     </div>
 
-    <!-- Burger button (mobile) -->
-    <button id="burger-btn" class="md:hidden flex flex-col gap-1 w-6 h-6 items-center justify-center bg-transparent border-none cursor-pointer p-0" aria-label={copy.menu}>
+    <!-- Burger button (mobile): 44x44px touch target; the icon lines keep their original size. -->
+    <button id="burger-btn" class="md:hidden flex flex-col gap-1 w-[44px] h-[44px] -m-[10px] items-center justify-center bg-transparent border-none cursor-pointer p-[10px]" aria-label={copy.menu}>
       <span class="block w-5 h-0.5 bg-[var(--color-text-strong)] rounded transition-all duration-300 origin-center" id="burger-line-1"></span>
       <span class="block w-5 h-0.5 bg-[var(--color-text-strong)] rounded transition-all duration-300 origin-center" id="burger-line-2"></span>
       <span class="block w-5 h-0.5 bg-[var(--color-text-strong)] rounded transition-all duration-300 origin-center" id="burger-line-3"></span>
     </button>
   </div>
-</div>
+</header>
 
 <!-- Preserves the document flow behind the fixed navigation. -->
 <div aria-hidden="true" class="h-[48px] md:h-[60px]"></div>
@@ -68,7 +70,9 @@ const navLinks = [
   </div>
   <div class="flex flex-col gap-2 px-6 py-4 flex-1">
     {navLinks.map((link) => (
-      <a href={link.href} target={link.target} rel={link.target ? 'noopener noreferrer' : undefined} class={`block py-2 no-underline transition-colors duration-200 font-['Geist_Mono'] text-sm ${currentPage === link.key ? 'text-[var(--color-accent)]' : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-strong)]'}`}>
+      <a href={link.href} target={link.target} rel={link.target ? 'noopener noreferrer' : undefined} class={link.key === 'cv'
+        ? "inline-flex mt-2 bg-[var(--color-accent)] text-white rounded-lg px-3 py-2 no-underline transition-opacity duration-200 hover:opacity-90 font-['Geist_Mono'] text-sm"
+        : `block py-2 no-underline transition-colors duration-200 font-['Geist_Mono'] text-sm ${currentPage === link.key ? 'text-[var(--color-accent)]' : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-strong)]'}`}>
         {link.label}
       </a>
     ))}

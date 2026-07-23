@@ -1,13 +1,17 @@
 import type { ProjectContent } from './legalTechContent';
 
-const workAssets = '/assets/work/bud66-studio';
+import { workImage } from './workImages';
+
+const w = (p: string) => workImage(`bud66-studio/${p}`);
+
+// TODO(luis): confirmar los alts propuestos en este archivo (generados por contexto de sección; validar contra las imágenes reales) y añadir captions opcionales donde aporten.
 
 export const bud66Content: ProjectContent = {
   slug: "bud66-studio",
   title: "Bud 66 Studio - A Community Film Contest",
   subtitle: "Budweiser",
   cover: {
-    src: `${workAssets}/Cover.png`,
+    src: w('Cover.png'), alt: 'Cover of the Bud 66 Studio film contest case study',
   },
   meta: {
     role: "Product Designer",
@@ -34,7 +38,7 @@ export const bud66Content: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image1.png`,
+        src: w('image1.png'), alt: 'Overview of the film contest problem space',
       },
     },
     {
@@ -82,29 +86,29 @@ export const bud66Content: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image2.png`,
+        src: w('image2.png'), alt: 'Bud 66 contest platform solution',
       },
     },
     {
       image: {
-        src: `${workAssets}/image3.png`,
+        src: w('image3.png'), alt: 'Film submission flow screens',
         height: '2142px',
       },
     },
     {
       image: {
-        src: `${workAssets}/image4.png`,
+        src: w('image4.png'), alt: 'Voting and discovery experience',
         height: '893px',
       },
     },
     {
       image: {
-        src: `${workAssets}/image5.png`,
+        src: w('image5.png'), alt: 'Community and sharing features',
       },
     },
     {
       image: {
-        src: `${workAssets}/image6.png`,
+        src: w('image6.png'), alt: 'Contest results and impact screens',
       },
     },
     {
@@ -147,7 +151,7 @@ export const bud66ContentEs: ProjectContent = {
   title: "Bud 66 Studio - Un concurso de cortometrajes para la comunidad",
   subtitle: "Budweiser",
   cover: {
-    src: `${workAssets}/Cover.png`,
+    src: w('Cover.png'), alt: 'Portada del caso de estudio del concurso de cine Bud 66 Studio',
   },
   meta: {
     role: "Diseñador de Producto",
@@ -174,7 +178,7 @@ export const bud66ContentEs: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image1.png`,
+        src: w('image1.png'), alt: 'Vista general del problema del concurso de cine',
       },
     },
     {
@@ -222,29 +226,29 @@ export const bud66ContentEs: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image2.png`,
+        src: w('image2.png'), alt: 'Solución de la plataforma del concurso Bud 66',
       },
     },
     {
       image: {
-        src: `${workAssets}/image3.png`,
+        src: w('image3.png'), alt: 'Pantallas del flujo de envío de cortos',
         height: '2142px',
       },
     },
     {
       image: {
-        src: `${workAssets}/image4.png`,
+        src: w('image4.png'), alt: 'Experiencia de votación y descubrimiento',
         height: '893px',
       },
     },
     {
       image: {
-        src: `${workAssets}/image5.png`,
+        src: w('image5.png'), alt: 'Funciones de comunidad y de compartir',
       },
     },
     {
       image: {
-        src: `${workAssets}/image6.png`,
+        src: w('image6.png'), alt: 'Pantallas de resultados e impacto del concurso',
       },
     },
     {

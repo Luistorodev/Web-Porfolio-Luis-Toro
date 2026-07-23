@@ -1,13 +1,17 @@
 import type { ProjectContent } from './legalTechContent';
 
-const workAssets = '/assets/work/platzi-calendar';
+import { workImage } from './workImages';
+
+const w = (p: string) => workImage(`platzi-calendar/${p}`);
+
+// TODO(luis): confirmar los alts propuestos en este archivo (generados por contexto de sección; validar contra las imágenes reales) y añadir captions opcionales donde aporten.
 
 export const platziContent: ProjectContent = {
   slug: "platzi-calendar",
   title: "Platzi Calendar Redesign",
   subtitle: "PLATZI",
   cover: {
-    src: `${workAssets}/cover.png`,
+    src: w('cover.png'), alt: 'Cover of the Platzi live events calendar case study',
   },
   meta: {
     role: "Product Designer",
@@ -111,7 +115,7 @@ export const platziContent: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image01.png`,
+        src: w('image01.png'), alt: 'Redesigned schedule view with filters and event detail',
       },
     },
     {
@@ -139,7 +143,7 @@ export const platziContentEs: ProjectContent = {
   title: "Rediseño del Calendario de Platzi",
   subtitle: "PLATZI",
   cover: {
-    src: `${workAssets}/cover.png`,
+    src: w('cover.png'), alt: 'Portada del caso de estudio del calendario de eventos en vivo de Platzi',
   },
   meta: {
     role: "Diseñador de Producto",
@@ -243,7 +247,7 @@ export const platziContentEs: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image01.png`,
+        src: w('image01.png'), alt: 'Vista de agenda rediseñada con filtros y detalle de evento',
       },
     },
     {

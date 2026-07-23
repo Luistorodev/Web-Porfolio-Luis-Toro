@@ -1,19 +1,46 @@
 ---
 import '../styles/global.css';
+import { getImage } from 'astro:assets';
 import Cursor from '../components/Cursor.astro';
-import type { Language } from '../data/i18n';
+import { ui, getLocalizedPath, type Language } from '../data/i18n';
+import defaultOgImage from '../assets/hero/luis-toro-profile.png';
 
 interface Props {
   lang?: Language;
   title?: string;
   description?: string;
+  /** Root-relative URL of the page's og:image (1200x630). Defaults to the brand image. */
+  image?: string;
+  type?: 'website' | 'article';
+  /** One or more JSON-LD objects to embed in the head. */
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
   lang = 'en',
   title = 'Luis Toro | Product Designer',
   description = 'Portfolio of Luis Toro, Product Designer.',
+  image,
+  type = 'website',
+  jsonLd,
 } = Astro.props;
+
+// ── Canonical + hreflang (derived from the current URL) ───
+const site = Astro.site!;
+const pathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const canonical = new URL(pathname, site).href;
+const enPath = pathname.replace(/^\/es(?=\/|$)/, '') || '/';
+const enUrl = new URL(enPath, site).href;
+const esUrl = new URL(getLocalizedPath(enPath, 'es'), site).href;
+
+// ── Open Graph image ──────────────────────────────────────
+// TODO(luis): reemplazar la imagen OG de marca (hoy la foto de perfil) por una pieza dedicada de 1200x630.
+const fallbackOg = await getImage({ src: defaultOgImage, width: 1200, height: 630, fit: 'cover', format: 'png' });
+const ogImage = new URL(image ?? fallbackOg.src, site).href;
+
+const ogLocale = lang === 'es' ? 'es_ES' : 'en_US';
+const ogLocaleAlternate = lang === 'es' ? 'en_US' : 'es_ES';
+const jsonLdItems = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 ---
 
 <!doctype html>
@@ -26,6 +53,36 @@ const {
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
+
+    <!-- Canonical + hreflang EN/ES -->
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="es" href={esUrl} />
+    <link rel="alternate" hreflang="x-default" href={enUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content={type} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Luis Toro" />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={ogLocaleAlternate} />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Structured data -->
+    {jsonLdItems.map((item) => (
+      <script is:inline type="application/ld+json" set:html={JSON.stringify(item)} />
+    ))}
+
     <script is:inline>
       (() => {
         const storageKey = 'theme';
@@ -46,6 +103,7 @@ const {
     <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400&family=Instrument+Serif:ital@0;1&family=Inter:ital,opsz,wght@0,14..32,400..700;1,14..32,400..700&display=swap" rel="stylesheet" />
   </head>
   <body class="font-['Inter']">
+    <a href="#main" class="skip-link">{ui[lang].skipToContent}</a>
     <slot />
     <Cursor />
   </body>

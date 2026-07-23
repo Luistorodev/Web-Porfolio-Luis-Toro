@@ -1,13 +1,17 @@
 import type { ProjectContent } from './legalTechContent';
 
-const workAssets = '/assets/work/canva-design-system';
+import { workImage } from './workImages';
+
+const w = (p: string) => workImage(`scotiabank-design-system/${p}`);
+
+// TODO(luis): confirmar los alts propuestos en este archivo (generados por contexto de sección; validar contra las imágenes reales) y añadir captions opcionales donde aporten.
 
 export const canvaContent: ProjectContent = {
-  slug: "canva-design-system",
+  slug: "scotiabank-design-system",
   title: "Canva DS Colombia: Unifying the experience without breaking the technology",
   subtitle: "Scotiabank Colpatria",
   cover: {
-    src: `${workAssets}/Cover.png`,
+    src: w('Cover.png'), alt: 'Cover of the Scotiabank design system case study',
   },
   meta: {
     role: "Product Designer",
@@ -93,19 +97,19 @@ export const canvaContent: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image1.png`,
+        src: w('image1.png'), alt: 'Chart of the most-used components in the Colombia library',
         caption: "Most-used components in our Colombia library",
       },
     },
     {
       image: {
-        src: `${workAssets}/image2.png`,
+        src: w('image2.png'), alt: 'Figma libraries created for Scotiabank Colombia',
         caption: "Figma libraries created for Colombia",
       },
     },
     {
       image: {
-        src: `${workAssets}/image3.png`,
+        src: w('image3.png'), alt: 'Components contributed to the local libraries',
         caption: "Components contributed to our libraries",
       },
     },
@@ -129,7 +133,7 @@ export const canvaContent: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/imag4.png`,
+        src: w('imag4.png'), alt: 'Localized design system architecture overview',
         height: '2043px',
       },
     },
@@ -140,7 +144,7 @@ export const canvaContent: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image5.png`,
+        src: w('image5.png'), alt: 'Most-used components in the Colombia library',
         caption: "Most-used components in our Colombia library",
       },
     },
@@ -151,7 +155,7 @@ export const canvaContent: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image6.png`,
+        src: w('image6.png'), alt: 'Figma library structure for Colombia',
         caption: "Figma libraries created for Colombia",
         height: '793px',
       },
@@ -163,17 +167,17 @@ export const canvaContent: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image7.png`,
+        src: w('image7.png'), alt: 'Component documentation and usage guidelines',
       },
     },
     {
       image: {
-        src: `${workAssets}/image8.png`,
+        src: w('image8.png'), alt: 'Design system tokens and foundations',
       },
     },
     {
       image: {
-        src: `${workAssets}/image9.png`,
+        src: w('image9.png'), alt: 'Component variants and states',
       },
     },
     {
@@ -183,7 +187,7 @@ export const canvaContent: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image10.png`,
+        src: w('image10.png'), alt: 'Adoption and impact metrics of the design system',
       },
     },
     {
@@ -236,11 +240,11 @@ export const canvaContent: ProjectContent = {
 };
 
 export const canvaContentEs: ProjectContent = {
-  slug: "canva-design-system",
+  slug: "scotiabank-design-system",
   title: "Canva DS Colombia: una experiencia unificada sin romper la tecnología",
   subtitle: "Scotiabank Colpatria",
   cover: {
-    src: `${workAssets}/Cover.png`,
+    src: w('Cover.png'), alt: 'Portada del caso de estudio del Design System de Scotiabank',
   },
   meta: {
     role: "Diseñador de Producto",
@@ -326,19 +330,19 @@ export const canvaContentEs: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image1.png`,
+        src: w('image1.png'), alt: 'Gráfico de los componentes más usados de la librería de Colombia',
         caption: "Componentes más usados de nuestra librería de Colombia",
       },
     },
     {
       image: {
-        src: `${workAssets}/image2.png`,
+        src: w('image2.png'), alt: 'Librerías de Figma creadas para Scotiabank Colombia',
         caption: "Librerías de Figma creadas para Colombia",
       },
     },
     {
       image: {
-        src: `${workAssets}/image3.png`,
+        src: w('image3.png'), alt: 'Componentes aportados a las librerías locales',
         caption: "Componentes aportados a nuestras librerías",
       },
     },
@@ -362,7 +366,7 @@ export const canvaContentEs: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/imag4.png`,
+        src: w('imag4.png'), alt: 'Vista general de la arquitectura del sistema de diseño localizado',
         height: '2043px',
       },
     },
@@ -373,7 +377,7 @@ export const canvaContentEs: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image5.png`,
+        src: w('image5.png'), alt: 'Componentes más usados de la librería de Colombia',
         caption: "Componentes más usados de nuestra librería de Colombia",
       },
     },
@@ -384,7 +388,7 @@ export const canvaContentEs: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image6.png`,
+        src: w('image6.png'), alt: 'Estructura de librerías de Figma para Colombia',
         caption: "Librerías de Figma creadas para Colombia",
         height: '793px',
       },
@@ -396,17 +400,17 @@ export const canvaContentEs: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image7.png`,
+        src: w('image7.png'), alt: 'Documentación de componentes y guías de uso',
       },
     },
     {
       image: {
-        src: `${workAssets}/image8.png`,
+        src: w('image8.png'), alt: 'Tokens y fundamentos del Design System',
       },
     },
     {
       image: {
-        src: `${workAssets}/image9.png`,
+        src: w('image9.png'), alt: 'Variantes y estados de los componentes',
       },
     },
     {
@@ -416,7 +420,7 @@ export const canvaContentEs: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image10.png`,
+        src: w('image10.png'), alt: 'Métricas de adopción e impacto del Design System',
       },
     },
     {

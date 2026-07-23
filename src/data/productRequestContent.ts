@@ -1,13 +1,17 @@
 import type { ProjectContent } from './legalTechContent';
 
-const workAssets = '/assets/work/product-request-revamp';
+import { workImage } from './workImages';
+
+const w = (p: string) => workImage(`product-request-revamp/${p}`);
+
+// TODO(luis): confirmar los alts propuestos en este archivo (generados por contexto de sección; validar contra las imágenes reales) y añadir captions opcionales donde aporten.
 
 export const productRequestContent: ProjectContent = {
   slug: "product-request-revamp",
   title: "Redesigning personal and revolving credit applications",
   subtitle: "Scotiabank Colpatria",
   cover: {
-    src: `${workAssets}/cover.png`,
+    src: w('cover.png'), alt: 'Cover of the loan application redesign case study',
   },
   meta: {
     role: "Product Designer",
@@ -49,7 +53,7 @@ export const productRequestContent: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image01.png`,
+        src: w('image01.png'), alt: 'Pain points in the original loan application flow',
       },
     },
     {
@@ -90,12 +94,12 @@ export const productRequestContent: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image02.png`,
+        src: w('image02.png'), alt: 'Research findings on the Oneclick credit funnel',
       },
     },
     {
       image: {
-        src: `${workAssets}/image03.png`,
+        src: w('image03.png'), alt: 'User interviews and heuristic review insights',
       },
     },
     {
@@ -122,7 +126,7 @@ export const productRequestContent: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image04.png`,
+        src: w('image04.png'), alt: 'Redesigned loan application step flow',
       },
     },
     {
@@ -132,7 +136,7 @@ export const productRequestContent: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image05.png`,
+        src: w('image05.png'), alt: 'Credit simulator interface',
       },
     },
     {
@@ -142,7 +146,7 @@ export const productRequestContent: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image06.png`,
+        src: w('image06.png'), alt: 'Form validation and guidance states',
       },
     },
     {
@@ -152,22 +156,22 @@ export const productRequestContent: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image07.png`,
+        src: w('image07.png'), alt: 'Confirmation and success screens',
       },
     },
     {
       image: {
-        src: `${workAssets}/image08.png`,
+        src: w('image08.png'), alt: 'Mobile application flow screens',
       },
     },
     {
       image: {
-        src: `${workAssets}/image09.png`,
+        src: w('image09.png'), alt: 'Trust-building microcopy and states',
       },
     },
     {
       image: {
-        src: `${workAssets}/image10.png`,
+        src: w('image10.png'), alt: 'Final loan request experience',
       },
     },
     {
@@ -224,7 +228,7 @@ export const productRequestContentEs: ProjectContent = {
   title: "Rediseño de la solicitud de crédito de libre inversión y rotativo",
   subtitle: "Scotiabank Colpatria",
   cover: {
-    src: `${workAssets}/cover.png`,
+    src: w('cover.png'), alt: 'Portada del caso de estudio del rediseño de solicitudes de crédito',
   },
   meta: {
     role: "Diseñador de Producto",
@@ -266,7 +270,7 @@ export const productRequestContentEs: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image01.png`,
+        src: w('image01.png'), alt: 'Puntos de dolor en el flujo original de solicitud de crédito',
       },
     },
     {
@@ -307,12 +311,12 @@ export const productRequestContentEs: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image02.png`,
+        src: w('image02.png'), alt: 'Hallazgos de investigación sobre el funnel de crédito Oneclick',
       },
     },
     {
       image: {
-        src: `${workAssets}/image03.png`,
+        src: w('image03.png'), alt: 'Aprendizajes de entrevistas y evaluación heurística',
       },
     },
     {
@@ -339,7 +343,7 @@ export const productRequestContentEs: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image04.png`,
+        src: w('image04.png'), alt: 'Flujo rediseñado de solicitud de crédito paso a paso',
       },
     },
     {
@@ -349,7 +353,7 @@ export const productRequestContentEs: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image05.png`,
+        src: w('image05.png'), alt: 'Interfaz del simulador de crédito',
       },
     },
     {
@@ -359,7 +363,7 @@ export const productRequestContentEs: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image06.png`,
+        src: w('image06.png'), alt: 'Estados de validación y guía del formulario',
       },
     },
     {
@@ -369,22 +373,22 @@ export const productRequestContentEs: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image07.png`,
+        src: w('image07.png'), alt: 'Pantallas de confirmación y éxito',
       },
     },
     {
       image: {
-        src: `${workAssets}/image08.png`,
+        src: w('image08.png'), alt: 'Pantallas del flujo móvil de solicitud',
       },
     },
     {
       image: {
-        src: `${workAssets}/image09.png`,
+        src: w('image09.png'), alt: 'Microcopy y estados que generan confianza',
       },
     },
     {
       image: {
-        src: `${workAssets}/image10.png`,
+        src: w('image10.png'), alt: 'Experiencia final de solicitud de crédito',
       },
     },
     {

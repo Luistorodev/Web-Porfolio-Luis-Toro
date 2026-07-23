@@ -1,12 +1,16 @@
 import type { ProjectContent } from './legalTechContent';
 
-const workAssets = '/assets/work/ontop-design-system';
+import { workImage } from './workImages';
+
+const w = (p: string) => workImage(`ontop-design-system/${p}`);
+
+// TODO(luis): confirmar los alts propuestos en este archivo (generados por contexto de sección; validar contra las imágenes reales) y añadir captions opcionales donde aporten.
 
 export const ontopDSContent: ProjectContent = {
   slug: "ontop-design-system",
   title: "Ontop Design System",
   subtitle: "ONTOP LLC",
-  cover: { src: `${workAssets}/Cover.png`, contain: true },
+  cover: { src: w('Cover.png'), alt: 'Cover of the Ontop design system case study', contain: true },
   meta: {
     role: "Product Designer",
     timeline: "2024 — Present",
@@ -18,7 +22,7 @@ export const ontopDSContent: ProjectContent = {
       heading: "A visual and component language that unifies Ontop products",
       body: ["Ontop was growing into an ecosystem of products for distinct segments. That growth exposed a problem: each platform was evolving with different visual and interaction criteria, affecting consistency, scalability, and delivery speed. The goal was to build a design system that aligned products, teams, and technologies around one shared language."],
     },
-    { image: { src: `${workAssets}/image01.png`, contain: true } },
+    { image: { src: w('image01.png'), alt: 'Overview of the unified Ontop product language', contain: true } },
     {
       subheading: "The Challenge",
       body: ["The core challenge was creating a design system that could serve products for different segments within one ecosystem, while preserving cross-platform cohesion and raising the visual and functional standard."],
@@ -28,7 +32,7 @@ export const ontopDSContent: ProjectContent = {
         { heading: "System restructuring while Marketing redefined the brand", body: ["The design system had to evolve as Marketing redefined Ontop's visual identity, requiring a cross-functional update to every component and token."] },
       ],
     },
-    { image: { src: `${workAssets}/image02.png`, contain: true } },
+    { image: { src: w('image02.png'), alt: 'Inconsistencies across Ontop platforms', contain: true } },
     {
       subheading: "Process",
       body: ["To create an adoption path grounded in reality, the work began with diagnosis and mapping:"],
@@ -43,15 +47,15 @@ export const ontopDSContent: ProjectContent = {
         { heading: "QA and testing (the differentiator)", body: ["Conducted internal validation and testing in real environments to ensure component consistency and performance, then iterated from the feedback received."] },
       ],
     },
-    { image: { src: `${workAssets}/image03.png`, contain: true } },
-    { image: { src: `${workAssets}/image04.png`, contain: true } },
-    { image: { src: `${workAssets}/image05.png`, contain: true } },
+    { image: { src: w('image03.png'), alt: 'Component audit and inventory', contain: true } },
+    { image: { src: w('image04.png'), alt: 'Design tokens and foundations', contain: true } },
+    { image: { src: w('image05.png'), alt: 'Core component UI kit', contain: true } },
     { subheading: "Solution", body: ["The result was a functional design system, ready for incremental implementation and grounded in the product's reality:"] },
-    { image: { src: `${workAssets}/image06.png`, contain: true } },
-    { image: { src: `${workAssets}/image07.png`, contain: true } },
-    { image: { src: `${workAssets}/image08.png`, contain: true } },
-    { image: { src: `${workAssets}/image09.png`, contain: true } },
-    { image: { src: `${workAssets}/image10.png`, contain: true } },
+    { image: { src: w('image06.png'), alt: 'Design system documentation', contain: true } },
+    { image: { src: w('image07.png'), alt: 'Component variants and states', contain: true } },
+    { image: { src: w('image08.png'), alt: 'Semantic color palette and typography', contain: true } },
+    { image: { src: w('image09.png'), alt: 'Dark mode ready token structure', contain: true } },
+    { image: { src: w('image10.png'), alt: 'Design system adoption across products', contain: true } },
     {
       subheading: "Impact",
       columns: [
@@ -71,7 +75,7 @@ export const ontopDSContentEs: ProjectContent = {
   slug: "ontop-design-system",
   title: "Design System de Ontop",
   subtitle: "ONTOP LLC",
-  cover: { src: `${workAssets}/Cover.png`, contain: true },
+  cover: { src: w('Cover.png'), alt: 'Portada del caso de estudio del Design System de Ontop', contain: true },
   meta: {
     role: "Diseñador de producto",
     timeline: "2024 — Actualidad",
@@ -83,7 +87,7 @@ export const ontopDSContentEs: ProjectContent = {
       heading: "Un lenguaje visual y de componentes para unificar los productos de Ontop",
       body: ["Ontop crecía como un ecosistema de productos para segmentos distintos. Ese crecimiento hizo visible un problema: cada plataforma avanzaba con criterios visuales y de interacción diferentes, afectando la consistencia, escalabilidad y velocidad de entrega. El objetivo fue construir un Design System que alineara productos, equipos y tecnologías bajo un mismo lenguaje."],
     },
-    { image: { src: `${workAssets}/image01.png`, contain: true } },
+    { image: { src: w('image01.png'), alt: 'Vista general del lenguaje unificado de productos Ontop', contain: true } },
     {
       subheading: "El reto",
       body: ["El reto principal fue crear un Design System que funcionara para productos dirigidos a segmentos diferentes dentro de un mismo ecosistema, manteniendo cohesión entre plataformas y elevando el estándar visual y funcional."],
@@ -93,7 +97,7 @@ export const ontopDSContentEs: ProjectContent = {
         { heading: "Reestructura del sistema mientras Marketing redefinía la marca", body: ["El Design System tuvo que evolucionar mientras Marketing redefinía la identidad visual de Ontop, lo que exigió actualizar de forma transversal todos los componentes y tokens."] },
       ],
     },
-    { image: { src: `${workAssets}/image02.png`, contain: true } },
+    { image: { src: w('image02.png'), alt: 'Inconsistencias entre plataformas de Ontop', contain: true } },
     {
       subheading: "Proceso",
       body: ["Para diseñar una adopción aterrizada, el trabajo comenzó con diagnóstico y mapeo:"],
@@ -108,15 +112,15 @@ export const ontopDSContentEs: ProjectContent = {
         { heading: "QA y testing (el diferencial)", body: ["Realicé validaciones internas y pruebas en entornos reales para asegurar la consistencia y el funcionamiento de los componentes, e iteré a partir del feedback recibido."] },
       ],
     },
-    { image: { src: `${workAssets}/image03.png`, contain: true } },
-    { image: { src: `${workAssets}/image04.png`, contain: true } },
-    { image: { src: `${workAssets}/image05.png`, contain: true } },
+    { image: { src: w('image03.png'), alt: 'Auditoría e inventario de componentes', contain: true } },
+    { image: { src: w('image04.png'), alt: 'Tokens y fundamentos de diseño', contain: true } },
+    { image: { src: w('image05.png'), alt: 'UI kit de componentes base', contain: true } },
     { subheading: "Solución", body: ["El resultado fue un Design System funcional, listo para implementarse de forma incremental y alineado con la realidad del producto:"] },
-    { image: { src: `${workAssets}/image06.png`, contain: true } },
-    { image: { src: `${workAssets}/image07.png`, contain: true } },
-    { image: { src: `${workAssets}/image08.png`, contain: true } },
-    { image: { src: `${workAssets}/image09.png`, contain: true } },
-    { image: { src: `${workAssets}/image10.png`, contain: true } },
+    { image: { src: w('image06.png'), alt: 'Documentación del Design System', contain: true } },
+    { image: { src: w('image07.png'), alt: 'Variantes y estados de componentes', contain: true } },
+    { image: { src: w('image08.png'), alt: 'Paleta de color semántica y tipografía', contain: true } },
+    { image: { src: w('image09.png'), alt: 'Estructura de tokens lista para modo oscuro', contain: true } },
+    { image: { src: w('image10.png'), alt: 'Adopción del Design System en los productos', contain: true } },
     {
       subheading: "Impacto",
       columns: [

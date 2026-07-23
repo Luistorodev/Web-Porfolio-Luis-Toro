@@ -1,3 +1,6 @@
+import type { ImageMetadata } from 'astro';
+import { workImage } from './workImages';
+
 export interface ProjectSection {
   label?: string;
   heading?: string;
@@ -9,18 +12,20 @@ export interface ProjectSection {
 }
 
 export interface ProjectImage {
-  src: string;
+  src: ImageMetadata;
+  // // TODO(luis): confirmar alt — descripción real de la imagen para lectores de pantalla.
+  alt?: string;
   tall?: boolean;
   height?: string;
   contain?: boolean;
   caption?: string;
   overlay?: {
-    src: string;
+    src: ImageMetadata;
     opacity?: string;
   };
-  logo?: string;
+  logo?: ImageMetadata;
   composites?: {
-    src: string;
+    src: ImageMetadata;
     width: string;
     top: string;
     left: string;
@@ -40,19 +45,21 @@ export interface ProjectContent {
   sections: ProjectSection[];
 }
 
-const workAssets = '/assets/work/legal-tech-ui';
+const w = (p: string) => workImage(`legal-tech-ui/${p}`);
+
+// TODO(luis): confirmar los alts propuestos en este archivo (generados por contexto de sección; validar contra las imágenes reales) y añadir captions opcionales donde aporten.
 
 export const legalTechContent: ProjectContent = {
   slug: "legal-tech-ui",
   title: "Creating a scalable design system for a LegalTech startup",
   subtitle: "Legal Tech UI",
   cover: {
-    src: `${workAssets}/297ca85a5424ddb65dc723c250a3f2e5261ef7db.png`,
+    src: w('297ca85a5424ddb65dc723c250a3f2e5261ef7db.png'), alt: 'Cover of the LegalTech design system case study',
     overlay: {
-      src: `${workAssets}/34c14e47d0b5a9944fe966972e3f7f3cf47b0220.png`,
+      src: w('34c14e47d0b5a9944fe966972e3f7f3cf47b0220.png'),
       opacity: "0.33",
     },
-    logo: `${workAssets}/e6e75576a48596140c2b6d899e5e46cf430557ad.png`,
+    logo: w('e6e75576a48596140c2b6d899e5e46cf430557ad.png'),
   },
   meta: {
     role: "UI Designer",
@@ -76,7 +83,7 @@ export const legalTechContent: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/f08f003e9ae66e36b07489c0c3397e0c630575f7.png`,
+        src: w('f08f003e9ae66e36b07489c0c3397e0c630575f7.png'), alt: 'Component and spacing inconsistencies before the system',
       },
     },
     {
@@ -89,13 +96,13 @@ export const legalTechContent: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/d241cc3895f1a8ad199c08143b86ed5b7834fb78.png`,
+        src: w('d241cc3895f1a8ad199c08143b86ed5b7834fb78.png'), alt: 'LegalTech website and blog design, full page',
         tall: true,
       },
     },
     {
       image: {
-        src: `${workAssets}/Project-app.png`,
+        src: w('Project-app.png'), alt: 'LegalTech product app UI screens',
         contain: true,
       },
     },
@@ -107,12 +114,12 @@ export const legalTechContentEs: ProjectContent = {
   title: "Creando un sistema de diseño escalable para una startup LegalTech",
   subtitle: "UI para LegalTech",
   cover: {
-    src: `${workAssets}/297ca85a5424ddb65dc723c250a3f2e5261ef7db.png`,
+    src: w('297ca85a5424ddb65dc723c250a3f2e5261ef7db.png'), alt: 'Portada del caso de estudio del Design System LegalTech',
     overlay: {
-      src: `${workAssets}/34c14e47d0b5a9944fe966972e3f7f3cf47b0220.png`,
+      src: w('34c14e47d0b5a9944fe966972e3f7f3cf47b0220.png'),
       opacity: "0.33",
     },
-    logo: `${workAssets}/e6e75576a48596140c2b6d899e5e46cf430557ad.png`,
+    logo: w('e6e75576a48596140c2b6d899e5e46cf430557ad.png'),
   },
   meta: {
     role: "Diseño de UI",
@@ -136,7 +143,7 @@ export const legalTechContentEs: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/f08f003e9ae66e36b07489c0c3397e0c630575f7.png`,
+        src: w('f08f003e9ae66e36b07489c0c3397e0c630575f7.png'), alt: 'Inconsistencias de componentes y espaciado antes del sistema',
       },
     },
     {
@@ -149,13 +156,13 @@ export const legalTechContentEs: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/d241cc3895f1a8ad199c08143b86ed5b7834fb78.png`,
+        src: w('d241cc3895f1a8ad199c08143b86ed5b7834fb78.png'), alt: 'Diseño del sitio web y blog LegalTech, página completa',
         tall: true,
       },
     },
     {
       image: {
-        src: `${workAssets}/Project-app.png`,
+        src: w('Project-app.png'), alt: 'Pantallas de UI de la app LegalTech',
         contain: true,
       },
     },

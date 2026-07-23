@@ -3,6 +3,8 @@ import Layout from '../../../layouts/Layout.astro';
 import Navbar from '../../../components/Navbar.astro';
 import Footer from '../../../components/Footer.astro';
 import ProjectContent from '../../../components/ProjectContent.astro';
+import CaseStudyNavigation from '../../../components/CaseStudyNavigation.astro';
+import { getImage } from 'astro:assets';
 import { allProjects, type Project } from '../../../data/projects';
 import { getCaseStudy } from '../../../data/caseStudies';
 import { projectCopy, ui } from '../../../data/i18n';
@@ -18,12 +20,27 @@ const localizedContent = content && projectText ? { ...content, ...projectText.e
 const seo = projectText
   ? { title: `${projectText.es.title} | Luis Toro`, description: projectText.es.subtitle }
   : ui.es.seo.home;
+const ogImage = localizedContent
+  ? await getImage({ src: localizedContent.cover.src, width: 1200, height: 630, fit: 'cover', format: 'png' })
+  : undefined;
+const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: new URL('/es', Astro.site).href },
+    { '@type': 'ListItem', position: 2, name: project.title.es, item: pageUrl },
+  ],
+};
+const projectIndex = allProjects.findIndex((item) => item.slug === project.slug);
+const previousProject = projectIndex > 0 ? allProjects[projectIndex - 1] : undefined;
+const nextProject = projectIndex >= 0 && projectIndex < allProjects.length - 1 ? allProjects[projectIndex + 1] : undefined;
 ---
 
-<Layout lang="es" title={seo.title} description={seo.description}>
+<Layout lang="es" title={seo.title} description={seo.description} image={ogImage?.src} type="article" jsonLd={breadcrumbJsonLd}>
   <div class="bg-[var(--color-page)] flex flex-col min-h-screen w-full transition-colors duration-200">
     <Navbar currentPage="work" currentPath={`/es/work/${project.slug}`} lang="es" />
-    <div class="flex flex-col items-center overflow-clip w-full max-w-[1440px] mx-auto pt-8 md:pt-12 animate-[fadeIn_0.4s_ease-out]">
+    <main id="main" class="flex flex-col items-center overflow-clip w-full max-w-[1440px] mx-auto pt-8 md:pt-12 animate-[fadeIn_0.4s_ease-out]">
       {localizedContent ? (
         <ProjectContent content={localizedContent} lang="es" />
       ) : (
@@ -32,7 +49,8 @@ const seo = projectText
           <p class="text-[var(--color-text-secondary)] text-[13px] leading-tight font-['Inter'] text-center max-w-[500px]">{ui.es.emptyProject} {project.company} &middot; {project.year}</p>
         </div>
       )}
-    </div>
+      <CaseStudyNavigation lang="es" previous={previousProject} next={nextProject} />
+    </main>
     <Footer lang="es" />
   </div>
 </Layout>

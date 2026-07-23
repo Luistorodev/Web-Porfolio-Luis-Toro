@@ -1,12 +1,16 @@
 import type { ProjectContent } from './legalTechContent';
 
-const workAssets = '/assets/work/ontop-app-revamp';
+import { workImage } from './workImages';
+
+const w = (p: string) => workImage(`ontop-app-revamp/${p}`);
+
+// TODO(luis): confirmar los alts propuestos en este archivo (generados por contexto de sección; validar contra las imágenes reales) y añadir captions opcionales donde aporten.
 
 export const ontopRedesignContent: ProjectContent = {
   slug: "ontop-app-redesign",
   title: "Ontop Wallet: End-to-End Redesign",
   subtitle: "Ontop LLC",
-  cover: { src: `${workAssets}/Cover.png` },
+  cover: { src: w('Cover.png'), alt: 'Cover of the Ontop Wallet redesign case study' },
   meta: {
     role: "Product Designer",
     timeline: "2025",
@@ -49,7 +53,7 @@ export const ontopRedesignContent: ProjectContent = {
         "The home screen functioned more like a large menu than a starting point: many features, little guidance. Forms asked for more than necessary and mixed operational information with user decisions. Progress and confirmation cues were missing, increasing anxiety (\"Did it go through?\" / \"What is its status?\").",
       ],
     },
-    { image: { src: `${workAssets}/image01.png`, contain: true } },
+    { image: { src: w('image01.png'), alt: 'Support ticket and pain point analysis', contain: true } },
     {
       subheading: "Design Decisions",
       body: ["I made and advocated for decisions that enabled meaningful change without disrupting the product:"],
@@ -64,14 +68,14 @@ export const ontopRedesignContent: ProjectContent = {
     },
     { subheading: "Solution", body: ["The result was an end-to-end redesign that modernized the experience and organized the product around clarity, trust, and speed:"] },
     { body: ["'''A new visual system aligned with fintech standards (hierarchy, accessibility, consistency).'''"] },
-    { image: { src: `${workAssets}/image02.png`, contain: true } },
-    { body: ["'''Clearer information architecture'''", "Navigation and home were designed to help people find and do more in fewer steps."], image: { src: `${workAssets}/image03.png`, contain: true }, layout: 'side-text-right' },
-    { body: ["'''Optimized critical flows'''", "Fewer redundant screens, clearer CTAs, and robust states and confirmations."], image: { src: `${workAssets}/image04.png`, contain: true }, layout: 'side-text-left' },
+    { image: { src: w('image02.png'), alt: 'Redesigned Ontop Wallet home dashboard', contain: true } },
+    { body: ["'''Clearer information architecture'''", "Navigation and home were designed to help people find and do more in fewer steps."], image: { src: w('image03.png'), alt: 'Clearer information architecture and navigation', contain: true }, layout: 'side-text-right' },
+    { body: ["'''Optimized critical flows'''", "Fewer redundant screens, clearer CTAs, and robust states and confirmations."], image: { src: w('image04.png'), alt: 'Optimized critical flows with clearer CTAs', contain: true }, layout: 'side-text-left' },
     { body: ["'''A foundation built for growth'''", "The app is ready to support future incremental improvements, including new currencies and products, without reworking everything."] },
-    { image: { src: `${workAssets}/image05.png`, contain: true } },
-    { image: { src: `${workAssets}/image06.png`, contain: true } },
-    { image: { src: `${workAssets}/image07.png`, contain: true } },
-    { image: { src: `${workAssets}/image08.png`, contain: true } },
+    { image: { src: w('image05.png'), alt: 'Transfer flow screens', contain: true } },
+    { image: { src: w('image06.png'), alt: 'Withdrawal flow screens', contain: true } },
+    { image: { src: w('image07.png'), alt: 'Wallet states and confirmations', contain: true } },
+    { image: { src: w('image08.png'), alt: 'Final redesigned app screens', contain: true } },
     {
       subheading: "Impact",
       columns: [
@@ -91,7 +95,7 @@ export const ontopRedesignContentEs: ProjectContent = {
   slug: "ontop-app-redesign",
   title: "Ontop Wallet: rediseño de punta a punta",
   subtitle: "Ontop LLC",
-  cover: { src: `${workAssets}/Cover.png` },
+  cover: { src: w('Cover.png'), alt: 'Portada del caso de estudio del rediseño de Ontop Wallet' },
   meta: {
     role: "Diseñador de producto",
     timeline: "2025",
@@ -134,7 +138,7 @@ export const ontopRedesignContentEs: ProjectContent = {
         "El inicio funcionaba más como un menú extenso que como un punto de partida: muchas funciones, poca guía. Los formularios pedían más información de la necesaria y mezclaban datos operativos con decisiones del usuario. Faltaban señales de progreso y confirmación, aumentando la ansiedad (\"¿Se envió?\" / \"¿Cuál es su estado?\").",
       ],
     },
-    { image: { src: `${workAssets}/image01.png`, contain: true } },
+    { image: { src: w('image01.png'), alt: 'Análisis de tickets de soporte y puntos de dolor', contain: true } },
     {
       subheading: "Decisiones de diseño",
       body: ["Tomé y defendí decisiones que permitieran un cambio significativo sin desestabilizar el producto:"],
@@ -149,14 +153,14 @@ export const ontopRedesignContentEs: ProjectContent = {
     },
     { subheading: "Solución", body: ["El resultado fue un rediseño de punta a punta que modernizó la experiencia y organizó el producto alrededor de claridad, confianza y velocidad:"] },
     { body: ["'''Un nuevo sistema visual alineado con estándares fintech (jerarquía, accesibilidad y consistencia).'''"] },
-    { image: { src: `${workAssets}/image02.png`, contain: true } },
-    { body: ["'''Arquitectura de información más clara'''", "El inicio y la navegación se diseñaron para encontrar y hacer más en menos pasos."], image: { src: `${workAssets}/image03.png`, contain: true }, layout: 'side-text-right' },
-    { body: ["'''Flujos críticos optimizados'''", "Menos pantallas redundantes, CTAs más claros y estados y confirmaciones robustos."], image: { src: `${workAssets}/image04.png`, contain: true }, layout: 'side-text-left' },
+    { image: { src: w('image02.png'), alt: 'Dashboard de inicio rediseñado de Ontop Wallet', contain: true } },
+    { body: ["'''Arquitectura de información más clara'''", "El inicio y la navegación se diseñaron para encontrar y hacer más en menos pasos."], image: { src: w('image03.png'), alt: 'Arquitectura de información y navegación más claras', contain: true }, layout: 'side-text-right' },
+    { body: ["'''Flujos críticos optimizados'''", "Menos pantallas redundantes, CTAs más claros y estados y confirmaciones robustos."], image: { src: w('image04.png'), alt: 'Flujos críticos optimizados con CTAs más claros', contain: true }, layout: 'side-text-left' },
     { body: ["'''Una base preparada para crecer'''", "La app quedó lista para incorporar mejoras incrementales, nuevas monedas y productos sin tener que rehacer todo."] },
-    { image: { src: `${workAssets}/image05.png`, contain: true } },
-    { image: { src: `${workAssets}/image06.png`, contain: true } },
-    { image: { src: `${workAssets}/image07.png`, contain: true } },
-    { image: { src: `${workAssets}/image08.png`, contain: true } },
+    { image: { src: w('image05.png'), alt: 'Pantallas del flujo de transferencias', contain: true } },
+    { image: { src: w('image06.png'), alt: 'Pantallas del flujo de retiros', contain: true } },
+    { image: { src: w('image07.png'), alt: 'Estados y confirmaciones de la billetera', contain: true } },
+    { image: { src: w('image08.png'), alt: 'Pantallas finales de la app rediseñada', contain: true } },
     {
       subheading: "Impacto",
       columns: [

@@ -1,13 +1,17 @@
 import type { ProjectContent } from './legalTechContent';
 
-const workAssets = '/assets/work/fanbase-app';
+import { workImage } from './workImages';
+
+const w = (p: string) => workImage(`fanbase-app/${p}`);
+
+// TODO(luis): confirmar los alts propuestos en este archivo (generados por contexto de sección; validar contra las imágenes reales) y añadir captions opcionales donde aporten.
 
 export const fanbaseContent: ProjectContent = {
   slug: "fanbase-app",
   title: "Fanbase App - Designing Seasonal Engagement for UK Football Fans",
   subtitle: "Budweiser",
   cover: {
-    src: `${workAssets}/Cover.png`,
+    src: w('Cover.png'), alt: 'Cover of the Budweiser fanbase app case study',
   },
   meta: {
     role: "Product Designer",
@@ -39,7 +43,7 @@ export const fanbaseContent: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/Problem.png`,
+        src: w('Problem.png'), alt: 'Diagram of the matchday engagement problem',
         contain: true,
       },
     },
@@ -64,7 +68,7 @@ export const fanbaseContent: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/Image02.png`,
+        src: w('Image02.png'), alt: 'Design decisions for the fan experience',
         height: '504px',
       },
     },
@@ -79,31 +83,31 @@ export const fanbaseContent: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/Image03.png`,
+        src: w('Image03.png'), alt: 'Fanbase app solution overview',
         height: '462px',
       },
     },
     {
       image: {
-        src: `${workAssets}/Image04.png`,
+        src: w('Image04.png'), alt: 'Matchday prediction flow screens',
         height: '462px',
       },
     },
     {
       image: {
-        src: `${workAssets}/Image05.png`,
+        src: w('Image05.png'), alt: 'Fan profile and rewards screens',
         height: '462px',
       },
     },
     {
       image: {
-        src: `${workAssets}/Image06.png`,
+        src: w('Image06.png'), alt: 'Social and ranking features of the app',
         height: '462px',
       },
     },
     {
       image: {
-        src: `${workAssets}/Image07.png`,
+        src: w('Image07.png'), alt: 'Season campaign screens',
         height: '462px',
       },
     },
@@ -144,7 +148,7 @@ export const fanbaseContent: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/Image08.png`,
+        src: w('Image08.png'), alt: 'Match-day engagement results',
       },
     },
     {
@@ -160,7 +164,7 @@ export const fanbaseContentEs: ProjectContent = {
   title: "Fanbase App - Diseñando engagement de temporada para fans de fútbol en UK",
   subtitle: "Budweiser",
   cover: {
-    src: `${workAssets}/Cover.png`,
+    src: w('Cover.png'), alt: 'Portada del caso de estudio de la app fanbase de Budweiser',
   },
   meta: {
     role: "Diseñador de Producto",
@@ -192,7 +196,7 @@ export const fanbaseContentEs: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/Problem.png`,
+        src: w('Problem.png'), alt: 'Diagrama del problema de engagement en días de partido',
         contain: true,
       },
     },
@@ -217,7 +221,7 @@ export const fanbaseContentEs: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/Image02.png`,
+        src: w('Image02.png'), alt: 'Decisiones de diseño para la experiencia de aficionados',
         height: '504px',
       },
     },
@@ -232,31 +236,31 @@ export const fanbaseContentEs: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/Image03.png`,
+        src: w('Image03.png'), alt: 'Vista general de la solución de la app fanbase',
         height: '462px',
       },
     },
     {
       image: {
-        src: `${workAssets}/Image04.png`,
+        src: w('Image04.png'), alt: 'Pantallas del flujo de pronósticos de partido',
         height: '462px',
       },
     },
     {
       image: {
-        src: `${workAssets}/Image05.png`,
+        src: w('Image05.png'), alt: 'Pantallas de perfil de aficionado y recompensas',
         height: '462px',
       },
     },
     {
       image: {
-        src: `${workAssets}/Image06.png`,
+        src: w('Image06.png'), alt: 'Funciones sociales y de ranking de la app',
         height: '462px',
       },
     },
     {
       image: {
-        src: `${workAssets}/Image07.png`,
+        src: w('Image07.png'), alt: 'Pantallas de la campaña de temporada',
         height: '462px',
       },
     },
@@ -297,7 +301,7 @@ export const fanbaseContentEs: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/Image08.png`,
+        src: w('Image08.png'), alt: 'Resultados de engagement en días de partido',
       },
     },
     {

@@ -1,88 +1,115 @@
 ---
+import { Image } from 'astro:assets';
 import type { ProjectImage } from '../data/legalTechContent';
 
 interface Props {
   image: ProjectImage;
+  /** Set true only for the LCP image (case-study cover). */
+  priority?: boolean;
 }
 
-const { image } = Astro.props;
+const { image, priority = false } = Astro.props;
+
+// Case-study content column is max 770px wide (max-w-[770px] + px-4).
+const widths = [400, 770, 1200, 1540];
+const sizes = '(min-width: 770px) 770px, calc(100vw - 2rem)';
+const loading = priority ? ('eager' as const) : ('lazy' as const);
+const fetchpriority = priority ? ('high' as const) : undefined;
 ---
 
 {image.contain ? (
-  <div class="relative w-full lightbox-trigger cursor-zoom-in">
-    <img
+  <figure class="relative w-full lightbox-trigger cursor-zoom-in">
+    <Image
       src={image.src}
-      alt=""
+      alt={image.alt ?? ''}
+      widths={widths}
+      sizes={sizes}
+      format="webp"
+      loading={loading}
+      fetchpriority={fetchpriority}
+      decoding="async"
       class="w-full h-auto object-contain"
-      data-pswp-src={image.src}
+      data-pswp-src={image.src.src}
     />
     {image.caption && (
-      <p class="text-[var(--color-text-secondary)] text-[13px] font-['Geist_Mono'] leading-[1.2] mt-2 uppercase text-right">{image.caption}</p>
+      <figcaption class="text-[var(--color-text-secondary)] text-[13px] font-['Geist_Mono'] leading-[1.2] mt-2 uppercase text-right">{image.caption}</figcaption>
     )}
-  </div>
+  </figure>
 ) : (
-  <div class="relative w-full">
+  <figure class="relative w-full">
     {!image.height ? (
       <>
         <div style={`padding-bottom: ${image.tall ? '187.03%' : '55.844%'}`}></div>
         <div class="absolute inset-0 lightbox-trigger cursor-zoom-in">
-          <img
+          <Image
             src={image.src}
-            alt=""
+            alt={image.alt ?? ''}
+            widths={widths}
+            sizes={sizes}
+            format="webp"
+            loading={loading}
+            fetchpriority={fetchpriority}
+            decoding="async"
             class="absolute inset-0 w-full h-full object-cover"
-            data-pswp-src={image.src}
+            data-pswp-src={image.src.src}
           />
           {image.overlay && (
             <div aria-hidden="true" class="absolute inset-0 pointer-events-none">
-              <img src={image.overlay.src} alt="" class="w-full h-full object-cover" />
+              <Image src={image.overlay.src} alt="" widths={widths} sizes={sizes} format="webp" loading="lazy" decoding="async" class="w-full h-full object-cover" />
               <div class="absolute inset-0" style={`background: rgba(0,0,0,${image.overlay.opacity || '0.33'})`}></div>
             </div>
           )}
           {image.logo && (
             <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <img src={image.logo} alt="" class="h-[60px] w-auto max-w-[300px] object-contain" />
+              <Image src={image.logo} alt="" widths={[160, 320]} sizes="160px" format="webp" loading="lazy" decoding="async" class="h-[60px] w-auto max-w-[300px] object-contain" />
             </div>
           )}
           {image.composites && image.composites.map((comp) => (
             <div class="absolute pointer-events-none" style={`width: ${comp.width}; top: ${comp.top}; left: ${comp.left};`}>
-              <img src={comp.src} alt="" class="w-full object-cover" />
+              <Image src={comp.src} alt="" widths={[400, 770]} sizes="770px" format="webp" loading="lazy" decoding="async" class="w-full object-cover" />
             </div>
           ))}
         </div>
         {image.caption && (
-          <p class="text-[var(--color-text-secondary)] text-[13px] font-['Geist_Mono'] leading-[1.2] mt-2 uppercase text-right">{image.caption}</p>
+          <figcaption class="text-[var(--color-text-secondary)] text-[13px] font-['Geist_Mono'] leading-[1.2] mt-2 uppercase text-right">{image.caption}</figcaption>
         )}
       </>
     ) : (
       <>
         <div class="lightbox-trigger cursor-zoom-in" style={`height: ${image.height}`}>
-          <img
+          <Image
             src={image.src}
-            alt=""
+            alt={image.alt ?? ''}
+            widths={widths}
+            sizes={sizes}
+            format="webp"
+            loading={loading}
+            fetchpriority={fetchpriority}
+            decoding="async"
             class="w-full h-full object-cover"
-            data-pswp-src={image.src}
+            data-pswp-src={image.src.src}
           />
           {image.overlay && (
             <div aria-hidden="true" class="absolute inset-0 pointer-events-none">
-              <img src={image.overlay.src} alt="" class="w-full h-full object-cover" />
+              <Image src={image.overlay.src} alt="" widths={widths} sizes={sizes} format="webp" loading="lazy" decoding="async" class="w-full h-full object-cover" />
               <div class="absolute inset-0" style={`background: rgba(0,0,0,${image.overlay.opacity || '0.33'})`}></div>
             </div>
           )}
           {image.logo && (
             <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <img src={image.logo} alt="" class="h-[60px] w-auto max-w-[300px] object-contain" />
+              <Image src={image.logo} alt="" widths={[160, 320]} sizes="160px" format="webp" loading="lazy" decoding="async" class="h-[60px] w-auto max-w-[300px] object-contain" />
             </div>
           )}
           {image.composites && image.composites.map((comp) => (
             <div class="absolute pointer-events-none" style={`width: ${comp.width}; top: ${comp.top}; left: ${comp.left};`}>
-              <img src={comp.src} alt="" class="w-full object-cover" />
+              <Image src={comp.src} alt="" widths={[400, 770]} sizes="770px" format="webp" loading="lazy" decoding="async" class="w-full object-cover" />
             </div>
           ))}
         </div>
         {image.caption && (
-          <p class="text-[var(--color-text-secondary)] text-[13px] font-['Geist_Mono'] leading-[1.2] mt-2 uppercase text-right">{image.caption}</p>
+          <figcaption class="text-[var(--color-text-secondary)] text-[13px] font-['Geist_Mono'] leading-[1.2] mt-2 uppercase text-right">{image.caption}</figcaption>
         )}
       </>
     )}
-  </div>
+  </figure>
 )}

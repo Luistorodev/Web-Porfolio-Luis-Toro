@@ -1,13 +1,17 @@
 import type { ProjectContent } from './legalTechContent';
 
-const workAssets = '/assets/work/application-redesign';
+import { workImage } from './workImages';
+
+const w = (p: string) => workImage(`application-redesign/${p}`);
+
+// TODO(luis): confirmar los alts propuestos en este archivo (generados por contexto de sección; validar contra las imágenes reales) y añadir captions opcionales donde aporten.
 
 export const circuloContent: ProjectContent = {
   slug: "application-redesign",
   title: "Redesigning the Círculo de Crédito experience",
   subtitle: "Círculo de Crédito",
   cover: {
-    src: `${workAssets}/cover.png`,
+    src: w('cover.png'), alt: 'Cover of the Círculo de Crédito app redesign case study',
   },
   meta: {
     role: "Product Designer",
@@ -50,7 +54,7 @@ export const circuloContent: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image01.png`,
+        src: w('image01.png'), alt: 'Observed user behavior in live sessions',
       },
     },
     {
@@ -66,13 +70,13 @@ export const circuloContent: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image02.png`,
+        src: w('image02.png'), alt: 'Credit report comprehension issues',
         contain: true,
       },
     },
     {
       image: {
-        src: `${workAssets}/image03.png`,
+        src: w('image03.png'), alt: 'Research synthesis and opportunities',
       },
     },
     {
@@ -93,7 +97,7 @@ export const circuloContent: ProjectContent = {
         "Clear product grouping and a hierarchy based on intent (explore vs. buy).",
       ],
       image: {
-        src: `${workAssets}/image04.png`,
+        src: w('image04.png'), alt: 'Redesigned credit report overview',
         contain: true,
       },
       layout: 'side-text-right',
@@ -104,7 +108,7 @@ export const circuloContent: ProjectContent = {
         "Fewer steps, progressive inputs, and real-time feedback.",
       ],
       image: {
-        src: `${workAssets}/image05.png`,
+        src: w('image05.png'), alt: 'Simplified credit score explanation',
         contain: true,
       },
       layout: 'side-text-left',
@@ -117,22 +121,22 @@ export const circuloContent: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image06.png`,
+        src: w('image06.png'), alt: 'Actionable recommendations UI',
       },
     },
     {
       image: {
-        src: `${workAssets}/image07.png`,
+        src: w('image07.png'), alt: 'Onboarding flow redesign',
       },
     },
     {
       image: {
-        src: `${workAssets}/image08.png`,
+        src: w('image08.png'), alt: 'Secondary product discovery screens',
       },
     },
     {
       image: {
-        src: `${workAssets}/image09.png`,
+        src: w('image09.png'), alt: 'Alerts and monitoring experience',
       },
     },
     {
@@ -166,7 +170,7 @@ export const circuloContent: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image10.png`,
+        src: w('image10.png'), alt: 'Impact metrics after the redesign',
       },
     },
     {
@@ -182,7 +186,7 @@ export const circuloContentEs: ProjectContent = {
   title: "Rediseño de la experiencia de Círculo de Crédito",
   subtitle: "Círculo de Crédito",
   cover: {
-    src: `${workAssets}/cover.png`,
+    src: w('cover.png'), alt: 'Portada del caso de estudio del rediseño de la app de Círculo de Crédito',
   },
   meta: {
     role: "Diseñador de Producto",
@@ -225,7 +229,7 @@ export const circuloContentEs: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image01.png`,
+        src: w('image01.png'), alt: 'Comportamiento observado en sesiones con usuarios',
       },
     },
     {
@@ -241,13 +245,13 @@ export const circuloContentEs: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image02.png`,
+        src: w('image02.png'), alt: 'Problemas de comprensión del reporte de crédito',
         contain: true,
       },
     },
     {
       image: {
-        src: `${workAssets}/image03.png`,
+        src: w('image03.png'), alt: 'Síntesis de investigación y oportunidades',
       },
     },
     {
@@ -268,7 +272,7 @@ export const circuloContentEs: ProjectContent = {
         "Agrupación clara de productos y jerarquía basada en la intención (explorar vs. comprar).",
       ],
       image: {
-        src: `${workAssets}/image04.png`,
+        src: w('image04.png'), alt: 'Vista rediseñada del reporte de crédito',
         contain: true,
       },
       layout: 'side-text-right',
@@ -279,7 +283,7 @@ export const circuloContentEs: ProjectContent = {
         "Menos pasos, inputs progresivos y feedback en tiempo real.",
       ],
       image: {
-        src: `${workAssets}/image05.png`,
+        src: w('image05.png'), alt: 'Explicación simplificada del score crediticio',
         contain: true,
       },
       layout: 'side-text-left',
@@ -292,22 +296,22 @@ export const circuloContentEs: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image06.png`,
+        src: w('image06.png'), alt: 'UI de recomendaciones accionables',
       },
     },
     {
       image: {
-        src: `${workAssets}/image07.png`,
+        src: w('image07.png'), alt: 'Rediseño del flujo de onboarding',
       },
     },
     {
       image: {
-        src: `${workAssets}/image08.png`,
+        src: w('image08.png'), alt: 'Pantallas de descubrimiento de productos secundarios',
       },
     },
     {
       image: {
-        src: `${workAssets}/image09.png`,
+        src: w('image09.png'), alt: 'Experiencia de alertas y monitoreo',
       },
     },
     {
@@ -341,7 +345,7 @@ export const circuloContentEs: ProjectContent = {
     },
     {
       image: {
-        src: `${workAssets}/image10.png`,
+        src: w('image10.png'), alt: 'Métricas de impacto tras el rediseño',
       },
     },
     {

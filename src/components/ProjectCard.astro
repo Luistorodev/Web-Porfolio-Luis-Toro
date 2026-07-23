@@ -1,0 +1,81 @@
+---
+import { Image } from 'astro:assets';
+import type { Project } from '../data/projects';
+import { getLocalizedPath, type Language } from '../data/i18n';
+
+interface Props {
+  project: Project;
+  lang?: Language;
+  /**
+   * fixed:   h-[353px] card (desktop left column)
+   * stretch: flex-1 card   (desktop right column)
+   * mobile:  auto height, 250px image (single column)
+   */
+  variant?: 'fixed' | 'stretch' | 'mobile';
+}
+
+const { project, lang = 'en', variant = 'fixed' } = Astro.props;
+
+const title = project.title[lang];
+const placeholder = title.split(' ').map((w) => w[0]).join('').slice(0, 3);
+const href = getLocalizedPath(`/work/${project.slug}`, lang);
+
+const articleClass = {
+  fixed: 'h-[353px] w-full',
+  stretch: 'flex-1 w-full',
+  mobile: 'w-full',
+}[variant];
+
+const hoverFx = 'transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]';
+const imageWrapClass = project.disabled
+  ? (variant === 'mobile'
+      ? 'h-[250px] w-full rounded-lg overflow-hidden relative'
+      : 'flex-1 min-h-0 w-full rounded-lg overflow-hidden relative')
+  : (variant === 'mobile'
+      ? `h-[250px] w-full rounded-lg overflow-hidden relative ${hoverFx}`
+      : `flex-1 min-h-0 w-full rounded-lg overflow-hidden relative ${hoverFx}`);
+
+const metaWrapClass = variant === 'mobile'
+  ? 'flex flex-col gap-0.5 text-sm w-full'
+  : 'flex items-start justify-between h-[19px] text-sm md:text-base whitespace-nowrap w-full';
+
+// Cards render at ~680px on desktop (2 cols inside max-w-[1440px]) and full-width on mobile.
+const widths = [400, 680, 1360];
+const sizes = '(min-width: 768px) 680px, calc(100vw - 2rem)';
+---
+
+<article class={`${project.disabled ? 'project-card-disabled' : 'project-card group'} ${articleClass}`}>
+  {project.disabled ? (
+    <div class="flex flex-col gap-0.5 h-full w-full">
+      <div class={imageWrapClass}>
+        {project.image ? (
+          <Image src={project.image} alt={title} widths={widths} sizes={sizes} format="webp" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" />
+        ) : (
+          <div class="bg-[var(--color-placeholder)] absolute inset-0 flex items-center justify-center">
+            <span class="text-[var(--color-text-muted)] text-sm">{placeholder}</span>
+          </div>
+        )}
+      </div>
+      <div class={metaWrapClass}>
+        <h3 class="font-medium text-[var(--color-text-strong)] font-['Inter']">{title}</h3>
+        <p class="text-[var(--color-text-secondary)] uppercase font-['Geist_Mono']">{`${project.company} • ${project.year}`}</p>
+      </div>
+    </div>
+  ) : (
+    <a href={href} class="flex flex-col gap-0.5 h-full w-full cursor-none no-underline">
+      <div class={imageWrapClass}>
+        {project.image ? (
+          <Image src={project.image} alt={title} widths={widths} sizes={sizes} format="webp" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" />
+        ) : (
+          <div class="bg-[var(--color-placeholder)] absolute inset-0 flex items-center justify-center">
+            <span class="text-[var(--color-text-muted)] text-sm">{placeholder}</span>
+          </div>
+        )}
+      </div>
+      <div class={metaWrapClass}>
+        <h3 class="font-medium text-[var(--color-text-strong)] font-['Inter']">{title}</h3>
+        <p class="text-[var(--color-text-secondary)] uppercase font-['Geist_Mono']">{`${project.company} • ${project.year}`}</p>
+      </div>
+    </a>
+  )}
+</article>

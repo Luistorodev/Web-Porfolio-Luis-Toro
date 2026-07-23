@@ -1,0 +1,50 @@
+---
+import { Image } from 'astro:assets';
+import { getLocalizedPath, ui, type Language } from '../data/i18n';
+import type { Project } from '../data/projects';
+
+interface Props {
+  lang?: Language;
+  previous?: Project;
+  next?: Project;
+}
+
+const { lang = 'en', previous, next } = Astro.props;
+const copy = ui[lang].caseStudyNav;
+const widths = [300, 600];
+const sizes = '(min-width: 768px) 361px, calc(100vw - 3rem)';
+
+function title(project: Project) {
+  return project.title[lang];
+}
+---
+
+<section aria-label={copy.label} class="border-b border-[var(--color-border-strong)] w-full">
+  <div class="mx-auto max-w-[770px] px-4 md:px-0 py-8 flex flex-col gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+      {previous ? (
+        <a href={getLocalizedPath(`/work/${previous.slug}`, lang)} class="border border-[var(--color-border)] rounded-lg p-3 no-underline transition-colors duration-200 hover:border-[var(--color-accent)] group">
+          {previous.image && (
+            <div class="aspect-[2.1] w-full rounded-md overflow-hidden mb-3">
+              <Image src={previous.image} alt={title(previous)} widths={widths} sizes={sizes} format="webp" loading="lazy" decoding="async" class="block w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]" />
+            </div>
+          )}
+          <span class="block text-[var(--color-text-muted)] text-[12px] uppercase font-['Geist_Mono'] mb-1">{copy.previous}</span>
+          <span class="block text-[var(--color-text-strong)] text-sm font-['Inter'] group-hover:text-[var(--color-accent)]">{title(previous)}</span>
+        </a>
+      ) : <div aria-hidden="true" class="hidden md:block" />}
+      {next ? (
+        <a href={getLocalizedPath(`/work/${next.slug}`, lang)} class="border border-[var(--color-border)] rounded-lg p-3 no-underline transition-colors duration-200 hover:border-[var(--color-accent)] group md:text-right">
+          {next.image && (
+            <div class="aspect-[2.1] w-full rounded-md overflow-hidden mb-3">
+              <Image src={next.image} alt={title(next)} widths={widths} sizes={sizes} format="webp" loading="lazy" decoding="async" class="block w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]" />
+            </div>
+          )}
+          <span class="block text-[var(--color-text-muted)] text-[12px] uppercase font-['Geist_Mono'] mb-1">{copy.next}</span>
+          <span class="block text-[var(--color-text-strong)] text-sm font-['Inter'] group-hover:text-[var(--color-accent)]">{title(next)}</span>
+        </a>
+      ) : <div aria-hidden="true" class="hidden md:block" />}
+    </div>
+    <a href={getLocalizedPath('/', lang)} class="self-center text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] text-[12px] uppercase font-['Geist_Mono'] no-underline transition-colors duration-200">{copy.back}</a>
+  </div>
+</section>
