@@ -1,9 +1,7 @@
 ---
 import '../styles/global.css';
-import { getImage } from 'astro:assets';
 import Cursor from '../components/Cursor.astro';
 import { ui, getLocalizedPath, type Language } from '../data/i18n';
-import defaultOgImage from '../assets/hero/luis-toro-profile.png';
 
 interface Props {
   lang?: Language;
@@ -34,9 +32,7 @@ const enUrl = new URL(enPath, site).href;
 const esUrl = new URL(getLocalizedPath(enPath, 'es'), site).href;
 
 // ── Open Graph image ──────────────────────────────────────
-// TODO(luis): reemplazar la imagen OG de marca (hoy la foto de perfil) por una pieza dedicada de 1200x630.
-const fallbackOg = await getImage({ src: defaultOgImage, width: 1200, height: 630, fit: 'cover', format: 'png' });
-const ogImage = new URL(image ?? fallbackOg.src, site).href;
+const ogImage = new URL(image ?? '/og-image.png', site).href;
 
 const ogLocale = lang === 'es' ? 'es_ES' : 'en_US';
 const ogLocaleAlternate = lang === 'es' ? 'en_US' : 'es_ES';
@@ -47,8 +43,14 @@ const jsonLdItems = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 <html lang={lang}>
   <head>
     <meta charset="utf-8" />
+    <!-- Favicon & PWA -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
     <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Luis Toro" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#ffffff" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
