@@ -4,9 +4,8 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
-// TODO(luis): reemplazar con el dominio de producción real.
-// De aquí salen canonical, Open Graph, hreflang, robots.txt y sitemap con URLs absolutas.
-const SITE_URL = process.env.SITE_URL ?? 'https://example.com';
+// TODO(luis): reemplazar con dominio personalizado si compras uno.
+const SITE_URL = process.env.SITE_URL ?? 'https://web-porfolio-luis-toro.vercel.app';
 
 // https://astro.build/config
 export default defineConfig({
