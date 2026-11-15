@@ -1,6 +1,12 @@
 {
   "redirects": [
     {
+      "source": "/",
+      "has": [{ "type": "host", "value": "web-porfolio-luis-toro.vercel.app" }],
+      "destination": "https://www.luistoro.me/",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "web-porfolio-luis-toro.vercel.app" }],
       "destination": "https://www.luistoro.me/:path*",
