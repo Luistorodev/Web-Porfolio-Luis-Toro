@@ -6,6 +6,10 @@ import sitemap from '@astrojs/sitemap';
 
 const SITE_URL = process.env.SITE_URL ?? 'https://www.luistoro.me';
 
+// Match the canonical URLs from Layout.astro: no trailing slash, except the site root.
+/** @param {string} url */
+const noTrailingSlash = (url) => (new URL(url).pathname === '/' ? url : url.replace(/\/+$/, ''));
+
 // https://astro.build/config
 export default defineConfig({
   site: SITE_URL,
@@ -22,6 +26,11 @@ export default defineConfig({
           en: 'en',
           es: 'es',
         },
+      },
+      serialize(item) {
+        item.url = noTrailingSlash(item.url);
+        item.links?.forEach((link) => (link.url = noTrailingSlash(link.url)));
+        return item;
       },
     }),
   ],
