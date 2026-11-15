@@ -4,7 +4,7 @@ import { defineConfig, fontProviders } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
-const SITE_URL = process.env.SITE_URL ?? 'https://luistoro.me';
+const SITE_URL = process.env.SITE_URL ?? 'https://www.luistoro.me';
 
 // https://astro.build/config
 export default defineConfig({
