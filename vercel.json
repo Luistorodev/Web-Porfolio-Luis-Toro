@@ -1,6 +1,12 @@
 {
   "redirects": [
     {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "web-porfolio-luis-toro.vercel.app" }],
+      "destination": "https://www.luistoro.me/:path*",
+      "permanent": true
+    },
+    {
       "source": "/work/canva-design-system",
       "destination": "/work/scotiabank-design-system",
       "permanent": true
