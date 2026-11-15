@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Hero from '../components/Hero.astro';
 import PortfolioGrid from '../components/PortfolioGrid.astro';
+import BuiltByMe from '../components/BuiltByMe.astro';
 import Footer from '../components/Footer.astro';
 import { ui } from '../data/i18n';
 
@@ -25,6 +26,7 @@ const personJsonLd = {
     <main id="main" class="flex flex-col gap-8 md:gap-12 items-center overflow-clip w-full max-w-[1440px] mx-auto py-8 md:py-12 animate-[fadeIn_0.4s_ease-out]">
       <Hero lang="en" />
       <PortfolioGrid lang="en" />
+      <BuiltByMe lang="en" />
     </main>
     <Footer lang="en" />
   </div>

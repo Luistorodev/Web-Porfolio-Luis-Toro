@@ -28,6 +28,11 @@ export const ui = {
       locationAlt: 'Location',
       trustedBy: 'Companies that trust my work',
     },
+    builtByMe: {
+      title: 'Built by me',
+      description: 'Products I design, code, and ship end to end.',
+      viewAll: 'All side projects',
+    },
     footer: 'Designed and built by Luis Toro',
     about: {
       title: 'Designing products. Exploring the world. Building what is next.',
@@ -80,6 +85,11 @@ export const ui = {
       location: 'Barranquilla, Colombia',
       locationAlt: 'Ubicación',
       trustedBy: 'Empresas que confían en mi trabajo',
+    },
+    builtByMe: {
+      title: 'Construido por mí',
+      description: 'Productos que diseño, programo y lanzo de principio a fin.',
+      viewAll: 'Ver todos los proyectos personales',
     },
     footer: 'Diseñado y desarrollado por Luis Toro',
     about: {

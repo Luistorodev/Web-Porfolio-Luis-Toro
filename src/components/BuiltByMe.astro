@@ -1,0 +1,22 @@
+---
+import SideProjectsGrid from './SideProjectsGrid.astro';
+import { ui, getLocalizedPath, type Language } from '../data/i18n';
+
+interface Props {
+  lang?: Language;
+}
+
+const { lang = 'en' } = Astro.props;
+const copy = ui[lang].builtByMe;
+---
+
+<section aria-labelledby="built-by-me-heading" class="flex flex-col gap-6 w-full pt-8 md:pt-12 border-t border-[var(--color-border)]">
+  <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-2 px-4 md:px-6 w-full">
+    <div class="flex flex-col gap-1">
+      <h2 id="built-by-me-heading" class="font-bold text-[var(--color-text-primary)] text-[24px] md:text-[31px] leading-tight font-(family-name:--font-inter)">{copy.title}</h2>
+      <p class="text-[var(--color-text-secondary)] text-[15px] md:text-[16px] font-(family-name:--font-inter)">{copy.description}</p>
+    </div>
+    <a href={getLocalizedPath('/side-projects', lang)} class="text-[var(--color-text-strong)] hover:text-[var(--color-accent)] text-[13px] md:text-sm uppercase font-(family-name:--font-geist-mono) no-underline whitespace-nowrap transition-colors duration-200">{copy.viewAll} →</a>
+  </div>
+  <SideProjectsGrid lang={lang} labelledBy="built-by-me-heading" variant="home" />
+</section>
