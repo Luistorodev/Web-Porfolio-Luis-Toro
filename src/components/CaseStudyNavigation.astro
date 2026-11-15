@@ -29,8 +29,8 @@ function title(project: Project) {
               <Image src={previous.image} alt={title(previous)} widths={widths} sizes={sizes} format="webp" loading="lazy" decoding="async" class="block w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]" />
             </div>
           )}
-          <span class="block text-[var(--color-text-muted)] text-[12px] uppercase font-['Geist_Mono'] mb-1">{copy.previous}</span>
-          <span class="block text-[var(--color-text-strong)] text-sm font-['Inter'] group-hover:text-[var(--color-accent)]">{title(previous)}</span>
+          <span class="block text-[var(--color-text-muted)] text-[12px] uppercase font-(family-name:--font-geist-mono) mb-1">{copy.previous}</span>
+          <span class="block text-[var(--color-text-strong)] text-sm font-(family-name:--font-inter) group-hover:text-[var(--color-accent)]">{title(previous)}</span>
         </a>
       ) : <div aria-hidden="true" class="hidden md:block" />}
       {next ? (
@@ -40,11 +40,11 @@ function title(project: Project) {
               <Image src={next.image} alt={title(next)} widths={widths} sizes={sizes} format="webp" loading="lazy" decoding="async" class="block w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]" />
             </div>
           )}
-          <span class="block text-[var(--color-text-muted)] text-[12px] uppercase font-['Geist_Mono'] mb-1">{copy.next}</span>
-          <span class="block text-[var(--color-text-strong)] text-sm font-['Inter'] group-hover:text-[var(--color-accent)]">{title(next)}</span>
+          <span class="block text-[var(--color-text-muted)] text-[12px] uppercase font-(family-name:--font-geist-mono) mb-1">{copy.next}</span>
+          <span class="block text-[var(--color-text-strong)] text-sm font-(family-name:--font-inter) group-hover:text-[var(--color-accent)]">{title(next)}</span>
         </a>
       ) : <div aria-hidden="true" class="hidden md:block" />}
     </div>
-    <a href={getLocalizedPath('/', lang)} class="self-center text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] text-[12px] uppercase font-['Geist_Mono'] no-underline transition-colors duration-200">{copy.back}</a>
+    <a href={getLocalizedPath('/', lang)} class="self-center text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] text-[12px] uppercase font-(family-name:--font-geist-mono) no-underline transition-colors duration-200">{copy.back}</a>
   </div>
 </section>

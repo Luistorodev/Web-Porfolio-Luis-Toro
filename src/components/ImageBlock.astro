@@ -32,7 +32,7 @@ const fetchpriority = priority ? ('high' as const) : undefined;
       data-pswp-src={image.src.src}
     />
     {image.caption && (
-      <figcaption class="text-[var(--color-text-secondary)] text-[13px] font-['Geist_Mono'] leading-[1.2] mt-2 uppercase text-right">{image.caption}</figcaption>
+      <figcaption class="text-[var(--color-text-secondary)] text-[13px] font-(family-name:--font-geist-mono) leading-[1.2] mt-2 uppercase text-right">{image.caption}</figcaption>
     )}
   </figure>
 ) : (
@@ -71,7 +71,7 @@ const fetchpriority = priority ? ('high' as const) : undefined;
           ))}
         </div>
         {image.caption && (
-          <figcaption class="text-[var(--color-text-secondary)] text-[13px] font-['Geist_Mono'] leading-[1.2] mt-2 uppercase text-right">{image.caption}</figcaption>
+          <figcaption class="text-[var(--color-text-secondary)] text-[13px] font-(family-name:--font-geist-mono) leading-[1.2] mt-2 uppercase text-right">{image.caption}</figcaption>
         )}
       </>
     ) : (
@@ -107,7 +107,7 @@ const fetchpriority = priority ? ('high' as const) : undefined;
           ))}
         </div>
         {image.caption && (
-          <figcaption class="text-[var(--color-text-secondary)] text-[13px] font-['Geist_Mono'] leading-[1.2] mt-2 uppercase text-right">{image.caption}</figcaption>
+          <figcaption class="text-[var(--color-text-secondary)] text-[13px] font-(family-name:--font-geist-mono) leading-[1.2] mt-2 uppercase text-right">{image.caption}</figcaption>
         )}
       </>
     )}

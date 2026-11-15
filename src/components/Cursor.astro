@@ -1,18 +1,36 @@
-<div id="custom-cursor" class="fixed top-0 left-0 w-3 h-3 rounded-full bg-[var(--color-accent)] pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 transition-[opacity,background-color,width,height,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hidden md:flex items-center justify-center overflow-hidden opacity-0">
-  <span id="cursor-text" class="text-white text-[13px] font-['Geist_Mono'] uppercase whitespace-nowrap opacity-0 transition-opacity duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]">VIEW PROJECT</span>
+---
+const { label } = Astro.props as { label: string };
+---
+
+<div id="custom-cursor" class="fixed top-0 left-0 rounded-full bg-[var(--color-accent)] pointer-events-none z-[9999] hidden md:flex items-center justify-center overflow-hidden opacity-0 will-change-transform" style="width:12px;height:12px">
+  <span id="cursor-text" class="text-white text-[13px] font-(family-name:--font-geist-mono) uppercase whitespace-nowrap">{label}</span>
 </div>
 
 <script>
   const cursor = document.getElementById('custom-cursor');
   const cursorText = document.getElementById('cursor-text');
-  if (cursor) {
-    let mouseX = 0;
-    let mouseY = 0;
-    let cursorX = 0;
-    let cursorY = 0;
-    let isProjectHover = false;
+  if (cursor && cursorText) {
+    type State = 'default' | 'link' | 'project';
+    const DOT = 12;
+    const LINK = 32;
+    const interactive = 'a, button, input, textarea, select, [role="button"], .hover-target';
 
+    let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
     let hasMoved = false;
+    let state: State = 'default';
+    let last = performance.now();
+
+    // Pill size from the real text so width/height animate between px values (fit-content can't animate).
+    const pillSize = () => ({ w: cursorText.scrollWidth + 28, h: cursorText.scrollHeight + 12 });
+
+    function setState(next: State) {
+      if (next === state) return;
+      state = next;
+      const { w, h } = next === 'project' ? pillSize() : next === 'link' ? { w: LINK, h: LINK } : { w: DOT, h: DOT };
+      cursor!.style.width = `${w}px`;
+      cursor!.style.height = `${h}px`;
+      cursor!.dataset.state = next;
+    }
 
     document.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
@@ -21,67 +39,60 @@
         hasMoved = true;
         cursorX = mouseX;
         cursorY = mouseY;
-        cursor.style.left = `${cursorX}px`;
-        cursor.style.top = `${cursorY}px`;
-        cursor.classList.add('opacity-100');
-        cursor.classList.remove('opacity-0');
       }
+      cursor.style.opacity = '1';
     });
+    document.documentElement.addEventListener('mouseleave', () => (cursor.style.opacity = '0'));
 
-    const interactive = 'a, button, input, textarea, select, [role="button"], .hover-target';
+    // mouseover fires on every element entered, so the target alone decides the state (no child-to-child flicker).
     document.addEventListener('mouseover', (e) => {
-      const target = (e.target as Element).closest(interactive);
-      if (target) {
-        cursor.classList.add('w-8', 'h-8', 'bg-[var(--color-accent-soft)]');
-        cursor.classList.remove('w-3', 'h-3', 'bg-[var(--color-accent)]');
-      }
-    });
-    document.addEventListener('mouseout', (e) => {
-      const target = (e.target as Element).closest(interactive);
-      if (target) {
-        cursor.classList.remove('w-8', 'h-8', 'bg-[var(--color-accent-soft)]');
-        cursor.classList.add('w-3', 'h-3', 'bg-[var(--color-accent)]');
-      }
+      const el = e.target as Element;
+      setState(el.closest('.project-card') ? 'project' : el.closest(interactive) ? 'link' : 'default');
     });
 
-    // Project card hover
-    document.addEventListener('mouseover', (e) => {
-      const target = (e.target as Element).closest('.project-card');
-      if (target && !isProjectHover) {
-        isProjectHover = true;
-        cursor.classList.add('w-fit', 'h-fit', 'bg-[var(--color-accent)]', 'py-[6px]', 'px-[14px]');
-        cursor.classList.remove('w-3', 'h-3', 'w-8', 'h-8', 'bg-[var(--color-accent-soft)]');
-        if (cursorText) cursorText.classList.add('opacity-100');
-      }
-    });
-    document.addEventListener('mouseout', (e) => {
-      const target = (e.target as Element).closest('.project-card');
-      if (target && isProjectHover) {
-        isProjectHover = false;
-        if (cursorText) cursorText.classList.remove('opacity-100');
-        cursor.classList.remove('w-fit', 'h-fit', 'bg-[var(--color-accent)]', 'py-[6px]', 'px-[14px]');
-        cursor.classList.add('w-3', 'h-3', 'bg-[var(--color-accent)]');
-      }
-    });
-
-    function animate() {
-      cursorX += (mouseX - cursorX) * 0.35;
-      cursorY += (mouseY - cursorY) * 0.35;
-      if (cursor) {
-        cursor.style.left = `${cursorX}px`;
-        cursor.style.top = `${cursorY}px`;
-      }
+    function animate(now: number) {
+      // Frame-rate independent easing: same feel on 60Hz and 120Hz screens.
+      const t = 1 - Math.pow(0.65, (now - last) / 16.67);
+      last = now;
+      cursorX += (mouseX - cursorX) * t;
+      cursorY += (mouseY - cursorY) * t;
+      cursor!.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%)`;
       requestAnimationFrame(animate);
     }
-    animate();
+    requestAnimationFrame(animate);
   }
 </script>
 
 <style is:global>
-  * {
-    cursor: none;
+  #custom-cursor {
+    transition:
+      width 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      height 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      background-color 0.3s ease,
+      opacity 0.3s ease;
   }
-  a, button, input, textarea, select, [role="button"], .hover-target {
+  #custom-cursor[data-state='link'] {
+    background-color: var(--color-accent-soft);
+  }
+  #cursor-text {
+    opacity: 0;
+    transform: translateY(4px) scale(0.92);
+    filter: blur(2px);
+    /* Fast exit so text never overflows the shrinking pill */
+    transition: opacity 0.12s ease, transform 0.12s ease, filter 0.12s ease;
+  }
+  #custom-cursor[data-state='project'] #cursor-text {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    /* Enter after the pill starts opening */
+    transition: opacity 0.3s ease 0.12s, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.12s, filter 0.3s ease 0.12s;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #custom-cursor, #cursor-text { transition-duration: 0.01s !important; transition-delay: 0s !important; }
+  }
+
+  * {
     cursor: none;
   }
   @media (max-width: 767px) {

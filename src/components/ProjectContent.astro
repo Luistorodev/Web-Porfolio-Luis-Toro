@@ -47,10 +47,10 @@ function renderBody(body: string[]) {
     <!-- Hero -->
     <div class="flex flex-col gap-6">
       <div class="flex flex-col gap-2">
-        <h1 class="font-bold text-[var(--color-text-primary)] text-[24px] md:text-[31px] leading-tight font-['Inter']">
+        <h1 class="font-bold text-[var(--color-text-primary)] text-[24px] md:text-[31px] leading-tight font-(family-name:--font-inter)">
           {content.title}
         </h1>
-        <p class="text-[var(--color-text-muted)] text-sm md:text-[14px] uppercase font-['Geist_Mono']">
+        <p class="text-[var(--color-text-muted)] text-sm md:text-[14px] uppercase font-(family-name:--font-geist-mono)">
           {content.subtitle}
         </p>
       </div>
@@ -60,16 +60,16 @@ function renderBody(body: string[]) {
     <!-- Meta bar -->
     <div class="flex gap-4 text-sm md:text-[14px]">
       <div class="flex flex-1 flex-col gap-1.5">
-        <span class="text-[var(--color-text-muted)] uppercase font-['Geist_Mono']">{ui[lang].projectMeta.role}:</span>
-        <span class="text-[var(--color-text-strong)] font-['Inter']">{meta.role}</span>
+        <span class="text-[var(--color-text-muted)] uppercase font-(family-name:--font-geist-mono)">{ui[lang].projectMeta.role}:</span>
+        <span class="text-[var(--color-text-strong)] font-(family-name:--font-inter)">{meta.role}</span>
       </div>
       <div class="flex flex-1 flex-col gap-1.5">
-        <span class="text-[var(--color-text-muted)] uppercase font-['Geist_Mono']">{ui[lang].projectMeta.timeline}</span>
-        <span class="text-[var(--color-text-strong)] font-['Inter']">{meta.timeline}</span>
+        <span class="text-[var(--color-text-muted)] uppercase font-(family-name:--font-geist-mono)">{ui[lang].projectMeta.timeline}</span>
+        <span class="text-[var(--color-text-strong)] font-(family-name:--font-inter)">{meta.timeline}</span>
       </div>
       <div class="flex flex-1 flex-col gap-1.5">
-        <span class="text-[var(--color-text-muted)] uppercase font-['Geist_Mono']">{ui[lang].projectMeta.skills}</span>
-        <div class="text-[var(--color-text-strong)] font-['Inter'] leading-[1.2]">
+        <span class="text-[var(--color-text-muted)] uppercase font-(family-name:--font-geist-mono)">{ui[lang].projectMeta.skills}</span>
+        <div class="text-[var(--color-text-strong)] font-(family-name:--font-inter) leading-[1.2]">
           {meta.skills.map((skill: string) => <p>{skill}</p>)}
         </div>
       </div>
@@ -86,7 +86,7 @@ function renderBody(body: string[]) {
                   <>
                     <ImageBlock image={section.image} />
                     {section.image.caption && (
-                      <p class="text-[var(--color-text-secondary)] text-[13px] font-['Geist_Mono'] leading-[1.2] uppercase text-right">{section.image.caption}</p>
+                      <p class="text-[var(--color-text-secondary)] text-[13px] font-(family-name:--font-geist-mono) leading-[1.2] uppercase text-right">{section.image.caption}</p>
                     )}
                   </>
                 )}
@@ -97,12 +97,12 @@ function renderBody(body: string[]) {
                     {renderBody(section.body).map((item) => (
                       item.type === 'heading-serif' ? (
                         item.content.map((h: string) => (
-                          <p class="text-[var(--color-text-primary)] text-[20px] md:text-[24px] leading-[1.2] font-['Instrument_Serif',serif]">{h}</p>
+                          <p class="text-[var(--color-text-primary)] text-[20px] md:text-[24px] leading-[1.2] font-(family-name:--font-instrument-serif)">{h}</p>
                         ))
                       ) : (
                         item.content.map((p: string) => {
                           const html = p.replace(/~~(.+?)~~/g, '<span class="text-[var(--color-accent)]">$1</span>').replace(/\*\*(.+?)\*\*/g, '<span class="font-bold text-[var(--color-text-primary)]">$1</span>');
-                          return <p class="text-[var(--color-text-secondary)] text-[13px] leading-relaxed font-['Inter']" set:html={html} />;
+                          return <p class="text-[var(--color-text-secondary)] text-[13px] leading-relaxed font-(family-name:--font-inter)" set:html={html} />;
                         })
                       )
                     ))}
@@ -118,12 +118,12 @@ function renderBody(body: string[]) {
                     {renderBody(section.body).map((item) => (
                       item.type === 'heading-serif' ? (
                         item.content.map((h: string) => (
-                          <p class="text-[var(--color-text-primary)] text-[20px] md:text-[24px] leading-[1.2] font-['Instrument_Serif',serif]">{h}</p>
+                          <p class="text-[var(--color-text-primary)] text-[20px] md:text-[24px] leading-[1.2] font-(family-name:--font-instrument-serif)">{h}</p>
                         ))
                       ) : (
                         item.content.map((p: string) => {
                           const html = p.replace(/~~(.+?)~~/g, '<span class="text-[var(--color-accent)]">$1</span>').replace(/\*\*(.+?)\*\*/g, '<span class="font-bold text-[var(--color-text-primary)]">$1</span>');
-                          return <p class="text-[var(--color-text-secondary)] text-[13px] leading-relaxed font-['Inter']" set:html={html} />;
+                          return <p class="text-[var(--color-text-secondary)] text-[13px] leading-relaxed font-(family-name:--font-inter)" set:html={html} />;
                         })
                       )
                     ))}
@@ -135,7 +135,7 @@ function renderBody(body: string[]) {
                   <>
                     <ImageBlock image={section.image} />
                     {section.image.caption && (
-                      <p class="text-[var(--color-text-secondary)] text-[13px] font-['Geist_Mono'] leading-[1.2] uppercase text-right">{section.image.caption}</p>
+                      <p class="text-[var(--color-text-secondary)] text-[13px] font-(family-name:--font-geist-mono) leading-[1.2] uppercase text-right">{section.image.caption}</p>
                     )}
                   </>
                 )}
@@ -146,19 +146,19 @@ function renderBody(body: string[]) {
       ) : (
       <div class="flex flex-col gap-4">
         {section.label && (
-          <p class="text-[var(--color-text-muted)] text-sm md:text-[14px] uppercase font-['Geist_Mono']">{section.label}</p>
+          <p class="text-[var(--color-text-muted)] text-sm md:text-[14px] uppercase font-(family-name:--font-geist-mono)">{section.label}</p>
         )}
         {section.heading && (
-          <h2 class="font-bold text-[var(--color-text-primary)] text-[24px] md:text-[31px] leading-tight font-['Inter']">{section.heading}</h2>
+          <h2 class="font-bold text-[var(--color-text-primary)] text-[24px] md:text-[31px] leading-tight font-(family-name:--font-inter)">{section.heading}</h2>
         )}
         {section.subheading && (
-          <h3 class="font-semibold text-[var(--color-text-strong)] text-[18px] md:text-[20px] leading-tight font-['Inter']">{section.subheading}</h3>
+          <h3 class="font-semibold text-[var(--color-text-strong)] text-[18px] md:text-[20px] leading-tight font-(family-name:--font-inter)">{section.subheading}</h3>
         )}
         {section.body && (
           <div class="flex flex-col gap-3">
             {renderBody(section.body).map((item) => (
               item.type === 'ul' ? (
-                <ul class="list-disc pl-5 space-y-1.5 text-[var(--color-text-secondary)] text-[13px] leading-relaxed font-['Inter']">
+                <ul class="list-disc pl-5 space-y-1.5 text-[var(--color-text-secondary)] text-[13px] leading-relaxed font-(family-name:--font-inter)">
                   {item.content.map((li: string) => {
                     const html = li
                       .replace(/~~(.+?)~~/g, '<span class="text-[var(--color-accent)]">$1</span>')
@@ -168,21 +168,21 @@ function renderBody(body: string[]) {
                 </ul>
               ) : item.type === 'heading-serif' ? (
                 item.content.map((h: string) => (
-                  <p class="text-[var(--color-text-primary)] text-[20px] md:text-[24px] leading-[1.2] font-['Instrument_Serif',serif]">{h}</p>
+                  <p class="text-[var(--color-text-primary)] text-[20px] md:text-[24px] leading-[1.2] font-(family-name:--font-instrument-serif)">{h}</p>
                 ))
               ) : item.type === 'quote' ? (
                 item.content.map((q: string) => {
                   const html = q
                     .replace(/~~(.+?)~~/g, '<span class="text-[var(--color-accent)]">$1</span>')
                     .replace(/\*\*(.+?)\*\*/g, '<span class="font-bold text-[var(--color-text-primary)]">$1</span>');
-                  return <p class={`text-[var(--color-text-primary)] leading-[1.2] text-center font-['Instrument_Serif',serif] py-4 ${html.length > 60 ? 'text-[18px] md:text-[20px]' : 'text-[20px] md:text-[24px]'}`} set:html={html} />;
+                  return <p class={`text-[var(--color-text-primary)] leading-[1.2] text-center font-(family-name:--font-instrument-serif) py-4 ${html.length > 60 ? 'text-[18px] md:text-[20px]' : 'text-[20px] md:text-[24px]'}`} set:html={html} />;
                 })
               ) : (
                 item.content.map((p: string) => {
                   const html = p
                     .replace(/~~(.+?)~~/g, '<span class="text-[var(--color-accent)]">$1</span>')
                     .replace(/\*\*(.+?)\*\*/g, '<span class="font-bold text-[var(--color-text-primary)]">$1</span>');
-                  return <p class="text-[var(--color-text-secondary)] text-[13px] leading-relaxed font-['Inter']" set:html={html} />;
+                  return <p class="text-[var(--color-text-secondary)] text-[13px] leading-relaxed font-(family-name:--font-inter)" set:html={html} />;
                 })
               )
             ))}
@@ -192,8 +192,8 @@ function renderBody(body: string[]) {
           <div class={`grid grid-cols-1 gap-6 ${section.columns.length === 4 ? 'md:grid-cols-4' : section.columns.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'}`}>
             {section.columns.map((col) => (
               <div class="flex flex-col gap-3">
-                <p class="text-[var(--color-text-primary)] text-[20px] md:text-[24px] leading-[1.2] font-['Instrument_Serif',serif]">{col.heading}</p>
-                <div class="flex flex-col gap-2 text-[var(--color-text-secondary)] text-[13px] leading-relaxed font-['Inter']">
+                <p class="text-[var(--color-text-primary)] text-[20px] md:text-[24px] leading-[1.2] font-(family-name:--font-instrument-serif)">{col.heading}</p>
+                <div class="flex flex-col gap-2 text-[var(--color-text-secondary)] text-[13px] leading-relaxed font-(family-name:--font-inter)">
                   {col.body.map((p: string) => {
                     const html = p
                       .replace(/~~(.+?)~~/g, '<span class="text-[var(--color-accent)]">$1</span>')
@@ -209,7 +209,7 @@ function renderBody(body: string[]) {
           <>
             <ImageBlock image={section.image} />
             {section.image.caption && (
-              <p class="text-[var(--color-text-secondary)] text-[13px] font-['Geist_Mono'] leading-[1.2] uppercase text-right">{section.image.caption}</p>
+              <p class="text-[var(--color-text-secondary)] text-[13px] font-(family-name:--font-geist-mono) leading-[1.2] uppercase text-right">{section.image.caption}</p>
             )}
           </>
         )}

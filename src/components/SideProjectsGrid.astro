@@ -33,13 +33,13 @@ function placeholder(project: SideProject) {
                 <Image src={project.image} alt={title(project)} widths={widths} sizes={sizes} format="webp" loading="lazy" decoding="async" class="block w-full h-full object-cover" />
               ) : (
                 <div class="bg-[var(--color-placeholder)] w-full h-full flex items-center justify-center">
-                  <span class="text-[var(--color-text-primary)] text-sm font-['Geist_Mono'] uppercase">{placeholder(project)}</span>
+                  <span class="text-[var(--color-text-primary)] text-sm font-(family-name:--font-geist-mono) uppercase">{placeholder(project)}</span>
                 </div>
               )}
             </div>
             <div class="flex flex-col gap-0.5 text-sm w-full md:flex-row md:items-start md:justify-between md:h-[19px] md:text-base md:whitespace-nowrap">
-              <h3 class="font-medium text-[var(--color-text-strong)] font-['Inter']">{title(project)}</h3>
-              {project.year && <p class="text-[var(--color-text-secondary)] uppercase font-['Geist_Mono']">{project.year}</p>}
+              <h3 class="font-medium text-[var(--color-text-strong)] font-(family-name:--font-inter)">{title(project)}</h3>
+              {project.year && <p class="text-[var(--color-text-secondary)] uppercase font-(family-name:--font-geist-mono)">{project.year}</p>}
             </div>
           </a>
         ) : (
@@ -49,13 +49,13 @@ function placeholder(project: SideProject) {
                 <Image src={project.image} alt={title(project)} widths={widths} sizes={sizes} format="webp" loading="lazy" decoding="async" class="block w-full h-full object-cover" />
               ) : (
                 <div class="bg-[var(--color-placeholder)] absolute inset-0 flex items-center justify-center">
-                  <span class="text-[var(--color-text-primary)] text-sm font-['Geist_Mono'] uppercase">{placeholder(project)}</span>
+                  <span class="text-[var(--color-text-primary)] text-sm font-(family-name:--font-geist-mono) uppercase">{placeholder(project)}</span>
                 </div>
               )}
             </div>
             <div class="flex flex-col gap-0.5 text-sm w-full md:flex-row md:items-start md:justify-between md:h-[19px] md:text-base md:whitespace-nowrap">
-              <h3 class="font-medium text-[var(--color-text-strong)] font-['Inter']">{title(project)}</h3>
-              {project.year && <p class="text-[var(--color-text-secondary)] uppercase font-['Geist_Mono']">{project.year}</p>}
+              <h3 class="font-medium text-[var(--color-text-strong)] font-(family-name:--font-inter)">{title(project)}</h3>
+              {project.year && <p class="text-[var(--color-text-secondary)] uppercase font-(family-name:--font-geist-mono)">{project.year}</p>}
             </div>
           </div>
         )}

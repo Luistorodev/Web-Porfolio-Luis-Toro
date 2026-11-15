@@ -6,10 +6,12 @@ import { ui } from '../data/i18n';
 
 const copy = ui.en;
 const experience = [
-  { role: 'Senior Product Designer', company: 'ONTOP LLC', period: `2024 — ${copy.cv.present}` },
+  { role: 'Product Design Engineer & Design System Lead', company: 'Ontop LLC', period: `2024 — ${copy.cv.present}` },
   { role: 'Product Designer', company: 'Circulo de Credito', period: '2023 — 2024' },
-  { role: 'Product Designer', company: 'Scotiabank', period: '2020 — 2023' },
-  { role: 'UI/UX Designer', company: 'Budweiser', period: '2019 — 2020' },
+  { role: 'AI Product Designer', company: 'Kmeleon Tech', period: '2023' },
+  { role: 'Product Designer', company: 'Scotiabank Colpatria', period: '2022 — 2023' },
+  { role: 'UX/UI Consultant', company: 'Serempre', period: '2021' },
+  { role: 'Junior UX/UI Designer', company: 'Finsocial', period: '2020' },
 ];
 ---
 
@@ -18,35 +20,35 @@ const experience = [
     <Navbar currentPage="cv" currentPath="/cv" lang="en" />
     <main id="main" class="flex flex-1 flex-col items-center overflow-clip w-full max-w-[1440px] mx-auto animate-[fadeIn_0.4s_ease-out]">
       <div class="flex flex-1 flex-col gap-4 md:gap-6 items-center justify-center px-4 md:px-6 py-16 md:py-24 w-full max-w-[745px]">
-        <h1 class="font-bold text-[var(--color-text-primary)] text-[24px] md:text-[31px] leading-tight font-['Inter']">{copy.cv.title}</h1>
+        <h1 class="font-bold text-[var(--color-text-primary)] text-[24px] md:text-[31px] leading-tight font-(family-name:--font-inter)">{copy.cv.title}</h1>
 
         <div class="flex flex-col gap-6 md:gap-8 mt-4 w-full max-w-[500px]">
           <div>
-            <h2 class="text-[var(--color-text-muted)] text-[12px] md:text-[14px] uppercase font-['Geist_Mono'] mb-3">{copy.cv.experience}</h2>
+            <h2 class="text-[var(--color-text-muted)] text-[12px] md:text-[14px] uppercase font-(family-name:--font-geist-mono) mb-3">{copy.cv.experience}</h2>
             {experience.map((exp) => (
               <div class="flex flex-col md:flex-row md:justify-between py-3 border-b border-[var(--color-border)] gap-1 md:gap-0">
                 <div class="flex flex-col gap-0.5">
-                  <span class="text-[var(--color-text-strong)] text-sm md:text-base font-['Inter'] font-medium">{exp.role}</span>
-                  <span class="text-[var(--color-text-secondary)] text-[13px] font-['Inter']">{exp.company}</span>
+                  <span class="text-[var(--color-text-strong)] text-sm md:text-base font-(family-name:--font-inter) font-medium">{exp.role}</span>
+                  <span class="text-[var(--color-text-secondary)] text-[13px] font-(family-name:--font-inter)">{exp.company}</span>
                 </div>
-                <span class="text-[var(--color-text-muted)] text-[11px] md:text-[13px] font-['Geist_Mono'] uppercase whitespace-nowrap">{exp.period}</span>
+                <span class="text-[var(--color-text-muted)] text-[11px] md:text-[13px] font-(family-name:--font-geist-mono) uppercase whitespace-nowrap">{exp.period}</span>
               </div>
             ))}
           </div>
 
           <div>
-            <h2 class="text-[var(--color-text-muted)] text-[12px] md:text-[14px] uppercase font-['Geist_Mono'] mb-3">{copy.cv.education}</h2>
+            <h2 class="text-[var(--color-text-muted)] text-[12px] md:text-[14px] uppercase font-(family-name:--font-geist-mono) mb-3">{copy.cv.education}</h2>
             <div class="flex flex-col md:flex-row md:justify-between py-3 border-b border-[var(--color-border)] gap-1 md:gap-0">
               <div class="flex flex-col gap-0.5">
-                <span class="text-[var(--color-text-strong)] text-sm md:text-base font-['Inter'] font-medium">{copy.cv.graphicDesign}</span>
-                <span class="text-[var(--color-text-secondary)] text-[13px] font-['Inter']">Universidad del Norte</span>
+                <span class="text-[var(--color-text-strong)] text-sm md:text-base font-(family-name:--font-inter) font-medium">{copy.cv.graphicDesign}</span>
+                <span class="text-[var(--color-text-secondary)] text-[13px] font-(family-name:--font-inter)">Universidad Autónoma del Caribe</span>
               </div>
-              <span class="text-[var(--color-text-muted)] text-[11px] md:text-[13px] font-['Geist_Mono'] uppercase whitespace-nowrap">2015 — 2019</span>
+              <span class="text-[var(--color-text-muted)] text-[11px] md:text-[13px] font-(family-name:--font-geist-mono) uppercase whitespace-nowrap">2016 — 2020</span>
             </div>
           </div>
 
           <div class="flex justify-center mt-4">
-            <a href="/assets/Luis%20Toro%20Cordero%20-%20Product%20Designer%20CV%20-%202025%20%5BEN%5D.pdf" class="bg-[var(--color-accent)] text-white text-base font-['Geist_Mono'] uppercase px-6 py-3 rounded-lg no-underline hover:opacity-90 transition-opacity duration-200">
+            <a href="/assets/Luis-Toro-Product-Design-Engineer-CV.pdf" class="bg-[var(--color-accent)] text-white text-base font-(family-name:--font-geist-mono) uppercase px-6 py-3 rounded-lg no-underline hover:opacity-90 transition-opacity duration-200">
               {copy.cv.download}
             </a>
           </div>

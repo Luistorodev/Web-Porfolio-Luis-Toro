@@ -46,10 +46,10 @@ const nextProject = projectIndex >= 0 && projectIndex < allProjects.length - 1 ?
         <ProjectContent content={localizedContent} lang="en" />
       ) : (
         <div class="flex flex-1 flex-col gap-4 md:gap-6 items-center justify-center px-4 md:px-6 py-16 md:py-24 w-full max-w-[745px]">
-          <h1 class="font-bold text-[var(--color-text-primary)] text-[24px] md:text-[31px] leading-tight font-['Inter'] text-center">
+          <h1 class="font-bold text-[var(--color-text-primary)] text-[24px] md:text-[31px] leading-tight font-(family-name:--font-inter) text-center">
             {project.title.en}
           </h1>
-          <p class="text-[var(--color-text-secondary)] text-[13px] leading-tight font-['Inter'] text-center max-w-[500px]">
+          <p class="text-[var(--color-text-secondary)] text-[13px] leading-tight font-(family-name:--font-inter) text-center max-w-[500px]">
             {ui.en.emptyProject} {project.company} &middot; {project.year}
           </p>
         </div>

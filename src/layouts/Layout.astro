@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import Cursor from '../components/Cursor.astro';
+import { Font } from 'astro:assets';
 import { ui, getLocalizedPath, type Language } from '../data/i18n';
 
 interface Props {
@@ -16,8 +17,8 @@ interface Props {
 
 const {
   lang = 'en',
-  title = 'Luis Toro | Product Designer',
-  description = 'Portfolio of Luis Toro, Product Designer.',
+  title = 'Luis Toro | Product Design Engineer',
+  description = 'Portfolio of Luis Toro, Product Design Engineer.',
   image,
   type = 'website',
   jsonLd,
@@ -109,13 +110,14 @@ const jsonLdItems = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
         document.documentElement.dataset.theme = theme;
       })();
     </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400&family=Instrument+Serif:ital@0;1&family=Inter:ital,opsz,wght@0,14..32,400..700;1,14..32,400..700&display=swap" rel="stylesheet" />
+    <!-- Self-hosted fonts with preload + metric-matched fallbacks to avoid the font swap flash -->
+    <Font cssVariable="--font-inter" preload={[{ style: 'normal', subset: 'latin' }]} />
+    <Font cssVariable="--font-geist-mono" preload={[{ subset: 'latin' }]} />
+    <Font cssVariable="--font-instrument-serif" />
   </head>
-  <body class="font-['Inter']">
+  <body class="font-(family-name:--font-inter)">
     <a href="#main" class="skip-link">{ui[lang].skipToContent}</a>
     <slot />
-    <Cursor />
+    <Cursor label={ui[lang].viewProject} />
   </body>
 </html>

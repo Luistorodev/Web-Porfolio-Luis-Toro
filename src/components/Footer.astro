@@ -8,8 +8,8 @@ interface Props {
 const { lang = 'en' } = Astro.props;
 ---
 
-<footer class="bg-[var(--color-surface)] border-t border-[var(--color-border)] flex items-center h-auto md:h-[60px] px-4 md:px-6 py-3 md:py-2 w-full font-['Geist_Mono'] text-xs md:text-base transition-colors duration-200">
-  <div class="flex flex-1 flex-col md:flex-row items-center justify-between min-w-0 gap-2 md:gap-0">
+<footer class="bg-[var(--color-surface)] border-t border-[var(--color-border)] flex items-center h-auto lg:h-[60px] px-4 md:px-6 py-3 md:py-2 w-full font-(family-name:--font-geist-mono) text-xs md:text-base transition-colors duration-200">
+  <div class="flex flex-1 flex-col lg:flex-row items-center justify-between min-w-0 gap-2 lg:gap-0">
     <div class="flex items-center gap-2 md:gap-3 shrink-0">
       <p class="text-[var(--color-text-muted)] uppercase whitespace-nowrap">
         {ui[lang].footer}

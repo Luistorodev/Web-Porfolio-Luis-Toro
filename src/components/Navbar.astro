@@ -16,19 +16,19 @@ const navLinks = [
   { href: getLocalizedPath('/', lang), label: copy.nav.work, key: 'work' },
   { href: getLocalizedPath('/side-projects', lang), label: copy.nav.sideProjects, key: 'side-projects' },
   { href: getLocalizedPath('/about', lang), label: copy.nav.about, key: 'about' },
-  { href: '/assets/Luis%20Toro%20Cordero%20-%20Product%20Designer%20CV%20-%202025%20%5BEN%5D.pdf', label: copy.nav.cv, key: 'cv', target: '_blank' },
+  { href: '/assets/Luis-Toro-Product-Design-Engineer-CV.pdf', label: copy.nav.cv, key: 'cv', target: '_blank' },
 ];
 ---
 
-<header class="bg-[var(--color-surface)] border-b border-[var(--color-border)] flex items-center h-auto md:h-[60px] px-4 md:px-6 py-3 md:py-2 w-full font-['Geist_Mono'] text-sm md:text-base fixed top-0 left-0 z-50 transition-colors duration-200">
+<header class="bg-[var(--color-surface)] border-b border-[var(--color-border)] flex items-center h-auto md:h-[60px] px-4 md:px-6 py-3 md:py-2 w-full font-(family-name:--font-geist-mono) text-sm lg:text-base fixed top-0 left-0 z-50 transition-colors duration-200">
   <div class="flex flex-1 items-center justify-between min-w-0">
     <a href={getLocalizedPath('/', lang)} class="flex items-center gap-2 md:gap-3 whitespace-nowrap no-underline">
       <span class="text-[var(--color-text-strong)]">LUIS TORO</span>
-      <span class="hidden md:inline text-[var(--color-text-muted)]">{copy.brandDescriptor}</span>
+      <span class="hidden lg:inline text-[var(--color-text-muted)]">{copy.brandDescriptor}</span>
     </a>
 
     <!-- Desktop nav -->
-    <nav aria-label={copy.navPrimary} class="hidden md:flex items-center gap-4 md:gap-8">
+    <nav aria-label={copy.navPrimary} class="hidden md:flex items-center gap-4 lg:gap-8">
       {navLinks.map((link) => (
         <a href={link.href} target={link.target} rel={link.target ? 'noopener noreferrer' : undefined} class={link.key === 'cv'
           ? 'bg-[var(--color-accent)] text-white rounded-lg px-3 py-2 no-underline hover:opacity-90 transition-opacity duration-200'
@@ -71,8 +71,8 @@ const navLinks = [
   <div class="flex flex-col gap-2 px-6 py-4 flex-1">
     {navLinks.map((link) => (
       <a href={link.href} target={link.target} rel={link.target ? 'noopener noreferrer' : undefined} class={link.key === 'cv'
-        ? "inline-flex mt-2 bg-[var(--color-accent)] text-white rounded-lg px-3 py-2 no-underline transition-opacity duration-200 hover:opacity-90 font-['Geist_Mono'] text-sm"
-        : `block py-2 no-underline transition-colors duration-200 font-['Geist_Mono'] text-sm ${currentPage === link.key ? 'text-[var(--color-accent)]' : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-strong)]'}`}>
+        ? "inline-flex mt-2 bg-[var(--color-accent)] text-white rounded-lg px-3 py-2 no-underline transition-opacity duration-200 hover:opacity-90 font-(family-name:--font-geist-mono) text-sm"
+        : `block py-2 no-underline transition-colors duration-200 font-(family-name:--font-geist-mono) text-sm ${currentPage === link.key ? 'text-[var(--color-accent)]' : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-strong)]'}`}>
         {link.label}
       </a>
     ))}

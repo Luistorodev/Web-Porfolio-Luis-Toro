@@ -3,7 +3,7 @@ export type Language = 'en' | 'es';
 export const ui = {
   en: {
     locale: 'en' as const,
-    brandDescriptor: 'PRODUCT DESIGNER + AI BUILDER',
+    brandDescriptor: 'PRODUCT DESIGN ENGINEER + AI BUILDER',
     nav: { work: 'MY WORK', sideProjects: 'SIDE PROJECTS', about: 'ABOUT', cv: 'CV' },
     languageSwitch: 'ES',
     languageSwitchLabel: 'View this page in Spanish',
@@ -14,6 +14,7 @@ export const ui = {
     skipToContent: 'Skip to content',
     navPrimary: 'Primary navigation',
     projectsSection: 'Projects',
+    viewProject: 'VIEW PROJECT',
     caseStudyNav: {
       label: 'Case study navigation',
       previous: 'Previous project',
@@ -22,7 +23,7 @@ export const ui = {
     },
     hero: {
       title: "Hi, I'm Luis Toro.",
-      description: 'Product Designer with 6+ years of experience and a background in FinTech, Healthcare, EdTech, and E-commerce, creating meaningful experiences with the highest standards of design craft.',
+      description: 'Product Design Engineer with 6+ years of experience building digital products at the intersection of design, engineering, and AI. Experienced in frontend development, scalable Design Systems, and AI-powered solutions.',
       location: 'Barranquilla, Colombia',
       locationAlt: 'Location',
       trustedBy: 'Companies that trust my work',
@@ -34,7 +35,7 @@ export const ui = {
     },
     sideProjects: {
       title: 'Building products, exploring code, and empowering communities',
-      description: 'I build tools for communities, experiment with front-end development, and explore what software can make simpler. I am currently building a personal finance manager.',
+      description: 'I build products that make complex work simpler, experimenting with AI and front-end development along the way. Lately I have been building Nodi Notes, an AI canvas for research, and Alternum, a curated directory of open-source tools.',
     },
     cv: {
       title: 'Curriculum Vitae',
@@ -42,20 +43,20 @@ export const ui = {
       education: 'Education',
       download: 'Download CV',
       present: 'Present',
-      graphicDesign: 'Graphic Design',
+      graphicDesign: "Bachelor's Degree in Graphic Design",
     },
     projectMeta: { role: 'Role', timeline: 'Timeline', skills: 'Skills' },
     emptyProject: 'This case study is currently being prepared.',
     seo: {
-      home: { title: 'Luis Toro | Product Designer', description: 'Portfolio of Luis Toro, a Product Designer focused on thoughtful digital products and scalable design systems.' },
-      about: { title: 'About | Luis Toro', description: 'Learn about Luis Toro, a Product Designer and curious maker.' },
+      home: { title: 'Luis Toro | Product Design Engineer', description: 'Portfolio of Luis Toro, a Product Design Engineer building digital products at the intersection of design, engineering, and AI.' },
+      about: { title: 'About | Luis Toro', description: 'Learn about Luis Toro, a Product Design Engineer and curious maker.' },
       sideProjects: { title: 'Side Projects | Luis Toro', description: 'Independent products and experiments by Luis Toro.' },
-      cv: { title: 'CV | Luis Toro', description: 'Professional experience and education of Luis Toro, Product Designer.' },
+      cv: { title: 'CV | Luis Toro', description: 'Professional experience and education of Luis Toro, Product Design Engineer.' },
     },
   },
   es: {
     locale: 'es' as const,
-    brandDescriptor: 'PRODUCT DESIGNER + CREADOR CON IA',
+    brandDescriptor: 'PRODUCT DESIGN ENGINEER + CREADOR CON IA',
     nav: { work: 'MI TRABAJO', sideProjects: 'PROYECTOS PERSONALES', about: 'SOBRE MÍ', cv: 'CV' },
     languageSwitch: 'EN',
     languageSwitchLabel: 'Ver esta página en inglés',
@@ -66,6 +67,7 @@ export const ui = {
     skipToContent: 'Saltar al contenido',
     navPrimary: 'Navegación principal',
     projectsSection: 'Proyectos',
+    viewProject: 'VER PROYECTO',
     caseStudyNav: {
       label: 'Navegación entre casos de estudio',
       previous: 'Proyecto anterior',
@@ -74,7 +76,7 @@ export const ui = {
     },
     hero: {
       title: 'Hola, soy Luis Toro.',
-      description: 'Product Designer con más de 6 años creando experiencias claras y de alta calidad en FinTech, salud, EdTech y comercio electrónico.',
+      description: 'Product Design Engineer con más de 6 años de experiencia creando productos digitales en la intersección entre diseño, ingeniería e IA. Con experiencia en desarrollo frontend, Design Systems escalables y soluciones impulsadas por IA.',
       location: 'Barranquilla, Colombia',
       locationAlt: 'Ubicación',
       trustedBy: 'Empresas que confían en mi trabajo',
@@ -86,7 +88,7 @@ export const ui = {
     },
     sideProjects: {
       title: 'Construyo productos, exploro código e impulso comunidades',
-      description: 'Creo herramientas para comunidades, experimento con desarrollo front-end y exploro cómo el software puede simplificar lo complejo. Actualmente estoy construyendo un gestor de finanzas personales.',
+      description: 'Construyo productos que simplifican el trabajo complejo y, en el camino, experimento con IA y desarrollo front-end. Últimamente he estado construyendo Nodi Notes, un canvas con IA para investigación, y Alternum, un directorio curado de herramientas open source.',
     },
     cv: {
       title: 'Hoja de vida',
@@ -94,15 +96,15 @@ export const ui = {
       education: 'Educación',
       download: 'Descargar CV',
       present: 'Actualidad',
-      graphicDesign: 'Diseño gráfico',
+      graphicDesign: 'Pregrado en Diseño Gráfico',
     },
     projectMeta: { role: 'Rol', timeline: 'Periodo', skills: 'Habilidades' },
     emptyProject: 'Este caso de estudio está en preparación.',
     seo: {
-      home: { title: 'Luis Toro | Product Designer', description: 'Portafolio de Luis Toro, Product Designer enfocado en productos digitales claros y sistemas de diseño escalables.' },
-      about: { title: 'Sobre mí | Luis Toro', description: 'Conoce a Luis Toro, Product Designer y creador curioso.' },
+      home: { title: 'Luis Toro | Product Design Engineer', description: 'Portafolio de Luis Toro, Product Design Engineer que crea productos digitales en la intersección entre diseño, ingeniería e IA.' },
+      about: { title: 'Sobre mí | Luis Toro', description: 'Conoce a Luis Toro, Product Design Engineer y creador curioso.' },
       sideProjects: { title: 'Proyectos personales | Luis Toro', description: 'Productos y experimentos independientes de Luis Toro.' },
-      cv: { title: 'CV | Luis Toro', description: 'Experiencia profesional y formación de Luis Toro, Product Designer.' },
+      cv: { title: 'CV | Luis Toro', description: 'Experiencia profesional y formación de Luis Toro, Product Design Engineer.' },
     },
   },
 } as const;

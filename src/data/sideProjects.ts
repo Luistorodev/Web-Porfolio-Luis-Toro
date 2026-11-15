@@ -1,6 +1,8 @@
 import type { ImageMetadata } from 'astro';
 import type { Language } from './i18n';
 import deepdenScreen from '../assets/side-projects/deepden-screen.png';
+import nodinotesScreen from '../assets/side-projects/nodinotes-screen.png';
+import alternumScreen from '../assets/side-projects/alternum-screen.png';
 
 export interface SideProject {
   title: Record<Language, string>;
@@ -23,8 +25,9 @@ function slugify(title: string): string {
 // One ordered source for every viewport. The first two preserve the current curation.
 // TODO(luis): confirm the final featured subset and add external URLs or case-study pages for any new clickable item.
 export const allSideProjects: SideProject[] = [
+  { title: { en: 'Nodi Notes', es: 'Nodi Notes' }, description: { en: 'An AI infinite canvas for notes and research, with answers that cite their sources', es: 'Un canvas infinito con IA para notas e investigación, con respuestas que citan sus fuentes' }, year: '2026', slug: slugify('Nodi Notes'), image: nodinotesScreen, externalUrl: 'https://nodinotes.app/', featured: true },
+  { title: { en: 'Alternum', es: 'Alternum' }, description: { en: 'A curated directory of open-source and AI tools, with trust signals explained', es: 'Un directorio curado de herramientas open source y de IA, con señales de confianza explicadas' }, year: '2026', slug: slugify('Alternum'), image: alternumScreen, externalUrl: 'https://alternum.site/', featured: true },
   { title: { en: 'DeepDen', es: 'DeepDen' }, year: '2026', slug: slugify('DeepDen'), image: deepdenScreen, externalUrl: 'https://deepden.app/', featured: true },
-  { title: { en: 'Personal Finance Manager', es: 'Personal Finance Manager' }, description: { en: 'A budgeting and expense-tracking tool', es: 'Una herramienta para presupuestos y seguimiento de gastos' }, year: '2026', slug: slugify('Personal Finance Manager'), disabled: true, featured: true },
   { title: { en: 'Community Resource Hub', es: 'Hub de recursos comunitarios' }, description: { en: 'A directory of free resources for underserved communities', es: 'Un directorio de recursos gratuitos para comunidades con acceso limitado' }, year: '2025', slug: slugify('Community Resource Hub') },
   { title: { en: 'Code Snippet Manager', es: 'Gestor de fragmentos de código' }, description: { en: 'Save and organize reusable code snippets', es: 'Guarda y organiza fragmentos de código reutilizables' }, year: '2026', slug: slugify('Code Snippet Manager') },
   { title: { en: 'Open Source Component Library', es: 'Librería de componentes open source' }, description: { en: 'Reusable React components with accessibility built in', es: 'Componentes reutilizables de React con accesibilidad integrada' }, year: '2025', slug: slugify('Open Source Component Library') },
