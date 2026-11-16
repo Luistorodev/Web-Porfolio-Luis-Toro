@@ -33,7 +33,7 @@ function placeholder(project: SideProject) {
       <article class={`${project.disabled ? 'project-card-disabled' : 'project-card group'} flex flex-col gap-0.5 w-full ${isHome ? 'md:h-[380px]' : 'md:h-[353px]'}`}>
         {project.externalUrl && !project.disabled ? (
           <a href={project.externalUrl} target="_blank" rel="noopener noreferrer" class="flex flex-col gap-0.5 h-full w-full no-underline cursor-none">
-            <div class="h-[250px] md:flex-1 md:min-h-0 w-full rounded-lg overflow-hidden transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]">
+            <div class="h-[250px] md:flex-1 md:min-h-0 w-full rounded-xs overflow-hidden transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]">
               {project.image ? (
                 <Image src={project.image} alt={title(project)} widths={widths} sizes={sizes} format="webp" loading="lazy" decoding="async" class="block w-full h-full object-cover" />
               ) : (
@@ -50,7 +50,7 @@ function placeholder(project: SideProject) {
           </a>
         ) : (
           <div class="flex flex-col gap-0.5 h-full w-full" aria-disabled={project.disabled ? 'true' : undefined}>
-            <div class="h-[250px] md:flex-1 md:min-h-0 w-full rounded-lg overflow-hidden relative">
+            <div class="h-[250px] md:flex-1 md:min-h-0 w-full rounded-xs overflow-hidden relative">
               {project.image ? (
                 <Image src={project.image} alt={title(project)} widths={widths} sizes={sizes} format="webp" loading="lazy" decoding="async" class="block w-full h-full object-cover" />
               ) : (

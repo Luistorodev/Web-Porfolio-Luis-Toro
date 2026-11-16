@@ -31,7 +31,7 @@ const navLinks = [
     <nav aria-label={copy.navPrimary} class="hidden md:flex items-center gap-4 lg:gap-8">
       {navLinks.map((link) => (
         <a href={link.href} target={link.target} rel={link.target ? 'noopener noreferrer' : undefined} class={link.key === 'cv'
-          ? 'bg-[var(--color-accent)] text-white rounded-lg px-3 py-2 no-underline hover:opacity-90 transition-opacity duration-200'
+          ? 'bg-[var(--color-accent)] text-white rounded-xs px-3 py-2 no-underline hover:opacity-90 transition-opacity duration-200'
           : `whitespace-nowrap no-underline transition-colors duration-200 ${currentPage === link.key ? 'text-[var(--color-accent)]' : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-strong)]'}`}>
           {link.label}
         </a>
@@ -39,20 +39,20 @@ const navLinks = [
     </nav>
 
     <div class="hidden md:flex items-center gap-2 shrink-0">
-      <button data-theme-toggle data-dark-label={copy.themeDark} data-light-label={copy.themeLight} type="button" class="theme-toggle bg-[var(--color-surface-muted)] border border-[var(--color-border)] rounded-lg w-[44px] h-[44px] flex items-center justify-center text-[var(--color-text-strong)] cursor-pointer transition-colors duration-200 hover:text-[var(--color-accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]" aria-label={copy.themeDark} aria-pressed="false" title={copy.themeDark}>
+      <button data-theme-toggle data-dark-label={copy.themeDark} data-light-label={copy.themeLight} type="button" class="theme-toggle bg-[var(--color-surface-muted)] border border-[var(--color-border)] rounded-xs w-[44px] h-[44px] flex items-center justify-center text-[var(--color-text-strong)] cursor-pointer transition-colors duration-200 hover:text-[var(--color-accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]" aria-label={copy.themeDark} aria-pressed="false" title={copy.themeDark}>
         <svg class="theme-icon--moon w-5 h-5" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z" /></svg>
         <svg class="theme-icon--sun w-5 h-5" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.5" /><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" /></svg>
       </button>
-      <a href={alternatePath} aria-label={copy.languageSwitchLabel} class="bg-[var(--color-surface-muted)] border border-[var(--color-border)] rounded-lg w-[44px] h-[44px] flex items-center justify-center no-underline text-[var(--color-text-strong)] hover:text-[var(--color-accent)] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]">
+      <a href={alternatePath} aria-label={copy.languageSwitchLabel} class="bg-[var(--color-surface-muted)] border border-[var(--color-border)] rounded-xs w-[44px] h-[44px] flex items-center justify-center no-underline text-[var(--color-text-strong)] hover:text-[var(--color-accent)] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]">
         {copy.languageSwitch}
       </a>
     </div>
 
     <!-- Burger button (mobile): 44x44px touch target; the icon lines keep their original size. -->
     <button id="burger-btn" class="md:hidden flex flex-col gap-1 w-[44px] h-[44px] -m-[10px] items-center justify-center bg-transparent border-none cursor-pointer p-[10px]" aria-label={copy.menu}>
-      <span class="block w-5 h-0.5 bg-[var(--color-text-strong)] rounded transition-all duration-300 origin-center" id="burger-line-1"></span>
-      <span class="block w-5 h-0.5 bg-[var(--color-text-strong)] rounded transition-all duration-300 origin-center" id="burger-line-2"></span>
-      <span class="block w-5 h-0.5 bg-[var(--color-text-strong)] rounded transition-all duration-300 origin-center" id="burger-line-3"></span>
+      <span class="block w-5 h-0.5 bg-[var(--color-text-strong)] rounded-xs transition-all duration-300 origin-center" id="burger-line-1"></span>
+      <span class="block w-5 h-0.5 bg-[var(--color-text-strong)] rounded-xs transition-all duration-300 origin-center" id="burger-line-2"></span>
+      <span class="block w-5 h-0.5 bg-[var(--color-text-strong)] rounded-xs transition-all duration-300 origin-center" id="burger-line-3"></span>
     </button>
   </div>
 </header>
@@ -71,7 +71,7 @@ const navLinks = [
   <div class="flex flex-col gap-2 px-6 py-4 flex-1">
     {navLinks.map((link) => (
       <a href={link.href} target={link.target} rel={link.target ? 'noopener noreferrer' : undefined} class={link.key === 'cv'
-        ? "inline-flex mt-2 bg-[var(--color-accent)] text-white rounded-lg px-3 py-2 no-underline transition-opacity duration-200 hover:opacity-90 font-(family-name:--font-geist-mono) text-sm"
+        ? "inline-flex mt-2 bg-[var(--color-accent)] text-white rounded-xs px-3 py-2 no-underline transition-opacity duration-200 hover:opacity-90 font-(family-name:--font-geist-mono) text-sm"
         : `block py-2 no-underline transition-colors duration-200 font-(family-name:--font-geist-mono) text-sm ${currentPage === link.key ? 'text-[var(--color-accent)]' : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-strong)]'}`}>
         {link.label}
       </a>
@@ -79,11 +79,11 @@ const navLinks = [
   </div>
   <div class="px-6 py-4 border-t border-[var(--color-border)]">
     <div class="flex items-center gap-2">
-      <button data-theme-toggle data-dark-label={copy.themeDark} data-light-label={copy.themeLight} type="button" class="theme-toggle bg-[var(--color-surface-muted)] border border-[var(--color-border)] rounded-lg w-[44px] h-[44px] flex items-center justify-center text-[var(--color-text-strong)] cursor-pointer transition-colors duration-200 hover:text-[var(--color-accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]" aria-label={copy.themeDark} aria-pressed="false" title={copy.themeDark}>
+      <button data-theme-toggle data-dark-label={copy.themeDark} data-light-label={copy.themeLight} type="button" class="theme-toggle bg-[var(--color-surface-muted)] border border-[var(--color-border)] rounded-xs w-[44px] h-[44px] flex items-center justify-center text-[var(--color-text-strong)] cursor-pointer transition-colors duration-200 hover:text-[var(--color-accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]" aria-label={copy.themeDark} aria-pressed="false" title={copy.themeDark}>
         <svg class="theme-icon--moon w-5 h-5" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z" /></svg>
         <svg class="theme-icon--sun w-5 h-5" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.5" /><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" /></svg>
       </button>
-      <a href={alternatePath} aria-label={copy.languageSwitchLabel} class="flex bg-[var(--color-surface-muted)] border border-[var(--color-border)] rounded-lg w-[44px] h-[44px] items-center justify-center no-underline text-[var(--color-text-strong)] hover:text-[var(--color-accent)] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]">
+      <a href={alternatePath} aria-label={copy.languageSwitchLabel} class="flex bg-[var(--color-surface-muted)] border border-[var(--color-border)] rounded-xs w-[44px] h-[44px] items-center justify-center no-underline text-[var(--color-text-strong)] hover:text-[var(--color-accent)] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]">
         {copy.languageSwitch}
       </a>
     </div>

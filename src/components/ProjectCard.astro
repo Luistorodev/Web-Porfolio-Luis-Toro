@@ -29,11 +29,11 @@ const articleClass = {
 const hoverFx = 'transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]';
 const imageWrapClass = project.disabled
   ? (variant === 'mobile'
-      ? 'h-[250px] w-full rounded-lg overflow-hidden relative'
-      : 'flex-1 min-h-0 w-full rounded-lg overflow-hidden relative')
+      ? 'h-[250px] w-full rounded-xs overflow-hidden relative'
+      : 'flex-1 min-h-0 w-full rounded-xs overflow-hidden relative')
   : (variant === 'mobile'
-      ? `h-[250px] w-full rounded-lg overflow-hidden relative ${hoverFx}`
-      : `flex-1 min-h-0 w-full rounded-lg overflow-hidden relative ${hoverFx}`);
+      ? `h-[250px] w-full rounded-xs overflow-hidden relative ${hoverFx}`
+      : `flex-1 min-h-0 w-full rounded-xs overflow-hidden relative ${hoverFx}`);
 
 const metaWrapClass = variant === 'mobile'
   ? 'flex flex-col gap-0.5 text-sm w-full'

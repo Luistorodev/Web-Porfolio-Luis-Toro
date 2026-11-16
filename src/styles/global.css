@@ -46,7 +46,7 @@ html[data-theme='dark'] {
   top: -100%;
   z-index: 100;
   padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
+  border-radius: 0.125rem;
   background: var(--color-accent);
   color: #ffffff;
   font-family: var(--font-geist-mono);
@@ -157,4 +157,9 @@ html[data-theme='dark'] .theme-icon--sun {
 
 html[data-theme='dark'] .theme-icon--moon {
   display: none;
+}
+
+/* Monochrome hero logos and location pin are dark artwork; flip them so they stay visible on the dark page. */
+html[data-theme='dark'] .dark-invert {
+  filter: invert(1) grayscale(1);
 }
