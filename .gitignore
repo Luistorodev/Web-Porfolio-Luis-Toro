@@ -22,3 +22,10 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# windows explorer / onedrive artifacts
+desktop.ini
+folderico-*.ico
+
+# local tooling and test artifacts
+.playwright-mcp/
