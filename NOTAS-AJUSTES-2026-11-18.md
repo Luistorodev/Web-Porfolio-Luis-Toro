@@ -140,3 +140,20 @@ Rama de trabajo: `UI-New-version` sobre `ea201c7`. Commit: *Endurecimiento de se
   `luistoro.me TXT "v=spf1 -all"` y `_dmarc TXT "v=DMARC1; p=reject; rua=mailto:..."` para
   que nadie pueda falsificar correos `@luistoro.me`. Hoy no hay SPF ni DMARC.
 
+## 5. Verificación en producción (tras el deploy)
+
+- Cabeceras servidas: `Content-Security-Policy` (frame-ancestors/base-uri/object-src),
+  `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`,
+  `Cross-Origin-Opener-Policy` y `Strict-Transport-Security` con `includeSubDomains`.
+- `/`, `/es`, `/work/ontop-app-redesign`, `/es/work/100-accelerator`, `/side-projects` y
+  `/cv`: 200. En esas 6 páginas, 34 scripts inline y **0 sin hash**; JSON-LD válido.
+- `/.well-known/security.txt` responde 200; el PDF de `/assets/` ya no lleva `ACAO: *`.
+
+## 6. Incidencia local al actualizar
+
+- Tras subir Astro a 7.4.12, el dev server falló al recargar
+  (`@astrojs/internal-helpers/path does not provide an export named stripRequestBase`):
+  era la caché de Vite. Solución aplicada: `npx astro dev stop`, borrar `node_modules/.vite`
+  y `.astro`, y `npx astro dev --background --force`.
+
+
