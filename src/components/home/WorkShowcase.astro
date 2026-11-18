@@ -1,0 +1,58 @@
+---
+import { Image } from 'astro:assets';
+import { allProjects } from '../../data/projects';
+import { getCaseStudy } from '../../data/caseStudies';
+import { getLocalizedPath, ui, type Language } from '../../data/i18n';
+
+interface Props {
+  lang?: Language;
+}
+
+const { lang = 'en' } = Astro.props;
+const copy = ui[lang].home;
+const featuredSlugs = ['ontop-app-redesign', 'ontop-design-system', 'application-redesign', 'scotiabank-design-system'];
+
+const items = featuredSlugs.map((slug) => {
+  const project = allProjects.find((p) => p.slug === slug)!;
+  const content = getCaseStudy(slug, lang);
+  const summary = content.sections.flatMap((s) => s.body ?? []).find((p) => !p.startsWith('•') && !p.startsWith("'''"));
+  const shots = content.sections.flatMap((s) => (s.image ? [s.image] : [])).slice(0, 2);
+  return { project, content, summary, shots, href: getLocalizedPath(`/work/${slug}`, lang) };
+});
+---
+
+<section aria-labelledby="work-heading" class="w-full px-4 md:px-12 lg:px-[84px] flex flex-col gap-10 md:gap-16 font-(family-name:--font-inter)">
+  <h2 id="work-heading" class="sr-only">{copy.workTitle}</h2>
+
+  {items.map(({ project, content, summary, shots, href }) => (
+    <article class="grid grid-cols-1 lg:grid-cols-[minmax(0,380px)_minmax(0,1fr)] gap-8 lg:gap-16 border-t border-[var(--color-border)] pt-10 md:pt-14">
+      <div class="flex flex-col gap-8 lg:sticky lg:top-[100px] self-start">
+        <div class="flex flex-col gap-1">
+          <h3 class="text-[22px] md:text-[26px] font-semibold leading-tight text-[var(--color-text-primary)]">{project.title[lang]}</h3>
+          <p class="text-[16px] md:text-[17px] text-[var(--color-text-muted)]">{content.subtitle}</p>
+        </div>
+        {summary && <p class="text-[16px] leading-[1.65] text-[var(--color-text-strong)]">{summary}</p>}
+        <dl class="grid grid-cols-[80px_1fr] gap-x-6 gap-y-3 text-[15px]">
+          <dt class="text-[var(--color-text-muted)]">{copy.year}</dt><dd class="text-[var(--color-text-strong)]">{content.meta.timeline}</dd>
+          <dt class="text-[var(--color-text-muted)]">{copy.role}</dt><dd class="text-[var(--color-text-strong)]">{content.meta.role}</dd>
+          <dt class="text-[var(--color-text-muted)]">{copy.scope}</dt><dd class="text-[var(--color-text-strong)]">{content.meta.skills.join(', ')}</dd>
+        </dl>
+        <a href={href} class="self-start inline-flex items-center gap-3 border border-[var(--color-text-primary)] text-[var(--color-text-primary)] rounded-xs px-4 py-2.5 text-[16px] no-underline transition-colors duration-200 hover:bg-[var(--color-text-primary)] hover:text-[var(--color-page)]">
+          {copy.viewCaseStudy}
+          <svg class="w-4 h-4" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9" /></svg>
+        </a>
+      </div>
+
+      <a href={href} tabindex="-1" aria-hidden="true" class="project-card group grid grid-cols-2 gap-4 md:gap-6">
+        <div class="col-span-2 h-[220px] md:h-[360px] rounded-xs overflow-hidden bg-[var(--color-surface-muted)]">
+          <Image src={project.image!} alt="" widths={[640, 960, 1280]} sizes="(min-width: 1024px) 60vw, 100vw" format="webp" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]" />
+        </div>
+        {shots.map((shot) => (
+          <div class="h-[140px] md:h-[260px] rounded-xs overflow-hidden bg-[var(--color-surface-muted)] p-3 md:p-6 flex items-center justify-center">
+            <Image src={shot.src} alt="" widths={[400, 800]} sizes="(min-width: 1024px) 30vw, 50vw" format="webp" loading="lazy" class="max-w-full max-h-full w-auto h-auto object-contain" />
+          </div>
+        ))}
+      </a>
+    </article>
+  ))}
+</section>

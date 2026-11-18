@@ -1,0 +1,71 @@
+---
+import { Image } from 'astro:assets';
+import { allSideProjects } from '../../data/sideProjects';
+import { getLocalizedPath, ui, type Language } from '../../data/i18n';
+
+interface Props {
+  lang?: Language;
+}
+
+const { lang = 'en' } = Astro.props;
+const copy = ui[lang];
+const items = allSideProjects.filter((p) => p.image && p.externalUrl);
+const arrowBtn = 'w-11 h-11 rounded-xs border border-[var(--color-text-primary)] text-[var(--color-text-primary)] flex items-center justify-center cursor-pointer bg-transparent transition-opacity duration-200 disabled:opacity-25 disabled:cursor-default';
+---
+
+<section aria-labelledby="play-heading" class="w-full flex flex-col gap-8 md:gap-12 font-(family-name:--font-inter)" data-carousel>
+  <div class="px-4 md:px-12 lg:px-[84px] flex flex-col md:flex-row md:items-end justify-between gap-6">
+    <div class="flex flex-col gap-3 max-w-[620px]">
+      <h2 id="play-heading" class="text-[24px] md:text-[28px] font-semibold text-[var(--color-text-primary)]">{copy.home.playTitle}</h2>
+      <p class="text-[16px] leading-[1.65] text-[var(--color-text-strong)]">{copy.sideProjects.description}</p>
+      <a href={getLocalizedPath('/side-projects', lang)} class="text-[15px] text-[var(--color-text-secondary)] underline underline-offset-4 hover:text-[var(--color-accent)]">{copy.builtByMe.viewAll}</a>
+    </div>
+    <div class="hidden md:flex gap-3">
+      <button type="button" data-prev class={arrowBtn} aria-label={copy.home.previous}>
+        <svg class="w-5 h-5" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6" /></svg>
+      </button>
+      <button type="button" data-next class={arrowBtn} aria-label={copy.home.next}>
+        <svg class="w-5 h-5" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+      </button>
+    </div>
+  </div>
+
+  <ul data-track class="flex gap-4 md:gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth px-4 md:px-12 lg:px-[84px] scroll-px-4 md:scroll-px-12 lg:scroll-px-[84px] pb-2 [scrollbar-width:none] list-none m-0">
+    {items.map((project) => (
+      <li class="snap-start shrink-0 w-[85vw] md:w-[560px]">
+        <a href={project.externalUrl} target="_blank" rel="noopener noreferrer" class="project-card group flex flex-col gap-3 no-underline">
+          <!-- 2:1 matches the site screenshots, so they show whole instead of a cropped strip. -->
+          <div class="aspect-[2/1] rounded-xs overflow-hidden bg-[var(--color-surface-muted)] border border-[var(--color-border)]">
+            <Image src={project.image!} alt="" widths={[600, 1120, 1600]} sizes="(min-width: 768px) 560px, 85vw" format="webp" loading="lazy" class="w-full h-full object-cover object-top transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]" />
+          </div>
+          <div class="flex flex-col gap-0.5">
+            <h3 class="text-[17px] font-semibold text-[var(--color-text-primary)]">{project.title[lang]}</h3>
+            {project.description && <p class="text-[14px] leading-snug text-[var(--color-text-muted)]">{project.description[lang]}</p>}
+          </div>
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((root) => {
+    const track = root.querySelector<HTMLElement>('[data-track]')!;
+    const prev = root.querySelector<HTMLButtonElement>('[data-prev]')!;
+    const next = root.querySelector<HTMLButtonElement>('[data-next]')!;
+    // One card per click, including the gap between cards.
+    const step = () => {
+      const [a, b] = track.children as HTMLCollectionOf<HTMLElement>;
+      return b ? b.offsetLeft - a.offsetLeft : (a?.offsetWidth ?? 300);
+    };
+    const sync = () => {
+      prev.disabled = track.scrollLeft <= 2;
+      next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+    };
+    prev.addEventListener('click', () => track.scrollBy({ left: -step() }));
+    next.addEventListener('click', () => track.scrollBy({ left: step() }));
+    track.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync);
+    sync();
+  });
+</script>

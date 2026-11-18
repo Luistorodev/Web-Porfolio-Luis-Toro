@@ -1,6 +1,6 @@
 ---
-import type { ProjectContent, ProjectSection } from '../data/legalTechContent';
-import { ui, type Language } from '../data/i18n';
+import type { ProjectContent, ProjectSection, ProjectImage } from '../data/legalTechContent';
+import { getLocalizedPath, ui, type Language } from '../data/i18n';
 import ImageBlock from './ImageBlock.astro';
 import Lightbox from './Lightbox.astro';
 
@@ -11,9 +11,12 @@ interface Props {
 
 const { content, lang = 'en' } = Astro.props;
 const { cover, meta, sections } = content;
+const copy = ui[lang];
+
+type BodyItem = { type: 'p' | 'ul' | 'quote' | 'lead'; content: string[] };
 
 function renderBody(body: string[]) {
-  const items: { type: 'p' | 'ul' | 'quote' | 'heading-serif'; content: string[] }[] = [];
+  const items: BodyItem[] = [];
   let bulletGroup: string[] = [];
 
   for (const p of body) {
@@ -25,7 +28,7 @@ function renderBody(body: string[]) {
         bulletGroup = [];
       }
       if (p.startsWith("'''") || p.startsWith('"""')) {
-        items.push({ type: 'heading-serif', content: [p.replace(/^['''"""]+/, '').replace(/['''"""]+$/, '')] });
+        items.push({ type: 'lead', content: [p.replace(/^['''"""]+/, '').replace(/['''"""]+$/, '')] });
       } else if (p.startsWith("''") || p.startsWith('"')) {
         items.push({ type: 'quote', content: [p.replace(/^[''""]+/, '').replace(/[''""]+$/, '')] });
       } else {
@@ -36,187 +39,163 @@ function renderBody(body: string[]) {
   if (bulletGroup.length > 0) {
     items.push({ type: 'ul', content: bulletGroup });
   }
-
   return items;
 }
+
+// Inline markup used by the content files: ~~accent~~ and **bold**.
+const fmt = (s: string) =>
+  s
+    .replace(/~~(.+?)~~/g, '<span class="text-[var(--color-accent)]">$1</span>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong class="font-semibold text-[var(--color-text-primary)]">$1</strong>');
+
+const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+// Chapters start at every section with a label ("Overview") or a subheading ("Problem", "Research"...).
+const chapters: { title: string; id: string; sections: ProjectSection[] }[] = [];
+for (const section of sections) {
+  const title = section.subheading ?? section.label;
+  if (title || chapters.length === 0) {
+    const t = title ?? content.title;
+    chapters.push({ title: t, id: slug(t), sections: [] });
+  }
+  chapters[chapters.length - 1].sections.push(section);
+}
+
+const words = sections
+  .flatMap((s) => [...(s.body ?? []), ...(s.columns ?? []).flatMap((c) => [c.heading, ...c.body]), s.heading ?? ''])
+  .join(' ')
+  .split(/\s+/).length;
+const readMinutes = Math.max(1, Math.round(words / 220));
+
+const metaItems = [
+  { label: copy.projectMeta.role, value: meta.role },
+  { label: copy.projectMeta.timeline, value: meta.timeline },
+  { label: copy.projectMeta.skills, value: meta.skills.join(', ') },
+];
+
+const bodyText = 'text-[var(--color-text-strong)] text-[16px] md:text-[17px] leading-[1.7]';
 ---
 
-<div class="border-b border-[var(--color-border-strong)] pb-8 w-full">
-  <div class="mx-auto max-w-[770px] px-4 md:px-0 flex flex-col gap-4">
+<div class="w-full px-4 md:px-12 lg:px-[84px] grid grid-cols-1 lg:grid-cols-[180px_minmax(0,1fr)] gap-10 lg:gap-16 font-(family-name:--font-inter)">
+  <!-- Sidebar: back link + chapter index with scroll-spy (desktop only). -->
+  <aside class="hidden lg:block">
+    <div class="sticky top-[110px] flex flex-col gap-8">
+      <a href={getLocalizedPath('/', lang)} class="inline-flex items-center gap-2 text-[15px] text-[var(--color-text-muted)] no-underline hover:text-[var(--color-text-primary)] transition-colors duration-200">
+        <svg class="w-4 h-4" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6" /></svg>
+        {copy.caseStudyNav.back}
+      </a>
+      <nav aria-label={copy.projectMeta.onThisPage}>
+        <ul class="flex flex-col gap-2.5 list-none m-0 p-0" data-toc>
+          {chapters.map((c) => (
+            <li>
+              <a href={`#${c.id}`} data-toc-link={c.id} class="block border-l border-transparent pl-3 -ml-3 text-[14px] leading-snug text-[var(--color-text-muted)] no-underline transition-colors duration-200 hover:text-[var(--color-text-primary)] data-[active]:border-[var(--color-text-primary)] data-[active]:text-[var(--color-text-primary)]">{c.title}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  </aside>
 
+  <article class="flex flex-col min-w-0">
     <!-- Hero -->
-    <div class="flex flex-col gap-6">
-      <div class="flex flex-col gap-2">
-        <h1 class="font-bold text-[var(--color-text-primary)] text-[24px] md:text-[31px] leading-tight font-(family-name:--font-inter)">
-          {content.title}
-        </h1>
-        <p class="text-[var(--color-text-muted)] text-sm md:text-[14px] uppercase font-(family-name:--font-geist-mono)">
-          {content.subtitle}
-        </p>
+    <header class="flex flex-col gap-8 md:gap-10 pb-12 md:pb-16">
+      <a href={getLocalizedPath('/', lang)} class="lg:hidden inline-flex items-center gap-2 text-[15px] text-[var(--color-text-muted)] no-underline">
+        <svg class="w-4 h-4" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6" /></svg>
+        {copy.caseStudyNav.back}
+      </a>
+      <div class="flex flex-col gap-3 max-w-[820px]">
+        <h1 class="text-[34px] md:text-[52px] leading-[1.1] tracking-[-0.02em] font-semibold text-[var(--color-text-primary)]">{content.title}</h1>
+        <p class="text-[14px] md:text-[16px] leading-[1.5] uppercase text-[var(--color-text-muted)] font-(family-name:--font-geist-mono)">{content.subtitle}</p>
+      </div>
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <dl class="flex flex-wrap gap-x-12 gap-y-5">
+          {metaItems.map((m) => (
+            <div class="flex flex-col gap-1.5">
+              <dt class="text-[13px] md:text-[14px] uppercase text-[var(--color-text-muted)] font-(family-name:--font-geist-mono)">{m.label}</dt>
+              <dd class="text-[16px] text-[var(--color-text-primary)]">{m.value}</dd>
+            </div>
+          ))}
+        </dl>
+        <span class="self-start md:self-auto bg-[var(--color-surface-muted)] text-[var(--color-text-strong)] text-[12px] md:text-[13px] uppercase font-(family-name:--font-geist-mono) rounded-xs px-3 py-1.5 whitespace-nowrap">{readMinutes} {copy.projectMeta.readTime}</span>
       </div>
       <ImageBlock image={cover} priority />
-    </div>
+    </header>
 
-    <!-- Meta bar -->
-    <div class="flex gap-4 text-sm md:text-[14px]">
-      <div class="flex flex-1 flex-col gap-1.5">
-        <span class="text-[var(--color-text-muted)] uppercase font-(family-name:--font-geist-mono)">{ui[lang].projectMeta.role}:</span>
-        <span class="text-[var(--color-text-strong)] font-(family-name:--font-inter)">{meta.role}</span>
-      </div>
-      <div class="flex flex-1 flex-col gap-1.5">
-        <span class="text-[var(--color-text-muted)] uppercase font-(family-name:--font-geist-mono)">{ui[lang].projectMeta.timeline}</span>
-        <span class="text-[var(--color-text-strong)] font-(family-name:--font-inter)">{meta.timeline}</span>
-      </div>
-      <div class="flex flex-1 flex-col gap-1.5">
-        <span class="text-[var(--color-text-muted)] uppercase font-(family-name:--font-geist-mono)">{ui[lang].projectMeta.skills}</span>
-        <div class="text-[var(--color-text-strong)] font-(family-name:--font-inter) leading-[1.2]">
-          {meta.skills.map((skill: string) => <p>{skill}</p>)}
-        </div>
-      </div>
-    </div>
-
-    <!-- Content sections -->
-    {sections.map((section: ProjectSection) => (
-      section.layout ? (
-        <div class={`flex flex-col md:flex-row gap-4 ${section.layout === 'side-text-left' ? 'md:flex-row' : ''} ${section.layout === 'side-text-right' ? 'md:flex-row' : ''}`}>
-          {section.layout === 'side-text-right' ? (
-            <>
-              <div class="flex-1">
-                {section.image && (
+    <!-- Chapters: title on the left, content on the right. -->
+    {chapters.map((chapter) => (
+      <section id={chapter.id} data-chapter class="scroll-mt-[100px] border-t border-[var(--color-border)] py-12 md:py-16 grid grid-cols-1 xl:grid-cols-[minmax(0,220px)_minmax(0,1fr)] gap-6 xl:gap-12">
+        <h2 class="text-[24px] md:text-[28px] font-semibold leading-tight text-[var(--color-text-primary)] xl:sticky xl:top-[110px] self-start">{chapter.title}</h2>
+        <div class="flex flex-col gap-10 min-w-0">
+          {chapter.sections.map((section) => {
+            const img = section.image as ProjectImage | undefined;
+            const textBlock = (
+              <div class="flex flex-col gap-4">
+                {section.heading && (
+                  <h3 class="text-[20px] md:text-[22px] font-semibold leading-snug text-[var(--color-text-primary)]">{section.heading}</h3>
+                )}
+                {section.body && renderBody(section.body).map((item) => (
+                  item.type === 'ul' ? (
+                    <ul class={`list-disc pl-5 space-y-2 ${bodyText}`}>
+                      {item.content.map((li) => <li set:html={fmt(li)} />)}
+                    </ul>
+                  ) : item.type === 'lead' ? (
+                    item.content.map((h) => <p class="text-[22px] md:text-[26px] leading-[1.2] text-[var(--color-text-primary)] font-(family-name:--font-instrument-serif)">{h}</p>)
+                  ) : item.type === 'quote' ? (
+                    item.content.map((q) => <blockquote class="border-l-2 border-[var(--color-accent)] pl-5 py-1 text-[22px] md:text-[28px] leading-[1.2] text-[var(--color-text-primary)] font-(family-name:--font-instrument-serif)" set:html={fmt(q)} />)
+                  ) : (
+                    item.content.map((p) => <p class={bodyText} set:html={fmt(p)} />)
+                  )
+                ))}
+              </div>
+            );
+            return (
+              <div class="flex flex-col gap-8">
+                {section.layout ? (
+                  <div class={`grid grid-cols-1 md:grid-cols-2 gap-8 items-center`}>
+                    {section.layout === 'side-text-right' ? (<>{img && <ImageBlock image={img} />}{textBlock}</>) : (<>{textBlock}{img && <ImageBlock image={img} />}</>)}
+                  </div>
+                ) : (
                   <>
-                    <ImageBlock image={section.image} />
-                    {section.image.caption && (
-                      <p class="text-[var(--color-text-secondary)] text-[13px] font-(family-name:--font-geist-mono) leading-[1.2] uppercase text-right">{section.image.caption}</p>
+                    {(section.heading || section.body) && textBlock}
+                    {section.columns && (
+                      <div class={`grid grid-cols-1 gap-x-10 gap-y-8 ${section.columns.length === 2 || section.columns.length === 4 ? 'md:grid-cols-2' : 'md:grid-cols-3'}`}>
+                        {section.columns.map((col) => (
+                          <div class="flex flex-col gap-2 border-t border-[var(--color-border)] pt-5">
+                            <p class="text-[22px] md:text-[24px] leading-[1.2] text-[var(--color-text-primary)] font-(family-name:--font-instrument-serif)">{col.heading}</p>
+                            {col.body.map((p) => <p class="text-[var(--color-text-secondary)] text-[15px] md:text-[16px] leading-[1.65]" set:html={fmt(p)} />)}
+                          </div>
+                        ))}
+                      </div>
                     )}
+                    {img && <ImageBlock image={img} />}
                   </>
                 )}
               </div>
-              <div class="flex-1 flex flex-col justify-end gap-3">
-                {section.body && (
-                  <div class="flex flex-col gap-3">
-                    {renderBody(section.body).map((item) => (
-                      item.type === 'heading-serif' ? (
-                        item.content.map((h: string) => (
-                          <p class="text-[var(--color-text-primary)] text-[20px] md:text-[24px] leading-[1.2] font-(family-name:--font-instrument-serif)">{h}</p>
-                        ))
-                      ) : (
-                        item.content.map((p: string) => {
-                          const html = p.replace(/~~(.+?)~~/g, '<span class="text-[var(--color-accent)]">$1</span>').replace(/\*\*(.+?)\*\*/g, '<span class="font-bold text-[var(--color-text-primary)]">$1</span>');
-                          return <p class="text-[var(--color-text-secondary)] text-[13px] leading-relaxed font-(family-name:--font-inter)" set:html={html} />;
-                        })
-                      )
-                    ))}
-                  </div>
-                )}
-              </div>
-            </>
-          ) : (
-            <>
-              <div class="flex-1 flex flex-col justify-end gap-3">
-                {section.body && (
-                  <div class="flex flex-col gap-3">
-                    {renderBody(section.body).map((item) => (
-                      item.type === 'heading-serif' ? (
-                        item.content.map((h: string) => (
-                          <p class="text-[var(--color-text-primary)] text-[20px] md:text-[24px] leading-[1.2] font-(family-name:--font-instrument-serif)">{h}</p>
-                        ))
-                      ) : (
-                        item.content.map((p: string) => {
-                          const html = p.replace(/~~(.+?)~~/g, '<span class="text-[var(--color-accent)]">$1</span>').replace(/\*\*(.+?)\*\*/g, '<span class="font-bold text-[var(--color-text-primary)]">$1</span>');
-                          return <p class="text-[var(--color-text-secondary)] text-[13px] leading-relaxed font-(family-name:--font-inter)" set:html={html} />;
-                        })
-                      )
-                    ))}
-                  </div>
-                )}
-              </div>
-              <div class="flex-1">
-                {section.image && (
-                  <>
-                    <ImageBlock image={section.image} />
-                    {section.image.caption && (
-                      <p class="text-[var(--color-text-secondary)] text-[13px] font-(family-name:--font-geist-mono) leading-[1.2] uppercase text-right">{section.image.caption}</p>
-                    )}
-                  </>
-                )}
-              </div>
-            </>
-          )}
+            );
+          })}
         </div>
-      ) : (
-      <div class="flex flex-col gap-4">
-        {section.label && (
-          <p class="text-[var(--color-text-muted)] text-sm md:text-[14px] uppercase font-(family-name:--font-geist-mono)">{section.label}</p>
-        )}
-        {section.heading && (
-          <h2 class="font-bold text-[var(--color-text-primary)] text-[24px] md:text-[31px] leading-tight font-(family-name:--font-inter)">{section.heading}</h2>
-        )}
-        {section.subheading && (
-          <h3 class="font-semibold text-[var(--color-text-strong)] text-[18px] md:text-[20px] leading-tight font-(family-name:--font-inter)">{section.subheading}</h3>
-        )}
-        {section.body && (
-          <div class="flex flex-col gap-3">
-            {renderBody(section.body).map((item) => (
-              item.type === 'ul' ? (
-                <ul class="list-disc pl-5 space-y-1.5 text-[var(--color-text-secondary)] text-[13px] leading-relaxed font-(family-name:--font-inter)">
-                  {item.content.map((li: string) => {
-                    const html = li
-                      .replace(/~~(.+?)~~/g, '<span class="text-[var(--color-accent)]">$1</span>')
-                      .replace(/\*\*(.+?)\*\*/g, '<span class="font-bold text-[var(--color-text-primary)]">$1</span>');
-                    return <li set:html={html} />;
-                  })}
-                </ul>
-              ) : item.type === 'heading-serif' ? (
-                item.content.map((h: string) => (
-                  <p class="text-[var(--color-text-primary)] text-[20px] md:text-[24px] leading-[1.2] font-(family-name:--font-instrument-serif)">{h}</p>
-                ))
-              ) : item.type === 'quote' ? (
-                item.content.map((q: string) => {
-                  const html = q
-                    .replace(/~~(.+?)~~/g, '<span class="text-[var(--color-accent)]">$1</span>')
-                    .replace(/\*\*(.+?)\*\*/g, '<span class="font-bold text-[var(--color-text-primary)]">$1</span>');
-                  return <p class={`text-[var(--color-text-primary)] leading-[1.2] text-center font-(family-name:--font-instrument-serif) py-4 ${html.length > 60 ? 'text-[18px] md:text-[20px]' : 'text-[20px] md:text-[24px]'}`} set:html={html} />;
-                })
-              ) : (
-                item.content.map((p: string) => {
-                  const html = p
-                    .replace(/~~(.+?)~~/g, '<span class="text-[var(--color-accent)]">$1</span>')
-                    .replace(/\*\*(.+?)\*\*/g, '<span class="font-bold text-[var(--color-text-primary)]">$1</span>');
-                  return <p class="text-[var(--color-text-secondary)] text-[13px] leading-relaxed font-(family-name:--font-inter)" set:html={html} />;
-                })
-              )
-            ))}
-          </div>
-        )}
-        {section.columns && (
-          <div class={`grid grid-cols-1 gap-6 ${section.columns.length === 4 ? 'md:grid-cols-4' : section.columns.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'}`}>
-            {section.columns.map((col) => (
-              <div class="flex flex-col gap-3">
-                <p class="text-[var(--color-text-primary)] text-[20px] md:text-[24px] leading-[1.2] font-(family-name:--font-instrument-serif)">{col.heading}</p>
-                <div class="flex flex-col gap-2 text-[var(--color-text-secondary)] text-[13px] leading-relaxed font-(family-name:--font-inter)">
-                  {col.body.map((p: string) => {
-                    const html = p
-                      .replace(/~~(.+?)~~/g, '<span class="text-[var(--color-accent)]">$1</span>')
-                      .replace(/\*\*(.+?)\*\*/g, '<span class="font-bold text-[var(--color-text-primary)]">$1</span>');
-                    return <p set:html={html} />;
-                  })}
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-        {section.image && (
-          <>
-            <ImageBlock image={section.image} />
-            {section.image.caption && (
-              <p class="text-[var(--color-text-secondary)] text-[13px] font-(family-name:--font-geist-mono) leading-[1.2] uppercase text-right">{section.image.caption}</p>
-            )}
-          </>
-        )}
-      </div>
-      )
+      </section>
     ))}
-  </div>
+  </article>
 </div>
 
 <Lightbox />
+
+<script>
+  // Highlight the chapter currently in view in the sidebar index.
+  const links = new Map(
+    [...document.querySelectorAll<HTMLAnchorElement>('[data-toc-link]')].map((a) => [a.dataset.tocLink!, a]),
+  );
+  if (links.size) {
+    const setActive = (id: string) => links.forEach((a, key) => a.toggleAttribute('data-active', key === id));
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((e) => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+        if (visible) setActive(visible.target.id);
+      },
+      { rootMargin: '-120px 0px -60% 0px' },
+    );
+    document.querySelectorAll('[data-chapter]').forEach((el) => observer.observe(el));
+    setActive(links.keys().next().value!);
+  }
+</script>

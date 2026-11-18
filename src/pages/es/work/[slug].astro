@@ -1,7 +1,7 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 import Navbar from '../../../components/Navbar.astro';
-import Footer from '../../../components/Footer.astro';
+import ContactBlock from '../../../components/home/ContactBlock.astro';
 import ProjectContent from '../../../components/ProjectContent.astro';
 import CaseStudyNavigation from '../../../components/CaseStudyNavigation.astro';
 import { allProjects, type Project } from '../../../data/projects';
@@ -36,7 +36,7 @@ const nextProject = projectIndex >= 0 && projectIndex < allProjects.length - 1 ?
 <Layout lang="es" title={seo.title} description={seo.description} type="article" jsonLd={breadcrumbJsonLd}>
   <div class="bg-[var(--color-page)] flex flex-col min-h-screen w-full transition-colors duration-200">
     <Navbar currentPage="work" currentPath={`/es/work/${project.slug}`} lang="es" />
-    <main id="main" class="flex flex-col items-center overflow-clip w-full max-w-[1440px] mx-auto pt-8 md:pt-12 animate-[fadeIn_0.4s_ease-out]">
+    <main id="main" class="flex flex-col items-center overflow-clip w-full max-w-[1440px] mx-auto pt-8 md:pt-16 pb-20 md:pb-28 animate-[fadeIn_0.4s_ease-out]">
       {localizedContent ? (
         <ProjectContent content={localizedContent} lang="es" />
       ) : (
@@ -47,6 +47,6 @@ const nextProject = projectIndex >= 0 && projectIndex < allProjects.length - 1 ?
       )}
       <CaseStudyNavigation lang="es" previous={previousProject} next={nextProject} />
     </main>
-    <Footer lang="es" />
+    <ContactBlock lang="es" />
   </div>
 </Layout>

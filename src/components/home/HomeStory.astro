@@ -1,0 +1,40 @@
+---
+import { Image } from 'astro:assets';
+import { getExperience } from '../../data/experience';
+import { ui, type Language } from '../../data/i18n';
+import portrait from '../../assets/hero/luis-toro-profile.png';
+
+interface Props {
+  lang?: Language;
+}
+
+const { lang = 'en' } = Astro.props;
+const copy = ui[lang];
+const experience = getExperience(lang);
+---
+
+<section aria-labelledby="story-heading" class="w-full px-4 md:px-12 lg:px-[84px] flex flex-col font-(family-name:--font-inter)">
+  <div class="grid grid-cols-1 lg:grid-cols-[220px_minmax(0,1fr)_minmax(0,400px)] gap-6 lg:gap-16 pb-12 md:pb-16">
+    <h2 id="story-heading" class="text-[24px] md:text-[28px] font-semibold text-[var(--color-text-primary)]">{copy.home.storyTitle}</h2>
+    <div class="flex flex-col gap-6 text-[16px] leading-[1.65] text-[var(--color-text-strong)] max-w-[460px]">
+      <p>{copy.hero.description}</p>
+      <p>{copy.about.description}</p>
+    </div>
+    <div class="h-[360px] md:h-[420px] lg:max-w-[340px] w-full lg:justify-self-end rounded-xs overflow-hidden bg-[var(--color-surface-muted)]">
+      <Image src={portrait} alt="Luis Toro" widths={[400, 800]} sizes="(min-width: 1024px) 400px, 100vw" format="webp" loading="lazy" class="w-full h-full object-cover object-top" />
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-[220px_minmax(0,1fr)] gap-6 lg:gap-16 border-t border-[var(--color-border)] py-12 md:py-16">
+    <h2 class="text-[24px] md:text-[28px] font-semibold text-[var(--color-text-primary)]">{copy.home.experienceTitle}</h2>
+    <ul class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-12 gap-y-10 list-none m-0 p-0">
+      {experience.map((exp) => (
+        <li class="flex flex-col gap-1 text-[16px]">
+          <span class="font-semibold text-[var(--color-text-primary)]">{exp.company}</span>
+          <span class="text-[var(--color-text-muted)]">{exp.role}</span>
+          <span class="mt-2 text-[var(--color-text-strong)]">({exp.period})</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

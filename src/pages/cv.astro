@@ -3,16 +3,10 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import { ui } from '../data/i18n';
+import { getExperience } from '../data/experience';
 
 const copy = ui.en;
-const experience = [
-  { role: 'Product Design Engineer & Design System Lead', company: 'Ontop LLC', period: `2024 — ${copy.cv.present}` },
-  { role: 'Product Designer', company: 'Circulo de Credito', period: '2023 — 2024' },
-  { role: 'AI Product Designer', company: 'Kmeleon Tech', period: '2023' },
-  { role: 'Product Designer', company: 'Scotiabank Colpatria', period: '2022 — 2023' },
-  { role: 'UX/UI Consultant', company: 'Serempre', period: '2021' },
-  { role: 'Junior UX/UI Designer', company: 'Finsocial', period: '2020' },
-];
+const experience = getExperience('en');
 ---
 
 <Layout lang="en" title={copy.seo.cv.title} description={copy.seo.cv.description}>

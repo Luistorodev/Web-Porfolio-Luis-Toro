@@ -1,0 +1,53 @@
+---
+import { Image } from 'astro:assets';
+import { ui, type Language } from '../../data/i18n';
+import logoOntop from '../../assets/logos/ontop.png';
+
+interface Props {
+  lang?: Language;
+}
+
+const { lang = 'en' } = Astro.props;
+const copy = ui[lang];
+---
+
+<section class="w-full px-4 md:px-12 lg:px-[84px] pt-6 md:pt-16 flex flex-col gap-12 md:gap-16 font-(family-name:--font-inter)">
+  <div class="flex flex-col gap-8 md:gap-10">
+    <h1 class="text-[32px] md:text-[48px] leading-[1.15] tracking-[-0.02em] text-[var(--color-text-primary)] max-w-[860px] font-normal">
+      {copy.home.introBefore} <strong class="font-semibold">Luis Toro</strong>{copy.home.introAfter}
+    </h1>
+
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+      <p class="text-[20px] md:text-[24px] leading-[1.4] text-[var(--color-text-muted)] max-w-[480px]">
+        {copy.home.currently}
+        <span class="inline-flex items-center gap-1.5 align-middle bg-[var(--color-surface-muted)] border border-[var(--color-border)] rounded-xs px-2 py-1 ml-1">
+          <Image src={logoOntop} alt="Ontop" widths={[73, 146]} sizes="73px" format="webp" class="dark-invert h-[14px] w-auto" />
+        </span>
+      </p>
+
+      <div class="flex items-center gap-6 text-[15px] text-[var(--color-text-muted)] whitespace-nowrap">
+        <span class="flex items-center gap-2">
+          <svg class="w-[18px] h-[18px]" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z" /><circle cx="12" cy="9.5" r="2.5" /></svg>
+          {copy.hero.location}
+        </span>
+        <span class="flex items-center gap-2" title={copy.home.localTime}>
+          <svg class="w-[18px] h-[18px]" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
+          <span class="sr-only">{copy.home.localTime}:</span>
+          <time data-local-time data-locale={copy.locale}>--:--</time>
+        </span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<script>
+  // Live local time in Barranquilla (Colombia has no DST, so a fixed zone is enough).
+  const el = document.querySelector<HTMLTimeElement>('[data-local-time]');
+  if (el) {
+    const fmt = new Intl.DateTimeFormat(el.dataset.locale, { hour: 'numeric', minute: '2-digit', timeZone: 'America/Bogota' });
+    const tick = () => (el.textContent = `${fmt.format(new Date())} COT`);
+    tick();
+    setInterval(tick, 30_000);
+  }
+</script>

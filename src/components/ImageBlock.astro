@@ -10,15 +10,15 @@ interface Props {
 
 const { image, priority = false } = Astro.props;
 
-// Case-study content column is max 770px wide (max-w-[770px] + px-4).
-const widths = [400, 770, 1200, 1540];
-const sizes = '(min-width: 770px) 770px, calc(100vw - 2rem)';
+// Case-study content column is up to ~1000px wide on desktop.
+const widths = [400, 800, 1100, 1600, 2000];
+const sizes = '(min-width: 1280px) 1000px, (min-width: 1024px) 70vw, calc(100vw - 2rem)';
 const loading = priority ? ('eager' as const) : ('lazy' as const);
 const fetchpriority = priority ? ('high' as const) : undefined;
 ---
 
 {image.contain ? (
-  <figure class="relative w-full lightbox-trigger cursor-zoom-in">
+  <figure class="relative w-full lightbox-trigger cursor-zoom-in bg-[var(--color-surface-muted)] rounded-xs p-4 md:p-10">
     <Image
       src={image.src}
       alt={image.alt ?? ''}
@@ -36,7 +36,7 @@ const fetchpriority = priority ? ('high' as const) : undefined;
     )}
   </figure>
 ) : (
-  <figure class="relative w-full">
+  <figure class="relative w-full rounded-xs overflow-hidden">
     {!image.height ? (
       <>
         <div style={`padding-bottom: ${image.tall ? '187.03%' : '55.844%'}`}></div>
