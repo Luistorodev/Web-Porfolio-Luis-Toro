@@ -34,6 +34,28 @@ export default defineConfig({
       },
     }),
   ],
+  security: {
+    // Astro emits a <meta http-equiv="content-security-policy"> with hashes for every
+    // bundled/inline script and style. Header-only directives (frame-ancestors) live in vercel.json.
+    csp: {
+      algorithm: 'SHA-256',
+      directives: [
+        "default-src 'self'",
+        "connect-src 'self' https://*.clarity.ms https://c.bing.com",
+        "img-src 'self' data: https://*.clarity.ms",
+        "font-src 'self'",
+        "object-src 'none'",
+        "base-uri 'self'",
+        "form-action 'self'",
+      ],
+      scriptDirective: {
+        resources: ["'self'", 'https://*.clarity.ms'],
+      },
+      styleDirective: {
+        resources: ["'self'", "'unsafe-inline'"],
+      },
+    },
+  },
   vite: {
     plugins: [tailwindcss()]
   }

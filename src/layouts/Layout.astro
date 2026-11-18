@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { createHash } from 'node:crypto';
 import Cursor from '../components/Cursor.astro';
 import { Font } from 'astro:assets';
 import { ui, getLocalizedPath, type Language } from '../data/i18n';
@@ -38,6 +39,24 @@ const ogImage = new URL(image ?? '/og-image.png', site).href;
 const ogLocale = lang === 'es' ? 'es_ES' : 'en_US';
 const ogLocaleAlternate = lang === 'es' ? 'en_US' : 'es_ES';
 const jsonLdItems = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+
+// ── Inline scripts (hashed for the CSP) ───────────────────
+// Astro only hashes the scripts it bundles, so the `is:inline` ones are built here as
+// single-line strings: the exact same string is hashed and rendered, so they can't drift.
+const cspHash = (source: string) => `sha256-${createHash('sha256').update(source, 'utf8').digest('base64')}` as const;
+
+const clarityProjectId = 'xyuxz9wyf4';
+const clarityScript = `(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","${clarityProjectId}");`;
+
+const themeScript = `(()=>{const storageKey='theme';let theme='light';try{const savedTheme=localStorage.getItem(storageKey);theme=savedTheme==='light'||savedTheme==='dark'?savedTheme:'light';}catch{theme='light';}document.documentElement.dataset.theme=theme;})();`;
+
+// Escape "<" so a value can never close the script tag (JSON-LD stays valid JSON).
+const jsonLdPayloads = jsonLdItems.map((item) => JSON.stringify(item).replace(/</g, '\\u003c'));
+
+// Register every inline script so the CSP meta can allow it.
+for (const source of [clarityScript, themeScript, ...jsonLdPayloads]) {
+  Astro.csp?.insertScriptHash({ hash: cspHash(source), kind: 'default' });
+}
 ---
 
 <!doctype html>
@@ -82,34 +101,14 @@ const jsonLdItems = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     <meta name="twitter:image" content={ogImage} />
 
     <!-- Structured data -->
-    {jsonLdItems.map((item) => (
-      <script is:inline type="application/ld+json" set:html={JSON.stringify(item)} />
+    {jsonLdPayloads.map((payload) => (
+      <script is:inline type="application/ld+json" set:html={payload} />
     ))}
 
     <!-- Microsoft Clarity -->
-    <script is:inline>
-      (function(c,l,a,r,i,t,y){
-          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-      })(window, document, "clarity", "script", "xyuxz9wyf4");
-    </script>
+    <script is:inline set:html={clarityScript} />
 
-    <script is:inline>
-      (() => {
-        const storageKey = 'theme';
-        let theme = 'light';
-
-        try {
-          const savedTheme = localStorage.getItem(storageKey);
-          theme = savedTheme === 'light' || savedTheme === 'dark' ? savedTheme : 'light';
-        } catch {
-          theme = 'light';
-        }
-
-        document.documentElement.dataset.theme = theme;
-      })();
-    </script>
+    <script is:inline set:html={themeScript} />
     <!-- Self-hosted fonts with preload + metric-matched fallbacks to avoid the font swap flash -->
     <Font cssVariable="--font-inter" preload={[{ style: 'normal', subset: 'latin' }]} />
     <Font cssVariable="--font-geist-mono" preload={[{ subset: 'latin' }]} />
