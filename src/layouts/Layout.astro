@@ -118,5 +118,16 @@ for (const source of [clarityScript, themeScript, ...jsonLdPayloads]) {
     <a href="#main" class="skip-link">{ui[lang].skipToContent}</a>
     <slot />
     <Cursor label={ui[lang].viewProject} />
+    <script>
+      import Lenis from 'lenis';
+      import 'lenis/dist/lenis.css';
+      // Inertial wheel scrolling; Lenis itself turns off for prefers-reduced-motion. Touch keeps native scrolling.
+      new Lenis({
+        autoRaf: true,
+        lerp: 0.09,
+        anchors: true,
+        prevent: (node) => node.classList.contains('pswp'),
+      });
+    </script>
   </body>
 </html>

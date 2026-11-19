@@ -11,12 +11,32 @@ interface Props {
 const { lang = 'en' } = Astro.props;
 const copy = ui[lang].home;
 const featuredSlugs = ['ontop-app-redesign', 'ontop-design-system', 'application-redesign', 'scotiabank-design-system'];
+// Which Solution images to show (index within the chapter) when the first two don't fit; default is the first two.
+const shotPicks: Record<string, number[]> = {
+  'application-redesign': [2, 3], // "Redesigned product pages"
+  'ontop-app-redesign': [3, 4], // "A foundation built for growth"
+};
+// Featured first, then every other published case study, newest first.
+const rest = allProjects
+  .filter((p) => !p.disabled && !featuredSlugs.includes(p.slug) && getCaseStudy(p.slug, lang))
+  .sort((a, b) => Number(b.year) - Number(a.year))
+  .map((p) => p.slug);
 
-const items = featuredSlugs.map((slug) => {
+const items = [...featuredSlugs, ...rest].map((slug) => {
   const project = allProjects.find((p) => p.slug === slug)!;
   const content = getCaseStudy(slug, lang);
   const summary = content.sections.flatMap((s) => s.body ?? []).find((p) => !p.startsWith('•') && !p.startsWith("'''"));
-  const shots = content.sections.flatMap((s) => (s.image ? [s.image] : [])).slice(0, 2);
+  // Group sections into chapters (a subheading starts one) and show the Solution chapter's images.
+  const chapters: { title: string; images: NonNullable<(typeof content.sections)[number]['image']>[] }[] = [];
+  for (const s of content.sections) {
+    if (s.subheading || !chapters.length) chapters.push({ title: s.subheading ?? '', images: [] });
+    if (s.image) chapters.at(-1)!.images.push(s.image);
+  }
+  // Fallback for cases without a Solution chapter (Phylo, 100+ Accelerator): the last chapter with images.
+  const solution = chapters.find((c) => /^solu/i.test(c.title) && c.images.length) ?? chapters.filter((c) => c.images.length).at(-1);
+  // Shots fill identical boxes at the ratio of most case-study screens (2310x1290), cropped from the top; the full images live in the case study.
+  const pick = shotPicks[slug];
+  const shots = (solution?.images ?? []).filter((_, i) => (pick ? pick.includes(i) : i < 2));
   return { project, content, summary, shots, href: getLocalizedPath(`/work/${slug}`, lang) };
 });
 ---
@@ -48,8 +68,8 @@ const items = featuredSlugs.map((slug) => {
           <Image src={project.image!} alt="" widths={[640, 960, 1280]} sizes="(min-width: 1024px) 60vw, 100vw" format="webp" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]" />
         </div>
         {shots.map((shot) => (
-          <div class="h-[140px] md:h-[260px] rounded-xs overflow-hidden bg-[var(--color-surface-muted)] p-3 md:p-6 flex items-center justify-center">
-            <Image src={shot.src} alt="" widths={[400, 800]} sizes="(min-width: 1024px) 30vw, 50vw" format="webp" loading="lazy" class="max-w-full max-h-full w-auto h-auto object-contain" />
+          <div class:list={['aspect-[2310/1290] rounded-xs overflow-hidden bg-[var(--color-surface-muted)]', shots.length === 1 && 'col-span-2']}>
+            <Image src={shot.src} alt="" widths={[400, 800, 1200]} sizes={shots.length === 1 ? '(min-width: 1024px) 60vw, 100vw' : '(min-width: 1024px) 30vw, 50vw'} format="webp" loading="lazy" class="w-full h-full object-cover object-top" />
           </div>
         ))}
       </a>

@@ -64,6 +64,11 @@ html {
   background: var(--color-page);
 }
 
+/* Lenis animates the scroll itself; native smooth scrolling would fight it. */
+html.lenis {
+  scroll-behavior: auto;
+}
+
 body {
   background: var(--color-page);
   color: var(--color-text-primary);
